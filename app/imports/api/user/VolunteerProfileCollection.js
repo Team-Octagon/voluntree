@@ -20,7 +20,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     const username = email;
     const user = this.findOne({ email, firstName, lastName });
     if (!user) {
-      const role = ROLE.USER;
+      const role = ROLE.VOLUNTEER;
       const userID = Users.define({ username, role, password });
       const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
       // this._collection.update(profileID, { $set: { userID } });
@@ -68,7 +68,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Volunteer.
    */
   assertValidRoleForMethod() {
-    // this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
+    // this.assertRole(userId, [ROLE.ADMIN, ROLE.VOLUNTEER]);
     return true;
   }
 
@@ -81,8 +81,8 @@ class VolunteerProfileCollection extends BaseProfileCollection {
   checkIntegrity() {
     const problems = [];
     this.find().forEach((doc) => {
-      if (doc.role !== ROLE.User) {
-        problems.push(`VolunteerProfile instance does not have ROLE.USER: ${doc}`);
+      if (doc.role !== ROLE.VOLUNTEER) {
+        problems.push(`VolunteerProfile instance does not have ROLE.VOLUNTEER: ${doc}`);
       }
     });
     return problems;
@@ -103,7 +103,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
 }
 
 /**
- * Profides the singleton instance of this class to all other entities.
+ * Provides the singleton instance of this class to all other entities.
  * @type {VolunteerProfileCollection}
  */
 export const VolunteerProfiles = new VolunteerProfileCollection();
