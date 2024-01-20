@@ -1,8 +1,8 @@
 import React from 'react';
 import { Col, Container, Button, Row, Image } from 'react-bootstrap';
 
-const VolunteerProfileInfo = () => (
-  <Container fluid className="profile-card">
+const VolunteerProfileCard = () => (
+  <Container fluid id="profile-card" className="my-5">
     <Row>
       <Col xs={12} md={{ span: 4, offset: 3 }}>
         <Row>
@@ -28,4 +28,4 @@ const VolunteerProfileInfo = () => (
   </Container>
 );
 
-export default VolunteerProfileInfo;
+export default VolunteerProfileCard;
