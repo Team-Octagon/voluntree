@@ -10,6 +10,7 @@ export const stuffConditions = ['excellent', 'good', 'fair', 'poor'];
 export const stuffPublications = {
   stuff: 'Stuff',
   stuffAdmin: 'StuffAdmin',
+  stuffVolunteer: 'StuffVolunteer',
 };
 
 class StuffCollection extends BaseCollection {
@@ -102,6 +103,14 @@ class StuffCollection extends BaseCollection {
         }
         return this.ready();
       });
+
+      /** This subscription publishes all documents regardless of user, but only if the logged in user is a Volunteer. */
+      Meteor.publish(stuffPublications.stuffVolunteer, function publish() {
+        if (this.userId && Roles.userIsInRole(this.userId, ROLE.VOLUNTEER)) {
+          return instance._collection.find();
+        }
+        return this.ready();
+      });
     }
   }
 
@@ -127,13 +136,24 @@ class StuffCollection extends BaseCollection {
   }
 
   /**
+   * Subscription method for volunteer users.
+   * It subscribes to the entire collection.
+   */
+  subscribeStuffVolunteer() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(stuffPublications.stuffVolunteer);
+    }
+    return null;
+  }
+
+  /**
    * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or User.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
    * @param userId The userId of the logged in user. Can be null or undefined
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.VOLUNTEER]);
   }
 
   /**
