@@ -26,3 +26,9 @@ body {
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
+@media screen and (max-width: 830px) {
+  .profile-card {
+    flex-direction: column-reverse;
+  }
+}
