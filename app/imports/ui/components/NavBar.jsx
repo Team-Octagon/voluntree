@@ -31,6 +31,10 @@ const NavBar = () => {
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
                 </NavDropdown>]
             ) : ''}
+            {Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER]) ? (
+              [<Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_VOLUNTEER} as={NavLink} to="/volunteer" key="volunteer">List Stuff (Volunteer)</Nav.Link>,
+              ]
+            ) : ''}
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? (
