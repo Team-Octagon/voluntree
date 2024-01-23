@@ -14,12 +14,11 @@ class UserProfileCollection extends BaseProfileCollection {
    * @param password The password for this user.
    * @param firstName The first name.
    * @param lastName The last name.
-   * @param birthDate The birth date.
    */
-  define({ email, firstName, lastName, birthDate, password }) {
+  define({ email, firstName, lastName, password }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ email, firstName, lastName, birthDate });
+    const user = this.findOne({ email, firstName, lastName });
     if (!user) {
       const role = ROLE.USER;
       const userID = Users.define({ username, role, password });
