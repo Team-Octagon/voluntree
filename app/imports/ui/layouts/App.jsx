@@ -23,7 +23,6 @@ import ListStuffVolunteer from '../pages/ListStuffVolunteer';
 import VolunteerProfile from '../pages/VolunteerProfile';
 import AboutUs from '../pages/AboutUs';
 
-
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {

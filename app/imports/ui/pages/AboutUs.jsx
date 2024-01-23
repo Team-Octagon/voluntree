@@ -1,22 +1,34 @@
 import React from 'react';
-import { Col, Container, Image, Row } from 'react-bootstrap';
-import { PAGE_IDS } from '../utilities/PageIDs';
+import { Container, Row, Col, Image } from 'react-bootstrap';
 
-/* A simple static component to render some text for the landing page. */
+// AboutUs component
 const AboutUs = () => (
-  <Container id={PAGE_IDS.LANDING} className="py-3">
-    <Row className="align-middle text-center">
-      <Col xs={4}>
-        <Image roundedCircle src="/images/meteor-logo.png" width="150px" />
-      </Col>
+  <div>
+    <Container className="text-center align-content-center">
+      <h1>Welcome to the Voluntree</h1>
+      <p>Connecting Volunteers with Opportunities</p>
+    </Container>
 
-      <Col xs={8} className="d-flex flex-column justify-content-center">
-        <h1>Welcome to this template</h1>
-        <p>Now get to work and modify this app!</p>
-      </Col>
+    <Container className="text-center">
+      {/* Replace image later */}
+      <Image src="/images/volunteer-team-stock-image.jpg" rounded />
+    </Container>
 
-    </Row>
-  </Container>
+    <Container className="my-4">
+      <Row>
+        <Col>
+          <h2>About Us</h2>
+          <p>
+            At Voluntree, we are committed to simplifying the process of providing opportunities for people to volunteer.
+
+            Our mission is to alleviate friction between volunteer organizations and volunteers, making it easy for individuals to find meaningful ways to contribute to their communities.
+
+            We believe in the power of volunteering to create positive change, and we strive to be the bridge that connects passionate volunteers with organizations in need.
+          </p>
+        </Col>
+      </Row>
+    </Container>
+  </div>
 );
 
 export default AboutUs;
