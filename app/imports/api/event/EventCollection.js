@@ -6,6 +6,8 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
+export const eventTags = ['adoption', 'animals', 'arts', 'community', 'culture', 'education', 'environment', 'health', 'human services', 'seniors', 'sports', 'technology', 'youth'];
+
 export const eventPublications = {
   event: 'Event',
   eventAdmin: 'EventAdmin',
@@ -17,7 +19,7 @@ class EventCollection extends BaseCollection {
     super('Events', new SimpleSchema({
       title: String,
       organizer: String,
-      date: Date,
+      eventDate: Date,
       location: String,
       description: String,
       startTime: String,
@@ -27,53 +29,117 @@ class EventCollection extends BaseCollection {
       },
       volunteersNeeded: Number,
       skillsRecommended: String,
-      status: String, // Status will require a better definition later on but should stand for completed, in progress, or not started
-      tags: String, // Tags will need to be an array of strings later on
-      feedback: String, // Feedback will require a better definition later on
+      status: {
+        type: String,
+        allowedValues: ['not started', 'completed'], // Should closed be a status?
+        defaultValue: 'not started',
+      },
+      tags: {
+        type: String,
+        allowedValues: eventTags,
+      },
+      feedback: {
+        type: String, // Feedback will require a better definition later on
+        optional: true,
+      },
     }));
   }
 
   /**
    * Defines a new Event item.
-   * @param name the name of the item.
-   * @param quantity how many.
-   * @param owner the owner of the item.
+   * @param title the title of the event.
+   * @param organizer the organizer of the event.
+   * @param eventDate the date of the event.
+   * @param location the location of the event.
+   * @param description the description of the event.
+   * @param startTime the start time of the event.
+   * @param endTime the end time of the event.
+   * @param volunteersNeeded the number of volunteers needed for the event.
+   * @param skillsRecommended the skills recommended for the event.
+   * @param status the status of the event.
+   * @param tags the tags describing the event type.
+   * @param feedback user feedback of the event.
    * @return {String} the docID of the new document.
    */
-  define({ name, quantity, owner }) {
+  define({ name, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, skillsRecommended, status, tags, feedback }) {
     const docID = this._collection.insert({
       name,
-      quantity,
-      owner,
+      organizer,
+      eventDate,
+      location,
+      description,
+      startTime,
+      endTime,
+      volunteersNeeded,
+      skillsRecommended,
+      status,
+      tags,
+      feedback,
     });
     return docID;
   }
 
   /**
    * Updates the given document.
-   * @param docID the id of the document to update.
-   * @param name the new name (optional).
-   * @param quantity the new quantity (optional).
+   * @param docID the id of the document to update. (optional).
+   * @param title the title of the event. (optional).
+   * @param organizer the organizer of the event. (optional).
+   * @param eventDate the date of the event. (optional).
+   * @param location the location of the event. (optional).
+   * @param description the description of the event. (optional).
+   * @param startTime the start time of the event. (optional).
+   * @param endTime the end time of the event. (optional).
+   * @param volunteersNeeded the number of volunteers needed for the event. (optional).
+   * @param skillsRecommended the skills recommended for the event. (optional).
+   * @param status the status of the event. (optional).
+   * @param tags the tags describing the event type. (optional).
    */
-  update(docID, { name, quantity }) {
+  update(docID, { title, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, skillsRecommended, status, tags }) {
     const updateData = {};
-    if (name) {
-      updateData.name = name;
+    if (title) {
+      updateData.title = title;
+    }
+    if (organizer) {
+      updateData.organizer = organizer;
+    }
+    if (eventDate) {
+      updateData.eventDate = eventDate;
+    }
+    if (location) {
+      updateData.location = location;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    if (startTime) {
+      updateData.startTime = startTime;
+    }
+    if (endTime) {
+      updateData.endTime = endTime;
     }
     // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
-    if (_.isNumber(quantity)) {
-      updateData.quantity = quantity;
+    if (_.isNumber(volunteersNeeded)) {
+      updateData.volunteersNeeded = volunteersNeeded;
+    }
+    if (skillsRecommended) {
+      updateData.skillsRecommended = skillsRecommended;
+    }
+    if (status) {
+      updateData.status = status;
+    }
+    if (tags) {
+      updateData.tags = tags;
     }
     this._collection.update(docID, { $set: updateData });
   }
 
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
-   * @param { String | Object } name A document or docID in this collection.
+   * @param { String | Object } title A document or docID in this collection.
    * @returns true
    */
-  removeIt(name) {
-    const doc = this.findDoc(name);
+  removeIt(title) {
+    const doc = this.findDoc(title);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -85,7 +151,7 @@ class EventCollection extends BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      // get the StuffCollection instance.
+      // get the EventCollection instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
       Meteor.publish(eventPublications.event, function publish() {
@@ -128,7 +194,7 @@ class EventCollection extends BaseCollection {
    * Subscription method for admin users.
    * It subscribes to the entire collection.
    */
-  subscribeStuffAdmin() {
+  subscribeEventAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(eventPublications.eventAdmin);
     }
@@ -159,14 +225,21 @@ class EventCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{owner: (*|number), quantity: *, name}}
+   * @return {{organizer: (*|string), title: (*|string), eventDate: (*|Date), location: (*|string), description: (*|string), startTime: (*|string), endTime: (*|string), volunteersNeeded: (*|number), status: (*|string), tags: (*|string)}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
-    const quantity = doc.quantity;
-    const owner = doc.owner;
-    return { name, quantity, owner };
+    const title = doc.title;
+    const organizer = doc.organizer;
+    const eventDate = doc.eventDate;
+    const location = doc.location;
+    const description = doc.description;
+    const startTime = doc.startTime;
+    const endTime = doc.endTime;
+    const volunteersNeeded = doc.volunteersNeeded;
+    const status = doc.status;
+    const tags = doc.tags;
+    return { title, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, status, tags };
   }
 }
 
