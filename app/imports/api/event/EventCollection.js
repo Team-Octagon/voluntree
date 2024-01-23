@@ -15,9 +15,21 @@ export const eventPublications = {
 class EventCollection extends BaseCollection {
   constructor() {
     super('Events', new SimpleSchema({
-      name: String,
-      quantity: Number,
-      owner: String,
+      title: String,
+      organizer: String,
+      date: Date,
+      location: String,
+      description: String,
+      startTime: String,
+      endTime: {
+        type: String,
+        optional: true,
+      },
+      volunteersNeeded: Number,
+      skillsRecommended: String,
+      status: String, // Status will require a better definition later on but should stand for completed, in progress, or not started
+      tags: String, // Tags will need to be an array of strings later on
+      feedback: String, // Feedback will require a better definition later on
     }));
   }
 
