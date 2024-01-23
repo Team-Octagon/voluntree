@@ -7,10 +7,14 @@ const VolunteerListEvents = () => (
   <Container id={PAGE_IDS.VOLUNTEER_PROFILE} className="py-3">
     <Row>
       <Col className="text-center">
-        <h1>Here is a list of all events</h1>
+        <h1>Event Listings</h1>
       </Col>
     </Row>
-    <VolunteerEventDash />
+    <Row>
+      <Col style={{ paddingLeft: 120 }}>
+        <VolunteerEventDash />
+      </Col>
+    </Row>
   </Container>
 );
 
