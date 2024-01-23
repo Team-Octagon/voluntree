@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Badge } from 'react-bootstrap';
 
-const EventCard = ({ title, description, tags }) => (
-  <Card>
+const EventCardTest = ({ title, description, tags }) => (
+  <Card style={{ width: '18rem' }}>
     <Card.Header>{title}</Card.Header>
     <Card.Body>
       <Card.Text>{description}</Card.Text>
@@ -19,10 +19,10 @@ const EventCard = ({ title, description, tags }) => (
 );
 
 // Require a document to be passed to this component.
-EventCard.propTypes = {
+EventCardTest.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default EventCard;
+export default EventCardTest;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Container, Tab, Row } from 'react-bootstrap';
-import EventCard from './EventCard';
+import EventCardTest from './EventCardTest';
 
 const VolunteerEventDash = () => {
   const [activeTab, setActiveTab] = useState('upcoming');
@@ -37,7 +37,7 @@ const VolunteerEventDash = () => {
         <Row>
           {UpcomingEvents.map((event, index) => (
             <Col key={index} sm={4}> {/* Use sm={4} to display 3 cards in a row, adjust as needed */}
-              <EventCard
+              <EventCardTest
                 title={event.title}
                 description={event.description}
                 tags={event.tags}
