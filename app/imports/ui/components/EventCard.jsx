@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Badge } from 'react-bootstrap';
 
 const EventCard = ({ title, description, tags }) => (
-  <Card>
+  <Card style={{ width: '18rem' }}>
     <Card.Header>{title}</Card.Header>
     <Card.Body>
       <Card.Text>{description}</Card.Text>
