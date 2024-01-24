@@ -32,10 +32,6 @@ const NavBar = () => {
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
                 </NavDropdown>]
             ) : ''}
-            {Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER]) ? (
-              [<Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_VOLUNTEER} as={NavLink} to="/volunteer" key="volunteer">List Stuff (Volunteer)</Nav.Link>,
-              ]
-            ) : ''}
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? (
@@ -45,6 +41,7 @@ const NavBar = () => {
               </NavDropdown>
             ) : (
               <NavDropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
+                <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_PROFILE_DROPDOWN} as={NavLink} to="/volunteer-profile">View Profile</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_SETTINGS} as={NavLink} to="/volunteer-settings"><GearFill /> Settings</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
               </NavDropdown>
