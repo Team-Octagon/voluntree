@@ -10,7 +10,7 @@ const EventCardTest = ({ title, description, tags }) => (
     </Card.Body>
     <Card.Footer>
       {tags.map((tag, index) => (
-        <Badge key={index} variant="info" className="mr-2">
+        <Badge key={index} variant="info" className="m-1">
           {tag}
         </Badge>
       ))}
