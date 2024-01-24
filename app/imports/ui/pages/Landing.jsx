@@ -8,7 +8,7 @@ const Landing = () => (
       <Row className="text-center">
         <Col>
           <Container>
-            <Image src="images/Voluntree-logo.png" class="img-fluid" width="20%" />
+            <Image src="images/Voluntree-logo.png" className="img-fluid" width="20%" />
           </Container>
           <Container>
             <Nav className="justify-content-center d-flex">
