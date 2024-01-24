@@ -12,16 +12,6 @@ const Landing = () => (
             <Image src="images/Voluntree-logo.png" className="img-fluid" width="20%" />
           </Container>
           <Container>
-            <Nav className="justify-content-center d-flex">
-              <FormControl
-                placeholder="Search for events"
-                aria-label="Search for events"
-                aria-describedby="basic-addon2"
-                style={{ width: '40%' }}
-              />
-            </Nav>
-          </Container>
-          <Container>
             <div className="mt-4 text-center">
               <h1>Upcoming Events In Your Area</h1>
               <p>Discover volunteer events and opportunities!</p>
