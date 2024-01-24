@@ -3,6 +3,8 @@ export const COMPONENT_IDS = {
   LIST_STUFF_EDIT: 'list-stuff-edit',
   MANGAGE_DATABASE_DUMP: 'manage-database-dump',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',
+  NAVBAR_FEEDBACK: 'navbar-feedback',
+  NAVBAR_LIST_EVENTS: 'navbar-list-events',
   NAVBAR_LIST_STUFF: 'navbar-list-stuff',
   NAVBAR_LIST_STUFF_ADMIN: 'navbar-list-stuff-admin',
   NAVBAR_LIST_STUFF_VOLUNTEER: 'navbar-list-stuff-volunteer',
