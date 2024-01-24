@@ -14,15 +14,16 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @param password The password for this user.
    * @param firstName The first name.
    * @param lastName The last name.
+   * @param birthDate The birth date.
    */
-  define({ email, firstName, lastName, password }) {
+  define({ email, firstName, lastName, birthDate, password }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName });
     if (!user) {
       const role = ROLE.VOLUNTEER;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
+      const profileID = this._collection.insert({ email, firstName, lastName, birthDate, userID, role });
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }
@@ -36,8 +37,9 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @param docID the id of the VolunteerProfile.
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
+   * @param birthDate new last name (optional).
    */
-  update(docID, { firstName, lastName }) {
+  update(docID, { firstName, lastName, birthDate }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -45,6 +47,9 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (birthDate) {
+      updateData.birthDate = birthDate;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -98,7 +103,8 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    const birthDate = doc.birthDate;
+    return { email, firstName, lastName, birthDate }; // CAM this is not enough for the define method. We lose the password.
   }
 }
 
