@@ -1,14 +1,15 @@
 import React from 'react';
 import { Col, Container, Image, Row, Navbar, Nav, FormControl, Carousel } from 'react-bootstrap';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => (
-  <Container id="landing-page" fluid className="justify-content-center d-flex">
+  <Container id={PAGE_IDS.LANDING} fluid className="justify-content-center d-flex">
     <Navbar bg="white" expand="sm">
       <Row className="text-center">
         <Col>
           <Container>
-            <Image src="images/Voluntree-logo.png" class="img-fluid" width="20%" />
+            <Image src="images/Voluntree-logo.png" className="img-fluid" width="20%" />
           </Container>
           <Container>
             <Nav className="justify-content-center d-flex">
