@@ -9,6 +9,11 @@ const Footer = () => (
         Voluntree
         {' '}
         <br />
+        <a href="/about-us">
+          About Us
+        </a>
+        {' '}
+        <br />
         Honolulu, HI 96822
         {' '}
         <br />
