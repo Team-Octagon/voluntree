@@ -24,6 +24,7 @@ import ListStuffVolunteer from '../pages/ListStuffVolunteer';
 import VolunteerProfile from '../pages/VolunteerProfile';
 import AboutUs from '../pages/AboutUs';
 import VolunteerListEvents from '../pages/VolunteerListEvents';
+import VolunteerEventDetail from '../pages/VolunteerEventDetail';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/volunteer-profile" element={<ProtectedRoute><VolunteerProfile /></ProtectedRoute>} />
           <Route path="/volunteer-list-events" element={<ProtectedRoute><VolunteerListEvents /></ProtectedRoute>} />
+          <Route path="/volunteer-list-events/:eventId" element={<ProtectedRoute><VolunteerEventDetail /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
