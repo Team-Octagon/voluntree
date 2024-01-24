@@ -7,7 +7,7 @@ import { Users } from './UserCollection';
 
 const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADMIN] = 'AdminProfileCollection';
-rolesToCollectionNames[ROLE.USER] = 'UserProfileCollection';
+rolesToCollectionNames[ROLE.VOLUNTEER] = 'VolunteerProfileCollection';
 
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
@@ -16,6 +16,10 @@ class BaseProfileCollection extends BaseCollection {
       firstName: String,
       lastName: String,
       role: String,
+      birthDate: {
+        type: Date,
+        optional: true,
+      },
       userID: /^[23456789ABCDEFGHJKLMNPQRSTWXYZabcdefghijkmnopqrstuvwxyz]{17}$/,
     })));
   }
