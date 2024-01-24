@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import {Col, Container, Tab, Row, Form} from 'react-bootstrap';
+import { Col, Container, Tab, Row, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import EventCardTest from './EventCardTest';
 import { UpcomingEvents } from '../../../public/dummy-data/EventData';
-import {TextField} from "uniforms-bootstrap5";
 
 const VolunteerEventDash = () => {
   const [activeTab, setActiveTab] = useState('upcoming');
   const navigate = useNavigate();
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState('');
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
-  const filteredEvents = UpcomingEvents.filter(event => event.title.toLowerCase().includes(search.toLowerCase()))
+  const filteredEvents = UpcomingEvents.filter(event => event.title.toLowerCase().includes(search.toLowerCase()));
   return (
     <Container fluid className="mt-4">
-      <Form.Control type="text" value={search} placeholder={"Search"} onChange={e => {setSearch(e.target.value)}} />
+      <Form.Control type="text" value={search} placeholder="Search" onChange={e => { setSearch(e.target.value); }} />
       <Tab.Container id="dashboard-tabs" activeKey={activeTab} onSelect={handleTabChange}>
         <Row>
           {filteredEvents.map((event, index) => (
