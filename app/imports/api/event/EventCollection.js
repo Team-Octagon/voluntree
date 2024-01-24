@@ -31,7 +31,7 @@ class EventCollection extends BaseCollection {
       skillsRecommended: String,
       status: {
         type: String,
-        allowedValues: ['not started', 'completed'], // Should closed be a status?
+        allowedValues: ['not started', 'completed'],
         defaultValue: 'not started',
       },
       tags: {
@@ -39,7 +39,7 @@ class EventCollection extends BaseCollection {
         allowedValues: eventTags,
       },
       feedback: {
-        type: String, // Feedback will require a better definition later on
+        type: String, // TODO: Feedback will require a better definition later on
         optional: true,
       },
     }));
@@ -95,7 +95,7 @@ class EventCollection extends BaseCollection {
    * @param tags the tags describing the event type. (optional).
    */
   update(docID, { title, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, skillsRecommended, status, tags }) {
-    const updateData = {};
+    const updateData = {}; // TODO Shorten this code
     if (title) {
       updateData.title = title;
     }
