@@ -24,7 +24,7 @@ import ListStuffVolunteer from '../pages/ListStuffVolunteer';
 import VolunteerProfile from '../pages/VolunteerProfile';
 import AboutUs from '../pages/AboutUs';
 import VolunteerListEvents from '../pages/VolunteerListEvents';
-import VolunteerEventDetail from "../pages/VolunteerEventDetail";
+import VolunteerEventDetail from '../pages/VolunteerEventDetail';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
