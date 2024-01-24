@@ -19,6 +19,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ManageDatabase from '../pages/ManageDatabase';
+import Feedback from "../pages/Feedback";
 import ListStuffVolunteer from '../pages/ListStuffVolunteer';
 import VolunteerProfile from '../pages/VolunteerProfile';
 import AboutUs from '../pages/AboutUs';
@@ -41,6 +42,8 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/volunteer-profile" element={<ProtectedRoute><VolunteerProfile /></ProtectedRoute>} />
           <Route path="/volunteer-list-events" element={<ProtectedRoute><VolunteerListEvents /></ProtectedRoute>} />
