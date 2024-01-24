@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Image, Row, Navbar, Nav, FormControl, Carousel } from 'react-bootstrap';
+import { Col, Container, Image, Row, Navbar, Carousel } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* A simple static component to render some text for the landing page. */
@@ -10,16 +10,6 @@ const Landing = () => (
         <Col>
           <Container>
             <Image src="images/Voluntree-logo.png" className="img-fluid" width="20%" />
-          </Container>
-          <Container>
-            <Nav className="justify-content-center d-flex">
-              <FormControl
-                placeholder="Search for events"
-                aria-label="Search for events"
-                aria-describedby="basic-addon2"
-                style={{ width: '40%' }}
-              />
-            </Nav>
           </Container>
           <Container>
             <div className="mt-4 text-center">
