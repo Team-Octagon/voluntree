@@ -1,5 +1,6 @@
 // import { Selector, t } from 'testcafe';
-import { aboutUsPage, /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */ signOutPage } from './simple.page';
+import { /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */ signOutPage } from './simple.page';
+import { aboutUsPage } from './aboutus.page';
 import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 // import { signUpPage } from './signup.page';
