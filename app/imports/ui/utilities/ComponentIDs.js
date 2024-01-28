@@ -1,5 +1,5 @@
 export const COMPONENT_IDS = {
-  ABOUT_US: 'about-us',
+  FOOTER_ABOUT_US: 'footer-about-us',
   LIST_STUFF_EDIT: 'list-stuff-edit',
   MANGAGE_DATABASE_DUMP: 'manage-database-dump',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',

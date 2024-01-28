@@ -10,7 +10,7 @@ const Footer = () => (
         Voluntree
         {' '}
         <br />
-        <a id={COMPONENT_IDS.ABOUT_US} href="/about-us">
+        <a id={COMPONENT_IDS.FOOTER_ABOUT_US} href="/about-us">
           About Us
         </a>
         {' '}
