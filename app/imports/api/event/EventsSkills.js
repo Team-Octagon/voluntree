@@ -13,19 +13,22 @@ export const eventSkillPublications = {
 
 class EventsSkillsCollection extends BaseCollection {
   constructor() {
-    super('Skills', new SimpleSchema({
-      name: { type: String, index: true, unique: true },
+    super('EventsSkills', new SimpleSchema({
+      event: String,
+      skill: String,
     }));
   }
 
   /**
    * Defines a new EventSkill item.
-   * @param name the name of the skill.
+   * @param event the name of the event.
+   * @param skill the name of the skill.
    * @return {String} the docID of the new document.
    */
-  define({ name }) {
+  define({ event, skill }) {
     const docID = this._collection.insert({
-      name,
+      event,
+      skill,
     });
     return docID;
   }
@@ -33,12 +36,16 @@ class EventsSkillsCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update. (optional).
-   * @param name the title of the event. (optional).
+   * @param event the name of the event. (optional).
+   * @param skill the name of the skill. (optional).
    */
-  update(docID, { name }) {
+  update(docID, { event, skill }) {
     const updateData = {};
-    if (name) {
-      updateData.name = name;
+    if (event) {
+      updateData.event = event;
+    }
+    if (skill) {
+      updateData.skill = skill;
     }
 
     this._collection.update(docID, { $set: updateData });
@@ -46,11 +53,11 @@ class EventsSkillsCollection extends BaseCollection {
 
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
-   * @param { String | Object } name A document or docID in this collection.
+   * @param { String | Object } event A document or docID in this collection.
    * @returns true
    */
-  removeIt(name) {
-    const doc = this.findDoc(name);
+  removeIt(event) {
+    const doc = this.findDoc(event);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -58,11 +65,11 @@ class EventsSkillsCollection extends BaseCollection {
 
   /**
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the event associated to an owner.
+   * It publishes the entire collection for admin and just the information associated to an owner.
    */
   publish() {
     if (Meteor.isServer) {
-      // get the Events instance.
+      // get the EventsSkills instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
       Meteor.publish(eventSkillPublications.eventSkill, function publish() {
@@ -136,12 +143,13 @@ class EventsSkillsCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{name: (*|string)}}
+   * @return {{event: *, skill: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
-    return name;
+    const event = doc.event;
+    const skill = doc.skill;
+    return { event, skill };
   }
 }
 

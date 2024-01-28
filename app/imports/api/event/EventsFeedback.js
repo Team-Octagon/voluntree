@@ -12,34 +12,22 @@ export const eventFeedbackPublications = {
 
 class EventsFeedbackCollection extends BaseCollection {
   constructor() {
-    super('Feedback', new SimpleSchema({
-      eventId: { type: String, index: true, unique: false },
-      userId: { type: String, index: true, unique: false },
-      rating: Number,
-      comments: String,
-      timestamp: Date,
-      isAnonymous: Boolean,
+    super('EventsFeedback', new SimpleSchema({
+      event: String,
+      feedback: String,
     }));
   }
 
   /**
    * Defines a new EventFeedback item.
-   * @param eventId the id of the event the feedback is for.
-   * @param userId the id of the user the feedback is from.
-   * @param rating the rating of the event.
-   * @param comments the comments of the user.
-   * @param timestamp the timestamp of the feedback when posted.
-   * @param isAnonymous whether the feedback is anonymous or not.
+   * @param event the name of the event the feedback is for.
+   * @param feedback the feedback of the event.
    * @return {String} the docID of the new document.
    */
-  define({ eventId, userId, rating, comments, timestamp, isAnonymous }) {
+  define({ event, feedback }) {
     const docID = this._collection.insert({
-      eventId,
-      userId,
-      rating,
-      comments,
-      timestamp,
-      isAnonymous,
+      event,
+      feedback,
     });
     return docID;
   }
@@ -47,28 +35,16 @@ class EventsFeedbackCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update. (optional).
-   * @param userId the id of the user the feedback is from. (optional).
-   * @param rating the rating of the event. (optional).
-   * @param comments the comments of the user. (optional).
-   * @param timestamp the timestamp of the feedback when posted. (optional).
-   * @param isAnonymous whether the feedback is anonymous or not. (optional).
+   * @param event the name of the event the feedback is for (optional).
+   * @param feedback the feedback of the event. (optional).
    */
-  update(docID, { userId, rating, comments, timestamp, isAnonymous }) {
+  update(docID, { event, feedback }) {
     const updateData = {};
-    if (userId) {
-      updateData.userId = userId;
+    if (event) {
+      updateData.event = event;
     }
-    if (rating) {
-      updateData.rating = rating;
-    }
-    if (comments) {
-      updateData.comments = comments;
-    }
-    if (timestamp) {
-      updateData.timestamp = timestamp;
-    }
-    if (isAnonymous) {
-      updateData.isAnonymous = isAnonymous;
+    if (feedback) {
+      updateData.feedback = feedback;
     }
 
     this._collection.update(docID, { $set: updateData });
@@ -88,11 +64,11 @@ class EventsFeedbackCollection extends BaseCollection {
 
   /**
    * Default publication method for entities.
-   * It publishes the entire collection for admin and just the event associated to an owner.
+   * It publishes the entire collection for admin and just the information associated to an owner.
    */
   publish() {
     if (Meteor.isServer) {
-      // get the Events instance.
+      // get the EventsFeedback instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
       Meteor.publish(eventFeedbackPublications.eventFeedback, function publish() {
@@ -166,17 +142,13 @@ class EventsFeedbackCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return { Object } An object representing the definition of the docID.
+   * @return {{event: *, feedback: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const eventId = doc.eventId;
-    const userId = doc.userId;
-    const rating = doc.rating;
-    const comments = doc.comments;
-    const timestamp = doc.timestamp;
-    const isAnonymous = doc.isAnonymous;
-    return { eventId, userId, rating, comments, timestamp, isAnonymous };
+    const event = doc.event;
+    const feedback = doc.feedback;
+    return { event, feedback };
   }
 }
 
