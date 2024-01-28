@@ -94,7 +94,7 @@ class EventsSkillsCollection extends BaseCollection {
   /**
    * Subscription method for event owned by the current user.
    */
-  subscribeEvent() {
+  subscribeEventSkills() {
     if (Meteor.isClient) {
       return Meteor.subscribe(eventSkillPublications.eventSkill);
     }
@@ -105,7 +105,7 @@ class EventsSkillsCollection extends BaseCollection {
    * Subscription method for admin users.
    * It subscribes to the entire collection.
    */
-  subscribeEventAdmin() {
+  subscribeEventSkillsAdmin() {
     if (Meteor.isClient) {
       return Meteor.subscribe(eventSkillPublications.eventSkillAdmin);
     }
@@ -116,7 +116,7 @@ class EventsSkillsCollection extends BaseCollection {
    * Subscription method for volunteer users.
    * It subscribes to the entire collection.
    */
-  subscribeEventVolunteer() {
+  subscribeEventSkillsVolunteer() {
     if (Meteor.isClient) {
       return Meteor.subscribe(eventSkillPublications.eventSkillVolunteer);
     }
