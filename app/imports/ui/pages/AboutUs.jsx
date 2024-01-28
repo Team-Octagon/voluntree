@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 // AboutUs component
 const AboutUs = () => (
   <div>
-    <Container className="text-center align-content-center">
+    <Container id={PAGE_IDS.ABOUT_US} className="text-center align-content-center">
       <h1>Welcome to the Voluntree</h1>
       <p>Connecting Volunteers with Opportunities</p>
     </Container>
