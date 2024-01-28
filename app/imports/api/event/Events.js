@@ -50,10 +50,8 @@ class EventsCollection extends BaseCollection {
    * @param startTime the start time of the event.
    * @param endTime the end time of the event.
    * @param volunteersNeeded the number of volunteers needed for the event.
-   * @param skillsRecommended the skills recommended for the event.
    * @param status the status of the event.
    * @param tags the tags describing the event type.
-   * @param feedback user feedback of the event.
    * @return {String} the docID of the new document.
    */
   define({ name, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, status, tags }) {
