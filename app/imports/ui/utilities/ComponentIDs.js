@@ -1,4 +1,5 @@
 export const COMPONENT_IDS = {
+  FOOTER: 'footer',
   FOOTER_ABOUT_US: 'footer-about-us',
   LIST_STUFF_EDIT: 'list-stuff-edit',
   MANGAGE_DATABASE_DUMP: 'manage-database-dump',

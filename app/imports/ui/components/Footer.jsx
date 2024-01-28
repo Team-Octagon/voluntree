@@ -5,7 +5,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => (
   <footer className="mt-auto py-3 bg-light">
-    <Container>
+    <Container id={COMPONENT_IDS.FOOTER}>
       <Col className="text-center">
         Voluntree
         {' '}
