@@ -266,4 +266,4 @@ class BaseCollection {
 
 }
 
-export default BaseCollection;
+export const VolunteerOrganization = new VolunteerOrganizationCollection;
