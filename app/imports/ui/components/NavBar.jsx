@@ -16,9 +16,9 @@ const NavBar = () => {
   const menuStyle = { marginBottom: '10px' };
   return (
     <Navbar bg="white" expand="lg" style={menuStyle}>
-      <Container className="">
-        <Image src="images/VoluntreeLogoCropped.png" width="5%" />
-        <Navbar.Brand id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/" className="px-5"><h1>Voluntree</h1></Navbar.Brand>
+      <Container>
+        <Image src="images/VoluntreeLogoCropped.png" width="6%" />
+        <Navbar.Brand id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/" className="logoFont"><h1>Voluntree</h1></Navbar.Brand>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
