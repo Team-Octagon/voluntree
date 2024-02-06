@@ -22,6 +22,7 @@ class EventsCollection extends BaseCollection {
       eventDate: Date,
       location: String,
       description: String,
+      eventLogo: String,
       startTime: String,
       endTime: {
         type: String,
@@ -54,13 +55,14 @@ class EventsCollection extends BaseCollection {
    * @param tags the tags describing the event type.
    * @return {String} the docID of the new document.
    */
-  define({ name, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, status, tags }) {
+  define({ name, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags }) {
     const docID = this._collection.insert({
       name,
       organizer,
       eventDate,
       location,
       description,
+      eventLogo,
       startTime,
       endTime,
       volunteersNeeded,
@@ -78,13 +80,14 @@ class EventsCollection extends BaseCollection {
    * @param eventDate the date of the event. (optional).
    * @param location the location of the event. (optional).
    * @param description the description of the event. (optional).
+   * @param eventLogo
    * @param startTime the start time of the event. (optional).
    * @param endTime the end time of the event. (optional).
    * @param volunteersNeeded the number of volunteers needed for the event. (optional).
    * @param status the status of the event. (optional).
    * @param tags the tags describing the event type. (optional).
    */
-  update(docID, { title, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, status, tags }) {
+  update(docID, { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags }) {
     const updateData = {}; // TODO Shorten this code
     if (title) {
       updateData.title = title;
@@ -99,6 +102,9 @@ class EventsCollection extends BaseCollection {
       updateData.location = location;
     }
     if (description) {
+      updateData.description = description;
+    }
+    if (eventLogo) {
       updateData.description = description;
     }
     if (startTime) {
@@ -221,12 +227,13 @@ class EventsCollection extends BaseCollection {
     const eventDate = doc.eventDate;
     const location = doc.location;
     const description = doc.description;
+    const eventLogo = doc.eventLogo;
     const startTime = doc.startTime;
     const endTime = doc.endTime;
     const volunteersNeeded = doc.volunteersNeeded;
     const status = doc.status;
     const tags = doc.tags;
-    return { title, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, status, tags };
+    return { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags };
   }
 }
 

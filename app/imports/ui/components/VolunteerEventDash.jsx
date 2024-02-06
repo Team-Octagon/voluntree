@@ -20,6 +20,7 @@ const VolunteerEventDash = () => {
           {filteredEvents.map((event, index) => (
             <Col key={index} sm={4} className="p-2 d-flex justify-content-center" onClick={() => navigate(`./${event.id}`)}> {/* Use sm={4} to display 3 cards in a row, adjust as needed */}
               <EventCardTest
+                eventLogo={event.eventLogo}
                 title={event.title}
                 description={event.description}
                 tags={event.tags}
