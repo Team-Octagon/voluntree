@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import OrganizationProfileCard from '../components/OrganizationProfileCard';
 
 const OrganizationPage = () => (
   <Container id={PAGE_IDS.ORGANIZATION_PAGE} className="py-3">
-    <h1>Organization Page</h1>
+    <OrganizationProfileCard />
   </Container>
 );
 
