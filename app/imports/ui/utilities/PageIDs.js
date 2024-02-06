@@ -17,5 +17,6 @@ export const PAGE_IDS = {
   SIGN_UP: 'sign-up',
   VOLUNTEER_SETTINGS: 'volunteer-settings',
   ADD_EVENT: 'add-event',
+  LIST_EVENTS: 'listEvents',
 
 };

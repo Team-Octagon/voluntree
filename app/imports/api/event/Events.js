@@ -35,6 +35,9 @@ class EventsCollection extends BaseCollection {
         defaultValue: 'not started',
       },
       tags: {
+        type: Array,
+      },
+      'tags.$': {
         type: String,
         allowedValues: eventTags,
       },
@@ -55,9 +58,9 @@ class EventsCollection extends BaseCollection {
    * @param tags the tags describing the event type.
    * @return {String} the docID of the new document.
    */
-  define({ name, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags }) {
+  define({ title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags }) {
     const docID = this._collection.insert({
-      name,
+      title,
       organizer,
       eventDate,
       location,

@@ -18,19 +18,22 @@
     { "name": "Application", "quantity": 1, "owner": "volunteer@foo.com", "condition": "good" }
   ],
 
-  "defaultEvent": {
-    "title": "Community Cleanup Day",
-    "organizer": "Community Council",
-    "eventDate": "2024-03-15",
-    "location": "City Park",
-    "description": "Join us for a day of cleaning up the community park.",
-    "eventLogo": "path/to/logo.png",
-    "startTime": "9:00 AM",
-    "endTime": "12:00 PM",
-    "volunteersNeeded": 20,
-    "status": "not started",
-    "tags": ["community", "environment"]
-  },
+  "defaultEvent": [
+    {
+      "title": "Community Cleanup Day",
+      "organizer": "Community Council",
+      "eventDate": "2024-03-15",
+      "location": "City Park",
+      "description": "Join us for a day of cleaning up the community park.",
+      "eventLogo": "path/to/logo.png",
+      "startTime": "9:00 AM",
+      "endTime": "12:00 PM",
+      "volunteersNeeded": 20,
+      "status": "not started",
+      "tags": ["community", "environment"]
+    }
+  ],
+
   "public": {
     "development": true
   }
