@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, NumField, SubmitField, TextField, DateField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -27,7 +27,7 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/* Renders the AddStuff page for adding a document. */
+/* Renders the AddEvent page for adding a document. */
 const AddEvent = () => {
 
   // On submit, insert the data.
@@ -55,8 +55,14 @@ const AddEvent = () => {
             <Card>
               <Card.Body>
                 <TextField name="title" />
-                <NumField name="quantity" decimal={null} />
-                <SelectField name="condition" />
+                <TextField name="organizer" />
+                <DateField name="eventDate" />
+                <TextField name="location" />
+                <TextField name="description" />
+                <TextField name="eventLogo" />
+                <TextField name="startTime" />
+                <TextField name="endTime" />
+                <NumField name="volunteersNeeded" decimal={null} />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
