@@ -15,10 +15,10 @@ const NavBar = () => {
   }), []);
   const menuStyle = { marginBottom: '10px' };
   return (
-    <Navbar bg="light" expand="lg" style={menuStyle}>
+    <Navbar bg="white" expand="lg" style={menuStyle}>
       <Container>
-        <Image src="images/Voluntree-logo.png" width="5%" />
-        <Navbar.Brand id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/"><h1>Voluntree</h1></Navbar.Brand>
+        <Image src="images/VoluntreeLogoCropped.png" width="6%" />
+        <Navbar.Brand id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/" className="logoFont"><h1>Voluntree</h1></Navbar.Brand>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
@@ -28,6 +28,7 @@ const NavBar = () => {
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
               [<Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/admin" key="admin">Admin</Nav.Link>,
+                <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/add-event" key="add-event">Add Event</Nav.Link>,
                 <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
                 </NavDropdown>]

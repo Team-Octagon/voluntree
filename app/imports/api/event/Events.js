@@ -14,21 +14,21 @@ export const eventPublications = {
   eventVolunteer: 'EventVolunteer',
 };
 
-class EventCollection extends BaseCollection {
+class EventsCollection extends BaseCollection {
   constructor() {
     super('Events', new SimpleSchema({
       title: String,
-      organizer: String,
+      organizer: { type: String, index: true, unique: false },
       eventDate: Date,
       location: String,
       description: String,
+      eventLogo: String,
       startTime: String,
       endTime: {
         type: String,
         optional: true,
       },
       volunteersNeeded: Number,
-      skillsRecommended: String,
       status: {
         type: String,
         allowedValues: ['not started', 'completed'],
@@ -37,10 +37,6 @@ class EventCollection extends BaseCollection {
       tags: {
         type: String,
         allowedValues: eventTags,
-      },
-      feedback: {
-        type: String, // TODO: Feedback will require a better definition later on
-        optional: true,
       },
     }));
   }
@@ -55,26 +51,23 @@ class EventCollection extends BaseCollection {
    * @param startTime the start time of the event.
    * @param endTime the end time of the event.
    * @param volunteersNeeded the number of volunteers needed for the event.
-   * @param skillsRecommended the skills recommended for the event.
    * @param status the status of the event.
    * @param tags the tags describing the event type.
-   * @param feedback user feedback of the event.
    * @return {String} the docID of the new document.
    */
-  define({ name, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, skillsRecommended, status, tags, feedback }) {
+  define({ name, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags }) {
     const docID = this._collection.insert({
       name,
       organizer,
       eventDate,
       location,
       description,
+      eventLogo,
       startTime,
       endTime,
       volunteersNeeded,
-      skillsRecommended,
       status,
       tags,
-      feedback,
     });
     return docID;
   }
@@ -87,14 +80,14 @@ class EventCollection extends BaseCollection {
    * @param eventDate the date of the event. (optional).
    * @param location the location of the event. (optional).
    * @param description the description of the event. (optional).
+   * @param eventLogo
    * @param startTime the start time of the event. (optional).
    * @param endTime the end time of the event. (optional).
    * @param volunteersNeeded the number of volunteers needed for the event. (optional).
-   * @param skillsRecommended the skills recommended for the event. (optional).
    * @param status the status of the event. (optional).
    * @param tags the tags describing the event type. (optional).
    */
-  update(docID, { title, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, skillsRecommended, status, tags }) {
+  update(docID, { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags }) {
     const updateData = {}; // TODO Shorten this code
     if (title) {
       updateData.title = title;
@@ -111,6 +104,9 @@ class EventCollection extends BaseCollection {
     if (description) {
       updateData.description = description;
     }
+    if (eventLogo) {
+      updateData.description = description;
+    }
     if (startTime) {
       updateData.startTime = startTime;
     }
@@ -120,9 +116,6 @@ class EventCollection extends BaseCollection {
     // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
     if (_.isNumber(volunteersNeeded)) {
       updateData.volunteersNeeded = volunteersNeeded;
-    }
-    if (skillsRecommended) {
-      updateData.skillsRecommended = skillsRecommended;
     }
     if (status) {
       updateData.status = status;
@@ -151,7 +144,7 @@ class EventCollection extends BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      // get the EventCollection instance.
+      // get the Events instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
       Meteor.publish(eventPublications.event, function publish() {
@@ -234,16 +227,17 @@ class EventCollection extends BaseCollection {
     const eventDate = doc.eventDate;
     const location = doc.location;
     const description = doc.description;
+    const eventLogo = doc.eventLogo;
     const startTime = doc.startTime;
     const endTime = doc.endTime;
     const volunteersNeeded = doc.volunteersNeeded;
     const status = doc.status;
     const tags = doc.tags;
-    return { title, organizer, eventDate, location, description, startTime, endTime, volunteersNeeded, status, tags };
+    return { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const Events = new EventCollection();
+export const Events = new EventsCollection();

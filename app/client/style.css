@@ -35,3 +35,11 @@ body {
     flex-direction: column-reverse;
   }
 }
+
+.logoFont {
+  font-family: 'Abril Fatface', serif;
+  font-weight: normal;
+  font-style: normal;
+  color: #004958;
+  padding-left: 20px;
+}

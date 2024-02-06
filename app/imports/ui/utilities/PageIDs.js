@@ -16,4 +16,6 @@ export const PAGE_IDS = {
   SIGN_OUT: 'sign-out',
   SIGN_UP: 'sign-up',
   VOLUNTEER_SETTINGS: 'volunteer-settings',
+  ADD_EVENT: 'add-event',
+
 };

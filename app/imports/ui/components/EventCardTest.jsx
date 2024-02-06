@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Badge } from 'react-bootstrap';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
-const EventCardTest = ({ title, description, tags }) => (
-  <Card style={{ width: '18rem' }}>
+const EventCardTest = ({ title, description, eventLogo, tags }) => (
+  <Card id={COMPONENT_IDS.EVENT_TEST_CARD} style={{ width: '18rem' }}>
+    <a href={eventLogo}>
+      <Card.Img variant="top" src={eventLogo} />
+    </a>
     <Card.Header>{title}</Card.Header>
     <Card.Body>
       <Card.Text>{description}</Card.Text>
@@ -22,6 +26,7 @@ const EventCardTest = ({ title, description, tags }) => (
 EventCardTest.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  eventLogo: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
