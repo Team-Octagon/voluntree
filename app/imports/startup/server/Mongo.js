@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
+import { Events } from '../../api/event/Events';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -13,5 +14,18 @@ if (Stuffs.count() === 0) {
   if (Meteor.settings.defaultData) {
     console.log('Creating default data.');
     Meteor.settings.defaultData.forEach(data => addData(data));
+  }
+}
+
+function addEvent(data) {
+  console.log(`  Adding: ${data.name} (${data.owner})`);
+  Events.define(data);
+}
+
+// Initialize the StuffsCollection if empty.
+if (Events.count() === 0) {
+  if (Meteor.settings.defaultData) {
+    console.log('Creating default data.');
+    Meteor.settings.defaultData.forEach(data => addEvent(data));
   }
 }
