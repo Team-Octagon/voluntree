@@ -11,6 +11,7 @@ export const PAGE_IDS = {
   MANAGE_DATABASE: 'manage-database',
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',
+  ORGANIZATION_PAGE: 'organization-page',
   SIGN_IN: 'sign-in',
   SIGN_OUT: 'sign-out',
   SIGN_UP: 'sign-up',
