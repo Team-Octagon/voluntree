@@ -19,7 +19,7 @@ const OrganizationProfileCard = () => (
         </Row>
         <Row>
           <Col>
-            <Button variant="primary">Message</Button>
+            <Button variant="primary">Contact Us</Button>
           </Col>
         </Row>
       </Col>
