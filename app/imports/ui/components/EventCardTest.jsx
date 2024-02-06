@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Badge } from 'react-bootstrap';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const EventCardTest = ({ title, description, eventLogo, tags }) => (
-  <Card style={{ width: '18rem' }}>
+  <Card id={COMPONENT_IDS.EVENT_TEST_CARD} style={{ width: '18rem' }}>
     <a href={eventLogo}>
       <Card.Img variant="top" src={eventLogo} />
     </a>

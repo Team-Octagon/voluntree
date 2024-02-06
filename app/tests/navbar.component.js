@@ -94,6 +94,13 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN}`);
     await t.click(`#${COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE}`);
   }
+
+  /* Go to the events listing page and searches. Must be signed in. */
+  async gotoEventsPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_LIST_EVENTS}`);
+    await t.typeText(`#${COMPONENT_IDS.SEARCH_EVENTS}`, 'Health');
+    await t.expect(Selector(`#${COMPONENT_IDS.EVENT_TEST_CARD}`).exists).ok();
+  }
 }
 
 export const navBar = new NavBar();

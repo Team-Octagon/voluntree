@@ -29,4 +29,6 @@ export const COMPONENT_IDS = {
   SIGN_UP_FORM_PASSWORD: 'sign-up-form-password',
   SIGN_UP_FORM_SUBMIT: 'sign-up-form-submit',
   SIGN_UP_FORM_BIRTHDATE: 'sign-up-form-birthdate',
+  SEARCH_EVENTS: 'search-events',
+  EVENT_TEST_CARD: 'event-test-card',
 };
