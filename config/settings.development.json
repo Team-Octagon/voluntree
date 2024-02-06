@@ -5,6 +5,8 @@
     { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe"
     },
     { "email": "volunteer@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Volunteer", "lastName": "Person"
+    },
+    { "email": "organization@foo.com", "password": "changeme", "role": "ORGANIZATION" , "firstName": "Organization", "lastName": "Representative"
     }
   ],
 

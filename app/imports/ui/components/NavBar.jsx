@@ -43,6 +43,7 @@ const NavBar = () => {
             ) : (
               <NavDropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_PROFILE_DROPDOWN} as={NavLink} to="/volunteer-profile">View Profile</NavDropdown.Item>
+                <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_ORGANIZATION_DROPDOWN} as={NavLink} to="/organization-page">View Organization</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_SETTINGS} as={NavLink} to="/volunteer-settings"><GearFill /> Settings</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
               </NavDropdown>

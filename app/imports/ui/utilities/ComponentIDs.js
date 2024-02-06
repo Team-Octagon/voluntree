@@ -18,6 +18,7 @@ export const COMPONENT_IDS = {
   NAVBAR_MANAGE_DROPDOWN: 'navbar-manage-dropdown',
   NAVBAR_MANAGE_DROPDOWN_DATABASE: 'navbar-manage-dropdown-database',
   NAVBAR_VOLUNTEER_PROFILE_DROPDOWN: 'navbar-volunteer-profile-dropdown',
+  NAVBAR_VOLUNTEER_ORGANIZATION_DROPDOWN: 'navbar-organization-profile-dropdown',
   NAVBAR_MANAGE_DROPDOWN_SETTINGS: 'navbar-manage-dropdown-settings',
   NAVBAR_SIGN_OUT: 'navbar-sign-out',
   SIGN_IN_FORM_EMAIL: 'sign-in-form-email',
