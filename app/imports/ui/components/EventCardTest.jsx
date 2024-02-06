@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Badge } from 'react-bootstrap';
 
-const EventCardTest = ({ title, description, tags }) => (
+const EventCardTest = ({ title, description, eventLogo, tags }) => (
   <Card style={{ width: '18rem' }}>
+    <a href={eventLogo}>
+      <Card.Img variant="top" src={eventLogo} />
+    </a>
     <Card.Header>{title}</Card.Header>
     <Card.Body>
       <Card.Text>{description}</Card.Text>
@@ -22,6 +25,7 @@ const EventCardTest = ({ title, description, tags }) => (
 EventCardTest.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  eventLogo: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
