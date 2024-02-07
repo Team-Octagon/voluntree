@@ -1,11 +1,11 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, NumField, SubmitField, TextField, DateField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, NumField, SubmitField, TextField, DateField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Events } from '../../api/event/Events';
+import { Events, eventTags } from '../../api/event/Events';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
@@ -23,6 +23,14 @@ const formSchema = new SimpleSchema({
     optional: true,
   },
   volunteersNeeded: Number,
+  tags: {
+    type: Array,
+    defaultValue: [], // Set an empty array as the default value
+  },
+  'tags.$': {
+    type: String,
+    allowedValues: eventTags, // Set allowed values for tags
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -32,10 +40,10 @@ const AddEvent = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded } = data;
+    const { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, tags } = data;
     const owner = Meteor.user().username;
     const collectionName = Events.getCollectionName();
-    const definitionData = { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, owner };
+    const definitionData = { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, tags, owner };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
@@ -63,6 +71,7 @@ const AddEvent = () => {
                 <TextField name="startTime" />
                 <TextField name="endTime" />
                 <NumField name="volunteersNeeded" decimal={null} />
+                <SelectField name="tags" label="Tags" allowedValues={eventTags} multiple />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

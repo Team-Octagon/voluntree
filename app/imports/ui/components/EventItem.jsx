@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const EventItem = ({ event }) => (
   <tr>
     <td>{event.title}</td>
-    <td>{event.eventDate}</td>
+    <td>{event.eventDate.toString()}</td>
     <td>{event.location}</td>
     <td>{event.description}</td>
   </tr>
@@ -15,7 +15,7 @@ const EventItem = ({ event }) => (
 EventItem.propTypes = {
   event: PropTypes.shape({
     title: PropTypes.string,
-    eventDate: PropTypes.string,
+    eventDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
     location: PropTypes.string,
     description: PropTypes.string,
     _id: PropTypes.string,

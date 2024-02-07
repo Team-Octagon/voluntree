@@ -11,11 +11,11 @@ const ListEvents = () => {
   // useTracker connects Meteor data to React components.
   const { ready, events } = useTracker(() => {
     // Subscribe to the Events collection.
-    const subscription = Events.subscribeEvent();
+    const subscription = Events.subscribeEventAdmin();
     // Determine if the subscription is ready.
     const rdy = subscription.ready();
     // Get the Event documents.
-    const eventItems = Events.find({}, { sort: { title: 1 } }).fetch();
+    const eventItems = Events.find({}).fetch();
     return {
       events: eventItems,
       ready: rdy,
@@ -41,16 +41,13 @@ const ListEvents = () => {
                 </tr>
               </thead>
               <tbody>
-                {events.map((event) => (
-                  <EventItem key={event._id} event={events} />
-                ))}
+                {events.map((event) => <EventItem key={event._id} event={event} />)}
               </tbody>
             </Table>
           </Col>
         </Row>
       </Container>
-    ) : <LoadingSpinner message="Loading Events" />
-  );
+    ) : <LoadingSpinner />);
 };
 
 export default ListEvents;
