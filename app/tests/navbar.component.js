@@ -101,6 +101,11 @@ class NavBar {
     await t.typeText(`#${COMPONENT_IDS.SEARCH_EVENTS}`, 'Health');
     await t.expect(Selector(`#${COMPONENT_IDS.EVENT_TEST_CARD}`).exists).ok();
   }
+
+  async gotoVolunteerProfile() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`)
+    await t.click(`#${COMPONENT_IDS.NAVBAR_VOLUNTEER_PROFILE_DROPDOWN}`)
+  }
 }
 
 export const navBar = new NavBar();
