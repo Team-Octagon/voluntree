@@ -1,5 +1,9 @@
 // import { Selector, t } from 'testcafe';
-import { /* aboutUsPage, addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */ signOutPage, volunteerProfilePage } from './simple.page';
+import {
+  feedbackPage, /* aboutUsPage, addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
+  signOutPage,
+  volunteerProfilePage
+} from './simple.page';
 // import { aboutUsPage } from './aboutus.page';
 import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
@@ -36,6 +40,14 @@ test('Test that volunteers can view their profile', async () => {
   await navBar.isLoggedIn(credentials.username);
   await navBar.gotoVolunteerProfile();
   await volunteerProfilePage.isDisplayed();
+});
+
+test('Test that volunteers can view feedback page', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(credentials.username, credentials.password);
+  await navBar.isLoggedIn(credentials.username);
+  await navBar.gotoFeedbackPage();
+  await feedbackPage.isDisplayed();
 });
 
 test('Test that user pages show up', async () => {
