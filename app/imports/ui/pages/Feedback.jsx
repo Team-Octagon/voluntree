@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import {PAGE_IDS} from "../utilities/PageIDs";
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 const Feedback = () => (
   <Container id={PAGE_IDS.FEEDBACK}>
