@@ -3,6 +3,7 @@ import { Stuffs } from '../stuff/StuffCollection';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
 import { VolunteerProfiles } from '../user/VolunteerProfileCollection';
+import { Events } from '../event/Events';
 
 class MATPClass {
   collections;
@@ -16,6 +17,7 @@ class MATPClass {
     this.collections = [
       AdminProfiles,
       Stuffs,
+      Events,
       UserProfiles,
       VolunteerProfiles,
     ];
@@ -27,6 +29,7 @@ class MATPClass {
       UserProfiles,
       VolunteerProfiles,
       Stuffs,
+      Events,
     ];
 
     /*

@@ -13,12 +13,12 @@ const ListEvents = () => {
     // Subscribe to the Events collection.
     const subscription = Events.subscribeEvent();
     // Determine if the subscription is ready.
-    const isReady = subscription.ready();
+    const rdy = subscription.ready();
     // Get the Event documents.
-    const eventItems = Events.find({}, { sort: { eventDate: 1 } }).fetch();
+    const eventItems = Events.find({}, { sort: { title: 1 } }).fetch();
     return {
       events: eventItems,
-      ready: isReady,
+      ready: rdy,
     };
   }, []);
 
@@ -42,7 +42,7 @@ const ListEvents = () => {
               </thead>
               <tbody>
                 {events.map((event) => (
-                  <EventItem key={event._id} event={event} />
+                  <EventItem key={event._id} event={events} />
                 ))}
               </tbody>
             </Table>

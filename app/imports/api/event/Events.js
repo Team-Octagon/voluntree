@@ -51,6 +51,7 @@ class EventsCollection extends BaseCollection {
    * @param eventDate the date of the event.
    * @param location the location of the event.
    * @param description the description of the event.
+   * @param eventLogo
    * @param startTime the start time of the event.
    * @param endTime the end time of the event.
    * @param volunteersNeeded the number of volunteers needed for the event.
