@@ -47,7 +47,7 @@ class EventInfoCollection extends BaseCollection {
    * @param volunteers new amount of volunteers.
    * @param feedback new feedback.
    * @param hours new number of hours contributed.   */
-  update(docID, { name, volunteers, feedback, hours }) {
+  update(docID, { name, volunteers, hours }) {
     const updateData = {};
     if (name) {
       updateData.name = name;
