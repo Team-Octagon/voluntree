@@ -106,6 +106,10 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`)
     await t.click(`#${COMPONENT_IDS.NAVBAR_VOLUNTEER_PROFILE_DROPDOWN}`)
   }
+
+  async gotoFeedbackPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_FEEDBACK}`)
+  }
 }
 
 export const navBar = new NavBar();
