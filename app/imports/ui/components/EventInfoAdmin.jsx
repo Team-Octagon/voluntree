@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { EventInfo } from '../../api/stuff/EventInfoCollection';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
-const EventInfoAdmin = ({ EventInfo }) => (
+const EventInfoAdmin = () => (
   <tr>
     <td>{EventInfo.name}</td>
     <td>{EventInfo.volunteers}</td>
