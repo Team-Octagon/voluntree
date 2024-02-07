@@ -21,7 +21,6 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ManageDatabase from '../pages/ManageDatabase';
 import ListStuffVolunteer from '../pages/ListStuffVolunteer';
 import VolunteerProfile from '../pages/VolunteerProfile';
-import Messenger from '../components/Messenger';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
