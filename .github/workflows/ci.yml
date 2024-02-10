@@ -1,4 +1,4 @@
-name: ci-team-octagon
+name: ci-voluntree
 
 on:
   push:
