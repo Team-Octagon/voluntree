@@ -1,3 +1,3 @@
-[![ci-meteor-application-template-production](https://github.com/ics-software-engineering/meteor-application-template-production/actions/workflows/ci.yml/badge.svg)](https://github.com/ics-software-engineering/meteor-application-template-production/actions/workflows/ci.yml)
+![ci-badge](https://github.com/team-octagon/voluntree/workflows/ci-team-octagon/badge.svg)(https://github.com/team-octagon/voluntree/actions/workflows/ci-team-octagon.yml)
 
 For details, please see http://ics-software-engineering.github.io/meteor-application-template-production/
