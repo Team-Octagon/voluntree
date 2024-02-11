@@ -2,33 +2,33 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
-import BaseCollection from '../base/BaseCollection';
-import { ROLE } from '../role/Role';
+import BaseCollection from '../../base/BaseCollection';
+import { ROLE } from '../../role/Role';
 
-export const volunteerSkillPublications = {
-  volunteerProfileSkill: 'VolunteerProfileSkill',
-  volunteerProfileSkillAdmin: 'VolunteerProfileSkillAdmin',
-  volunteerProfileSkillVolunteer: 'VolunteerProfileSkillVolunteer',
+export const volunteerEventPublications = {
+  volunteerEvent: 'VolunteerEvent',
+  volunteerEventAdmin: 'VolunteerEventAdmin',
+  volunteerEventVolunteer: 'VolunteerEventVolunteer',
 };
 
-class VolunteerProfileSkillsCollection extends BaseCollection {
+class VolunteerEventsCollection extends BaseCollection {
   constructor() {
-    super('VolunteerProfileSkills', new SimpleSchema({
+    super('VolunteerEvents', new SimpleSchema({
       volunteerUser: String,
-      skill: String,
+      event: String,
     }));
   }
 
   /**
-   * Defines a new VolunteerUserSkill item.
+   * Defines a new VolunteerEvent item.
    * @param volunteerUser the name of the volunteer user.
-   * @param skill the name of the skill.
+   * @param event the name of the event.
    * @return {String} the docID of the new document.
    */
-  define({ volunteerUser, skill }) {
+  define({ volunteerUser, event }) {
     const docID = this._collection.insert({
       volunteerUser,
-      skill,
+      event,
     });
     return docID;
   }
@@ -37,15 +37,15 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
    * Updates the given document.
    * @param docID the id of the document to update. (optional).
    * @param volunteerUser the name of the volunteer user. (optional).
-   * @param skill the name of the skill. (optional).
+   * @param event the name of the event. (optional).
    */
-  update(docID, { volunteerUser, skill }) {
+  update(docID, { volunteerUser, event }) {
     const updateData = {};
     if (volunteerUser) {
       updateData.volunteerUser = volunteerUser;
     }
-    if (skill) {
-      updateData.skill = skill;
+    if (event) {
+      updateData.event = event;
     }
 
     this._collection.update(docID, { $set: updateData });
@@ -53,11 +53,11 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
 
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
-   * @param { String | Object } volunteerUser A document or docID in this collection.
+   * @param { String | Object } event A document or docID in this collection.
    * @returns true
    */
-  removeIt(volunteerUser) {
-    const doc = this.findDoc(volunteerUser);
+  removeIt(event) {
+    const doc = this.findDoc(event);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -69,10 +69,10 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      // get the VolunteerProfileSkill instance.
+      // get the VolunteerEvent instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
-      Meteor.publish(volunteerSkillPublications.volunteerProfileSkill, function publish() {
+      Meteor.publish(volunteerEventPublications.volunteerEvent, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -81,7 +81,7 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(volunteerSkillPublications.volunteerProfileSkillAdmin, function publish() {
+      Meteor.publish(volunteerEventPublications.volunteerEventAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -89,7 +89,7 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is a Volunteer. */
-      Meteor.publish(volunteerSkillPublications.volunteerProfileSkillVolunteer, function publish() {
+      Meteor.publish(volunteerEventPublications.volunteerEventVolunteer, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.VOLUNTEER)) {
           return instance._collection.find();
         }
@@ -99,11 +99,11 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for skills owned by the current user.
+   * Subscription method for event done by the current user.
    */
-  subscribeVolunteerSkills() {
+  subscribeVolunteerEvents() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(volunteerSkillPublications.volunteerProfileSkill);
+      return Meteor.subscribe(volunteerEventPublications.volunteerEvent);
     }
     return null;
   }
@@ -112,9 +112,9 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
    * Subscription method for admin users.
    * It subscribes to the entire collection.
    */
-  subscribeVolunteerSkillsAdmin() {
+  subscribeVolunteerEventsAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(volunteerSkillPublications.volunteerProfileSkillAdmin);
+      return Meteor.subscribe(volunteerEventPublications.volunteerEventAdmin);
     }
     return null;
   }
@@ -123,9 +123,9 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
    * Subscription method for volunteer users.
    * It subscribes to the entire collection.
    */
-  subscribeVolunteerSkillsVolunteer() {
+  subscribeVolunteerEventsVolunteer() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(volunteerSkillPublications.volunteerProfileSkillVolunteer);
+      return Meteor.subscribe(volunteerEventPublications.volunteerEventVolunteer);
     }
     return null;
   }
@@ -143,17 +143,17 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{event: *, skill: *}}
+   * @return {{volunteerUser: *, event: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const volunteerUser = doc.volunteerUser;
-    const skill = doc.skill;
-    return { volunteerUser, skill };
+    const event = doc.event;
+    return { volunteerUser, event };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const VolunteerProfileSkills = new VolunteerProfileSkillsCollection();
+export const VolunteerEvents = new VolunteerEventsCollection();

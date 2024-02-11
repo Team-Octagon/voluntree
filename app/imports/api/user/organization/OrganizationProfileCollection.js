@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from './BaseProfileCollection';
-import { ROLE } from '../role/Role';
-import { Users } from './UserCollection';
+import BaseProfileCollection from '../BaseProfileCollection';
+import { ROLE } from '../../role/Role';
+import { Users } from '../UserCollection';
 
 class OrganizationProfileCollection extends BaseProfileCollection {
   constructor() {
