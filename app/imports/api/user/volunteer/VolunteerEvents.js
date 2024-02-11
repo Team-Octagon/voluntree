@@ -2,33 +2,33 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
-import BaseCollection from '../base/BaseCollection';
-import { ROLE } from '../role/Role';
+import BaseCollection from '../../base/BaseCollection';
+import { ROLE } from '../../role/Role';
 
-export const eventSkillPublications = {
-  eventSkill: 'EventSkill',
-  eventSkillAdmin: 'EventSkillAdmin',
-  eventSkillVolunteer: 'EventSkillVolunteer',
+export const volunteerEventPublications = {
+  volunteerEvent: 'VolunteerEvent',
+  volunteerEventAdmin: 'VolunteerEventAdmin',
+  volunteerEventVolunteer: 'VolunteerEventVolunteer',
 };
 
-class EventsSkillsCollection extends BaseCollection {
+class VolunteerEventsCollection extends BaseCollection {
   constructor() {
-    super('EventsSkills', new SimpleSchema({
+    super('VolunteerEvents', new SimpleSchema({
+      volunteerUser: String,
       event: String,
-      skill: String,
     }));
   }
 
   /**
-   * Defines a new EventSkill item.
+   * Defines a new VolunteerEvent item.
+   * @param volunteerUser the name of the volunteer user.
    * @param event the name of the event.
-   * @param skill the name of the skill.
    * @return {String} the docID of the new document.
    */
-  define({ event, skill }) {
+  define({ volunteerUser, event }) {
     const docID = this._collection.insert({
+      volunteerUser,
       event,
-      skill,
     });
     return docID;
   }
@@ -36,16 +36,16 @@ class EventsSkillsCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update. (optional).
+   * @param volunteerUser the name of the volunteer user. (optional).
    * @param event the name of the event. (optional).
-   * @param skill the name of the skill. (optional).
    */
-  update(docID, { event, skill }) {
+  update(docID, { volunteerUser, event }) {
     const updateData = {};
+    if (volunteerUser) {
+      updateData.volunteerUser = volunteerUser;
+    }
     if (event) {
       updateData.event = event;
-    }
-    if (skill) {
-      updateData.skill = skill;
     }
 
     this._collection.update(docID, { $set: updateData });
@@ -53,11 +53,11 @@ class EventsSkillsCollection extends BaseCollection {
 
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
-   * @param { String | Object } skill A document or docID in this collection.
+   * @param { String | Object } event A document or docID in this collection.
    * @returns true
    */
-  removeIt(skill) {
-    const doc = this.findDoc(skill);
+  removeIt(event) {
+    const doc = this.findDoc(event);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
@@ -69,10 +69,10 @@ class EventsSkillsCollection extends BaseCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      // get the EventsSkills instance.
+      // get the VolunteerEvent instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
-      Meteor.publish(eventSkillPublications.eventSkill, function publish() {
+      Meteor.publish(volunteerEventPublications.volunteerEvent, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -81,7 +81,7 @@ class EventsSkillsCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(eventSkillPublications.eventSkillAdmin, function publish() {
+      Meteor.publish(volunteerEventPublications.volunteerEventAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -89,7 +89,7 @@ class EventsSkillsCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is a Volunteer. */
-      Meteor.publish(eventSkillPublications.eventSkillVolunteer, function publish() {
+      Meteor.publish(volunteerEventPublications.volunteerEventVolunteer, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.VOLUNTEER)) {
           return instance._collection.find();
         }
@@ -99,11 +99,11 @@ class EventsSkillsCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for event owned by the current user.
+   * Subscription method for event done by the current user.
    */
-  subscribeEventSkills() {
+  subscribeVolunteerEvents() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(eventSkillPublications.eventSkill);
+      return Meteor.subscribe(volunteerEventPublications.volunteerEvent);
     }
     return null;
   }
@@ -112,9 +112,9 @@ class EventsSkillsCollection extends BaseCollection {
    * Subscription method for admin users.
    * It subscribes to the entire collection.
    */
-  subscribeEventSkillsAdmin() {
+  subscribeVolunteerEventsAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(eventSkillPublications.eventSkillAdmin);
+      return Meteor.subscribe(volunteerEventPublications.volunteerEventAdmin);
     }
     return null;
   }
@@ -123,9 +123,9 @@ class EventsSkillsCollection extends BaseCollection {
    * Subscription method for volunteer users.
    * It subscribes to the entire collection.
    */
-  subscribeEventSkillsVolunteer() {
+  subscribeVolunteerEventsVolunteer() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(eventSkillPublications.eventSkillVolunteer);
+      return Meteor.subscribe(volunteerEventPublications.volunteerEventVolunteer);
     }
     return null;
   }
@@ -143,17 +143,17 @@ class EventsSkillsCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{event: *, skill: *}}
+   * @return {{volunteerUser: *, event: *}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
+    const volunteerUser = doc.volunteerUser;
     const event = doc.event;
-    const skill = doc.skill;
-    return { event, skill };
+    return { volunteerUser, event };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const EventsSkills = new EventsSkillsCollection();
+export const VolunteerEvents = new VolunteerEventsCollection();

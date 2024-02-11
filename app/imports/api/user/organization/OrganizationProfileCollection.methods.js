@@ -1,15 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { VolunteerProfiles } from './VolunteerProfileCollection';
+import { OrganizationProfiles } from './OrganizationProfileCollection';
 
 export const signUpNewUserMethod = new ValidatedMethod({
-  name: 'VolunteerProfiles.SignupNewUser',
+  name: 'OrganizationProfiles.SignupNewUser',
   mixins: [CallPromiseMixin],
   validate: null,
-  run({ email, firstName, lastName, password }) {
+  run({ email, name, password }) {
     if (Meteor.isServer) {
-      VolunteerProfiles.define({ email, firstName, lastName, password });
+      OrganizationProfiles.define({ email, name, password });
     }
   },
 });
