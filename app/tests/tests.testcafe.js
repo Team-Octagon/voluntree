@@ -1,6 +1,6 @@
 // import { Selector, t } from 'testcafe';
 import {
-  feedbackPage, aboutUsPage,/* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
+  feedbackPage, aboutUsPage, /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
   signOutPage,
   volunteerProfilePage,
 } from './simple.page';
