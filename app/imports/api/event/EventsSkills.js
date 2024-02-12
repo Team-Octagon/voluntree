@@ -53,11 +53,11 @@ class EventsSkillsCollection extends BaseCollection {
 
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
-   * @param { String | Object } skill A document or docID in this collection.
+   * @param { String | Object } event A document or docID in this collection.
    * @returns true
    */
-  removeIt(skill) {
-    const doc = this.findDoc(skill);
+  removeIt(event) {
+    const doc = this.findDoc(event);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;

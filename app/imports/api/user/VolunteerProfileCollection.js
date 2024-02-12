@@ -1,9 +1,9 @@
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from '../BaseProfileCollection';
-import { ROLE } from '../../role/Role';
-import { Users } from '../UserCollection';
+import BaseProfileCollection from './BaseProfileCollection';
+import { ROLE } from '../role/Role';
+import { Users } from './UserCollection';
 
-class VolunteerCollection extends BaseProfileCollection {
+class VolunteerProfileCollection extends BaseProfileCollection {
   constructor() {
     super('VolunteerProfile', new SimpleSchema({}));
   }
@@ -110,6 +110,6 @@ class VolunteerCollection extends BaseProfileCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
- * @type {VolunteerCollection}
+ * @type {VolunteerProfileCollection}
  */
-export const VolunteerProfiles = new VolunteerCollection();
+export const VolunteerProfiles = new VolunteerProfileCollection();
