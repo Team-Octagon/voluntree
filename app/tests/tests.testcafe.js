@@ -1,6 +1,6 @@
 // import { Selector, t } from 'testcafe';
 import {
-  feedbackPage, /* aboutUsPage, addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
+  feedbackPage, aboutUsPage,/* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
   signOutPage,
   volunteerProfilePage,
 } from './simple.page';
@@ -85,7 +85,7 @@ test('Test that admin pages show up', async () => {
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(adminCredentials.username);
   await footer.gotoAboutUsPage();
-  // await aboutUsPage.isDisplayed();
+  await aboutUsPage.isDisplayed();
   // await navBar.gotoAddStuffPage();
   // await addStuffPage.isDisplayed();
   // await navBar.gotoListStuffPage();
