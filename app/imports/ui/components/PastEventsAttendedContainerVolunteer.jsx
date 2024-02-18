@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import PastEventCardVolunteer from './PastEventCardVolunteer';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const pastEventsData = [
   {
@@ -19,7 +20,7 @@ const pastEventsData = [
   },
 ];
 const UpcomingEventsContainerVolunteer = () => (
-  <Container>
+  <Container id={COMPONENT_IDS.DASHBOARD_PAST_EVENTS_VOLUNTEER}>
     {pastEventsData.map((event) => (
       <PastEventCardVolunteer title={event.title} date={event.date} />
     ))}

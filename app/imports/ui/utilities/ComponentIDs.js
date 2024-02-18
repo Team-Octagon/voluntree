@@ -32,4 +32,7 @@ export const COMPONENT_IDS = {
   SIGN_UP_FORM_BIRTHDATE: 'sign-up-form-birthdate',
   SEARCH_EVENTS: 'search-events',
   EVENT_TEST_CARD: 'event-test-card',
+  DASHBOARD_UPCOMING_EVENTS_VOLUNTEER: 'dashboard-upcoming-events',
+  DASHBOARD_PAST_EVENTS_VOLUNTEER: 'dashboard-past-events',
+  DASHBOARD_STATS_VOLUNTEER: 'dashboard-stats-volunteer',
 };

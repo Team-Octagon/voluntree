@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Container, Col, Row } from 'react-bootstrap';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 // Displays example stats for the volunteer when they use the dashboard page.
 const StatsContainerVolunteer = () => (
-  <Container className="mt-4">
+  <Container id={PAGE_IDS.DASHBOARD_STATS_VOLUNTEER} className="mt-4">
     <Row>
       <Col md={3}>
         <Card>
