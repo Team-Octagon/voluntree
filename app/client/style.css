@@ -3,7 +3,7 @@
 
 /* Set up some CSS variables to theme the application. */
 :root {
-  --matr-navbar-bg: #024731;
+  --matr-navbar-bg: #0cba82;
   --matr-navbar-bg-rgb: 173, 216, 230;
   --matr-navbar-text-color: white;
   --matr-navbar-highlight-text: khaki;
@@ -42,4 +42,24 @@ body {
   font-style: normal;
   color: #004958;
   padding-left: 20px;
+}
+
+.upcoming-events-header {
+  color: white; /* Change this to white or another light color for better readability */
+}
+
+.custom-card {
+  min-height: 500px; /* Adjust this based on your content needs */
+}
+
+.custom-btn {
+  background-color: teal; /* Or any specific teal shade you prefer */
+  border-color: teal; /* To ensure the border matches the background */
+}
+
+/* If using a light shade of teal, you may want to ensure text is readable */
+.custom-btn:hover {
+  background-color: #008080; /* Darker teal for hover effect */
+  border-color: #008080; /* Consistent with hover background */
+  color: white; /* Keep text color white for readability */
 }

@@ -35,14 +35,14 @@ const Landing = () => {
           <Col md={6}>
             <Form className="d-flex justify-content-center">
               <Form.Control type="search" placeholder="Search..." aria-label="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="me-2" />
-              <Button variant="outline-success" onClick={handleSearch}>Search</Button>
+              <Button variant="primary" style={{ backgroundColor: 'teal', borderColor: 'teal', color: 'white' }} onClick={handleSearch}>Search</Button>
             </Form>
           </Col>
         </Row>
         <Row className="justify-content-center text-center mt-5">
           <Col md={6}>
-            <h1 className="mt-4">Upcoming Events In Your Area</h1>
-            <p>Discover volunteer events and opportunities!</p>
+            <h1 className="mt-4 upcoming-events-header">Upcoming Events In Your Area</h1>
+            <p className="upcoming-events-header">Discover volunteer events and opportunities!</p>
           </Col>
         </Row>
 
@@ -52,9 +52,9 @@ const Landing = () => {
             <Row xs={1} md={2} lg={3} className="g-4">
               {events.map((event) => (
                 <Col key={event._id}>
-                  <Card>
+                  <Card className="custom-card"> {/* Add the custom-card class */}
                     <Card.Img variant="top" src={event.eventLogo || '/images/volunteer-team-stock-image.jpg'} />
-                    <Card.Body>
+                    <Card.Body className="text-center"> {/* Apply text-center class */}
                       <Card.Title>{event.title}</Card.Title>
                       <Card.Text>
                         Date: {event.date}
@@ -63,7 +63,7 @@ const Landing = () => {
                         <br />
                         {event.description}
                       </Card.Text>
-                      <Button variant="primary" href={`/events/${event._id}`}>Learn More</Button>
+                      <Button variant="primary" style={{ backgroundColor: 'teal', borderColor: 'teal', color: 'white' }} href={`/events/${event._id}`}>Learn More</Button>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -75,14 +75,14 @@ const Landing = () => {
         {/* Explore new section */}
         <Row className="justify-content-center text-center mt-5">
           <Col md={8}>
-            <h1>Explore What is New</h1>
+            <h1 style={{ color: 'white' }}>Explore What is New</h1> {/* Add this style to make header text white */}
             <Carousel className="mt-4">
               {['1', '2', '3'].map((num) => (
                 <Carousel.Item key={num}>
-                  <Image src={`images/stock-image${num}.jpg`} className="d-block w-100" />
+                  <Image src={`images/stock-image${num}.png`} className="d-block w-100" style={{ maxWidth: '1000px', margin: '0 auto' }} /> {/* Adjust maxWidth as needed */}
                   <Carousel.Caption>
-                    <h3>{`Header ${num}`}</h3>
-                    <p>{`Detail text for image ${num}`}</p>
+                    <h3 style={{ color: 'white' }}>{`Header ${num}`}</h3> {/* Change text color to white */}
+                    <p style={{ color: 'white' }}>{`Detail text for image ${num}`}</p> {/* Change text color to white */}
                   </Carousel.Caption>
                 </Carousel.Item>
               ))}
