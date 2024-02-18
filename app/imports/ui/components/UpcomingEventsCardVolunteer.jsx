@@ -22,7 +22,6 @@ const UpcomingEventsCardVolunteer = ({ title, description, date, time, location,
           </Card.Text>
         </div>
         <div>
-          {/* Displaying the logo on the far right with full height */}
           <Image src={logoUrl} alt="Event Logo" style={{ height: '100px', width: '100px' }} />
         </div>
       </div>

@@ -23,6 +23,7 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
             {currentUser ? ([
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD_VOLUNTEER} as={NavLink} to="/dashboard-volunteer" key="feedback">Dashboard</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_FEEDBACK} as={NavLink} to="/feedback" key="feedback">Feedback</Nav.Link>,
               <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_EVENTS} as={NavLink} to="/volunteer-list-events" key="volunteer-list-events">Events</Nav.Link>,
             ]) : ''}

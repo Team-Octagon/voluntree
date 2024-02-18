@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Container } from 'react-bootstrap';
-import UpcomingEventsCardVolunteer from './UpcomingEventsCardVolunteer';
 import { Link } from 'react-router-dom';
+import UpcomingEventsCardVolunteer from './UpcomingEventsCardVolunteer';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const eventsData = [
   {
@@ -23,7 +24,7 @@ const eventsData = [
   // Add more event data as needed
 ];
 const UpcomingEventsContainerVolunteer = () => (
-  <Container className="mt-4">
+  <Container id={COMPONENT_IDS.DASHBOARD_UPCOMING_EVENTS_VOLUNTEER} className="mt-4">
     {eventsData.map((event, index) => (
       <UpcomingEventsCardVolunteer
         key={index}

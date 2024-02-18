@@ -1,0 +1,30 @@
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import PastEventCardVolunteer from './PastEventCardVolunteer';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+
+const pastEventsData = [
+  {
+    id: 1,
+    title: 'Event 1',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    date: '2022-01-01',
+    location: 'Event Location 1',
+  },
+  {
+    id: 2,
+    title: 'Event 2',
+    description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    date: '2022-02-15',
+    location: 'Event Location 2',
+  },
+];
+const UpcomingEventsContainerVolunteer = () => (
+  <Container id={COMPONENT_IDS.DASHBOARD_PAST_EVENTS_VOLUNTEER}>
+    {pastEventsData.map((event) => (
+      <PastEventCardVolunteer title={event.title} date={event.date} />
+    ))}
+  </Container>
+);
+
+export default UpcomingEventsContainerVolunteer;
