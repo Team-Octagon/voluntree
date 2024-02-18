@@ -19,5 +19,5 @@ export const PAGE_IDS = {
   ADD_EVENT: 'add-event',
   LIST_EVENTS: 'listEvents',
   FEEDBACK: 'feedback',
-
+  DASHBOARD_VOLUNTEER: 'dashboard-volunteer',
 };
