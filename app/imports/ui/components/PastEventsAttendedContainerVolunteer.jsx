@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import PastEventCardVolunteer from './PastEventCardVolunteer';
 
 const pastEventsData = [
@@ -20,9 +20,9 @@ const pastEventsData = [
 ];
 const UpcomingEventsContainerVolunteer = () => (
   <Container>
-      {pastEventsData.map((event) => (
-          <PastEventCardVolunteer title={event.title} date={event.date} />
-      ))}
+    {pastEventsData.map((event) => (
+      <PastEventCardVolunteer title={event.title} date={event.date} />
+    ))}
   </Container>
 );
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Container } from 'react-bootstrap';
-import UpcomingEventsCardVolunteer from './UpcomingEventsCardVolunteer';
 import { Link } from 'react-router-dom';
+import UpcomingEventsCardVolunteer from './UpcomingEventsCardVolunteer';
 
 const eventsData = [
   {
