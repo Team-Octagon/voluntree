@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import * as Events from 'events';
 import { MATPCollections } from '../../api/matp/MATPCollections';
 
 // Call publish for all the collections.
@@ -12,4 +13,9 @@ Meteor.publish(null, function () {
     return Meteor.roleAssignment.find({ 'user._id': this.userId });
   }
   this.ready();
+});
+
+Meteor.publish('eventsPublic', function publish() {
+  // Publish specific events to all users, even if not logged in.
+  return Events.find({ status: 'public' }); // Example: only find events marked as public
 });
