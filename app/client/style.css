@@ -5,8 +5,8 @@
 :root {
   --matr-navbar-bg: #0cba82;
   --matr-navbar-bg-rgb: 173, 216, 230;
-  --matr-navbar-text-color: white;
-  --matr-navbar-highlight-text: khaki;
+  --matr-navbar-text-color: black;
+  --matr-navbar-highlight-text: teal;
 }
 
 /* Change bootstrap variable values.
@@ -15,6 +15,14 @@
 body {
   --bs-dark: var(--matr-navbar-bg);
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
+
+}
+body .navbar {
+  --bs-navbar-active-color: var(--matr-navbar-highlight-text);
+  --bs-navbar-brand-color: var(--matr-navbar-text-color);
+  --bs-navbar-brand-hover-color: var(--matr-navbar-highlight-text);
+  --bs-navbar-color: var(--matr-navbar-text-color);
+  --bs-navbar-hover-color: var(--matr-navbar-highlight-text);
 }
 
 /* Set the SignIn and SignUp alerts background. */
@@ -62,4 +70,16 @@ body {
   background-color: #008080; /* Darker teal for hover effect */
   border-color: #008080; /* Consistent with hover background */
   color: white; /* Keep text color white for readability */
+}
+/* Apply teal styles to all buttons */
+button, .btn {
+  background-color: teal; /* Set the button background to teal */
+  color: white; /* Set the text color to white for contrast */
+  border: 1px solid teal; /* Set the border color to match the background */
+}
+
+/* Adjust hover styles for all buttons */
+button:hover, .btn:hover {
+  background-color: #008080; /* Darker shade of teal for hover state */
+  border-color: #008080; /* Darker shade for border on hover */
 }
