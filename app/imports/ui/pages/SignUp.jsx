@@ -8,7 +8,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, DateField, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
-import { UserProfiles } from '../../api/user/UserProfileCollection';
+import { VolunteerProfiles } from '../../api/user/VolunteerProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 
 /**
@@ -29,9 +29,9 @@ const SignUp = () => {
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const collectionName = UserProfiles.getCollectionName();
+    const collectionName = VolunteerProfiles.getCollectionName();
     const definitionData = doc;
-    // create the new UserProfile
+    // create the new VolunteerProfile
     defineMethod.callPromise({ collectionName, definitionData })
       .then(() => {
         // log the new user in.
@@ -51,7 +51,7 @@ const SignUp = () => {
   /* Display the signup form. Redirect to add page after successful registration and login. */
   // if correct authentication, redirect to from: page instead of signup screen
   if (redirectToReferer) {
-    return <Navigate to="/add" />;
+    return <Navigate to="/volunteer-profile" />;
   }
   return (
     <Container id={PAGE_IDS.SIGN_UP} className="py-3">

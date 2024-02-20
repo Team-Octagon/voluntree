@@ -20,6 +20,14 @@ class BaseProfileCollection extends BaseCollection {
         type: Date,
         optional: true,
       },
+      bio: {
+        type: String,
+        defaultValue: 'This user has not yet created a bio.',
+      },
+      avatar: {
+        type: String,
+        defaultValue: '/images/meteor-logo.png',
+      },
       userID: /^[23456789ABCDEFGHJKLMNPQRSTWXYZabcdefghijkmnopqrstuvwxyz]{17}$/,
     })));
   }

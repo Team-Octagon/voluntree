@@ -38,8 +38,10 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    * @param birthDate new last name (optional).
+   * @param bio new bio (optional).
+   * @param avatar new avatar (optional).
    */
-  update(docID, { firstName, lastName, birthDate }) {
+  update(docID, { firstName, lastName, birthDate, bio, avatar }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -50,6 +52,12 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     }
     if (birthDate) {
       updateData.birthDate = birthDate;
+    }
+    if (bio) {
+      updateData.bio = bio;
+    }
+    if (avatar) {
+      updateData.avatar = avatar;
     }
     this._collection.update(docID, { $set: updateData });
   }
