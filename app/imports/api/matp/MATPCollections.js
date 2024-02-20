@@ -4,6 +4,7 @@ import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
 import { VolunteerProfiles } from '../user/VolunteerProfileCollection';
 import { Events } from '../event/Events';
+import { OrganizationProfiles } from '../user/OrganizationProfileCollection';
 
 class MATPClass {
   collections;
@@ -18,6 +19,7 @@ class MATPClass {
       AdminProfiles,
       Stuffs,
       Events,
+      OrganizationProfiles,
       UserProfiles,
       VolunteerProfiles,
     ];
@@ -26,6 +28,7 @@ class MATPClass {
      */
     this.collectionLoadSequence = [
       AdminProfiles,
+      OrganizationProfiles,
       UserProfiles,
       VolunteerProfiles,
       Stuffs,
