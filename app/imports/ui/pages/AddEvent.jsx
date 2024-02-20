@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, NumField, SubmitField, TextField, DateField, SelectField } from 'uniforms-bootstrap5';
+import React, { useRef } from 'react';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { AutoForm, ErrorsField, NumField, TextField, DateField, LongTextField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -9,7 +9,7 @@ import { Events, eventTags } from '../../api/event/Events';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
-// Create a schema to specify the structure of the data to appear in the form.
+// Adjusted schema definition for multiple tag selection
 const formSchema = new SimpleSchema({
   title: String,
   organizer: { type: String, index: true, unique: false },
@@ -24,56 +24,78 @@ const formSchema = new SimpleSchema({
   },
   volunteersNeeded: Number,
   tags: {
-    type: Array,
-    defaultValue: [], // Set an empty array as the default value
+    type: Array, // Specify that tags is an array
+    defaultValue: [], // Ensuring default is an empty array
   },
   'tags.$': {
     type: String,
-    allowedValues: eventTags, // Set allowed values for tags
+    allowedValues: eventTags,
   },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/* Renders the AddEvent page for adding a document. */
 const AddEvent = () => {
+  const formRef = useRef(null);
 
-  // On submit, insert the data.
-  const submit = (data, formRef) => {
-    const { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, tags } = data;
-    const owner = Meteor.user().username;
+  const submit = (data) => {
+    const owner = Meteor.user()?.username;
     const collectionName = Events.getCollectionName();
-    const definitionData = { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, tags, owner };
+    const definitionData = { ...data, owner };
     defineMethod.callPromise({ collectionName, definitionData })
-      .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
-        swal('Success', 'Item added successfully', 'success');
-        formRef.reset();
-      });
+        swal('Success', 'Event added successfully', 'success');
+        formRef.current.reset();
+      })
+      .catch(error => swal('Error', error.message, 'error'));
   };
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
-  let fRef = null;
   return (
     <Container id={PAGE_IDS.ADD_EVENT} className="py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
-          <Col className="text-center"><h2>Add Event</h2></Col>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+        <Col md={10} lg={8}>
+          <h2 className="text-center mb-4">Add New Event</h2>
+          <AutoForm ref={formRef} schema={bridge} onSubmit={submit}>
             <Card>
               <Card.Body>
-                <TextField name="title" />
-                <TextField name="organizer" />
-                <DateField name="eventDate" />
-                <TextField name="location" />
-                <TextField name="description" />
-                <TextField name="eventLogo" />
-                <TextField name="startTime" />
-                <TextField name="endTime" />
-                <NumField name="volunteersNeeded" decimal={null} />
-                <SelectField name="tags" label="Tags" allowedValues={eventTags} multiple />
-                <SubmitField value="Submit" />
+                <Row>
+                  <Col sm={6}>
+                    <TextField name="title" placeholder="Title" />
+                  </Col>
+                  <Col sm={6}>
+                    <TextField name="organizer" placeholder="Organizer" />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={6}>
+                    <DateField name="eventDate" placeholder="Event Date" />
+                  </Col>
+                  <Col sm={6}>
+                    <TextField name="location" placeholder="Location" />
+                  </Col>
+                </Row>
+                <LongTextField name="description" placeholder="Description" />
+                <TextField name="eventLogo" placeholder="Event Logo URL" />
+                <Row>
+                  <Col sm={6}>
+                    <TextField name="startTime" placeholder="Start Time" />
+                  </Col>
+                  <Col sm={6}>
+                    <TextField name="endTime" placeholder="End Time (Optional)" />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={6}>
+                    <NumField name="volunteersNeeded" decimal={false} placeholder="Volunteers Needed" />
+                  </Col>
+                  <Col sm={6}>
+                    <SelectField name="tags" placeholder="Select Tags" multiple />
+                  </Col>
+                </Row>
                 <ErrorsField />
+                <div className="text-center">
+                  <Button type="submit" variant="primary">Submit</Button>
+                </div>
               </Card.Body>
             </Card>
           </AutoForm>
