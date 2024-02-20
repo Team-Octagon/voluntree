@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /** Renders a single row in the List Events table. */
 const EventItem = ({ event }) => (
@@ -14,6 +16,9 @@ const EventItem = ({ event }) => (
     <td>{event.volunteersNeeded}</td>
     <td>{event.status}</td>
     <td>{Array.isArray(event.tags) ? event.tags.join(', ') : event.tags}</td>
+    <td>
+      <Link className={COMPONENT_IDS.LIST_EVENTS_EDIT} to={`/edit-event/${event._id}`}>Edit</Link>
+    </td>
   </tr>
 );
 
