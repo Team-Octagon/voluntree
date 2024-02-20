@@ -20,4 +20,6 @@ export const PAGE_IDS = {
   LIST_EVENTS: 'listEvents',
   FEEDBACK: 'feedback',
   DASHBOARD_VOLUNTEER: 'dashboard-volunteer',
+  EDIT_EVENT: 'edit-event',
+
 };

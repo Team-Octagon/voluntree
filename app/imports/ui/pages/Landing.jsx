@@ -13,7 +13,7 @@ const Landing = () => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Event documents
-    const eventItems = Events.find({}).fetch();
+    const eventItems = Events.find({}, { sort: { eventDate: 1 }, limit: 3 }).fetch(); // Sort events by date ascending and limit to 3
     return {
       events: eventItems,
       ready: rdy,
@@ -57,7 +57,7 @@ const Landing = () => {
                     <Card.Body className="text-center"> {/* Apply text-center class */}
                       <Card.Title>{event.title}</Card.Title>
                       <Card.Text>
-                        Date: {event.date}
+                        Date: {new Date(event.eventDate).toLocaleDateString()}
                         <br />
                         Location: {event.location}
                         <br />

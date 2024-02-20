@@ -26,17 +26,23 @@ const ListEvents = () => {
     ready ? (
       <Container id={PAGE_IDS.LIST_EVENTS} className="py-3">
         <Row className="justify-content-center">
-          <Col md={9}>
-            <Col className="text-center">
+          <Col md={12}> {/* Adjusted for potential additional width requirement */}
+            <div className="text-center"> {/* Changed from <Col> to <div> for proper usage */}
               <h2>List Events</h2>
-            </Col>
+            </div>
             <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>Title</th>
+                  <th>Organizer</th>
                   <th>Event Date</th>
                   <th>Location</th>
                   <th>Description</th>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                  <th>Volunteers Needed</th>
+                  <th>Status</th>
+                  <th>Tags</th>
                   <th>Edit</th>
                 </tr>
               </thead>
@@ -47,7 +53,8 @@ const ListEvents = () => {
           </Col>
         </Row>
       </Container>
-    ) : <LoadingSpinner />);
+    ) : <LoadingSpinner />
+  );
 };
 
 export default ListEvents;
