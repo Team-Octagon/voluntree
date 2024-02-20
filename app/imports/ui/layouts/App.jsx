@@ -30,6 +30,7 @@ import AddEvent from '../pages/AddEvent';
 import ListEvents from '../pages/ListEvents';
 import DashboardVolunteer from '../pages/DashboardVolunteer';
 import EditEvent from '../pages/EditEvent';
+import AdminProfile from '../pages/AdminProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/organization-page" element={<ProtectedRoute><OrganizationPage /></ProtectedRoute>} />
+          <Route path="/admin-page" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
           <Route path="/volunteer-profile" element={<ProtectedRoute><VolunteerProfile /></ProtectedRoute>} />
           <Route path="/volunteer-settings" element={<ProtectedRoute><VolunteerSettings /></ProtectedRoute>} />
           <Route path="/volunteer-list-events" element={<ProtectedRoute><VolunteerListEvents /></ProtectedRoute>} />

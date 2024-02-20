@@ -1,3 +1,4 @@
+// Import necessary modules
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -9,10 +10,15 @@ import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import NotificationsDropdown from './NotificationsDropdown';
 
+// Define the NavBar component
 const NavBar = () => {
+  // Track the currentUser state
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
+
+  // Determine if the currentUser is an ADMIN
+  const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
 
   return (
     <Navbar expand="lg" variant="light" style={{ backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
@@ -31,7 +37,7 @@ const NavBar = () => {
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_EVENTS} as={NavLink} to="/volunteer-list-events">Events</Nav.Link>
               </>
             ) : null}
-            {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) && (
+            {isAdmin && (
               <>
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/admin">Admin</Nav.Link>
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/add-event">Add Event</Nav.Link>
@@ -68,7 +74,10 @@ const NavBar = () => {
                 </Dropdown>
 
                 <NavDropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
-                  <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_PROFILE_DROPDOWN} as={NavLink} to="/volunteer-profile">View Profile</NavDropdown.Item>
+                  {/* Redirect to /admin-page if isAdmin, otherwise /volunteer-profile */}
+                  <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_PROFILE_DROPDOWN} as={NavLink} to={isAdmin ? '/admin-page' : '/volunteer-profile'}>
+                    {isAdmin ? 'Admin Page' : 'View Profile'}
+                  </NavDropdown.Item>
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_ORGANIZATION_DROPDOWN} as={NavLink} to="/organization-page">View Organization</NavDropdown.Item>
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_SETTINGS} as={NavLink} to="/volunteer-settings"><GearFill /> Settings</NavDropdown.Item>
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
@@ -82,4 +91,5 @@ const NavBar = () => {
   );
 };
 
+// Export the NavBar component
 export default NavBar;
