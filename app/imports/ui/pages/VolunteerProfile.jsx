@@ -24,6 +24,8 @@ const VolunteerProfile = () => {
       <VolunteerProfileCard
         firstName={profile.firstName}
         lastName={profile.lastName}
+        bio={profile.bio}
+        avatar={profile.avatar}
       />
       <VolunteerProfileDash />
     </Container>
