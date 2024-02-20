@@ -1,13 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Container, Button, Row, Image } from 'react-bootstrap';
 
-const VolunteerProfileCard = () => (
+const VolunteerProfileCard = ({ firstName, lastName }) => (
   <Container fluid id="profile-card" className="my-5">
     <Row>
       <Col xs={12} md={{ span: 4, offset: 3 }}>
         <Row>
           <Col>
-            <h1>John Doe</h1>
+            <h1>{firstName} {lastName}</h1>
           </Col>
         </Row>
         <Row>
@@ -27,5 +28,10 @@ const VolunteerProfileCard = () => (
     </Row>
   </Container>
 );
+
+VolunteerProfileCard.propTypes = {
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+};
 
 export default VolunteerProfileCard;
