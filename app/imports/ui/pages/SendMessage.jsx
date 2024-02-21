@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 const SendMessage = () => (
-  <Container id={PAGE_IDS.FEEDBACK}>
+  <Container id={PAGE_IDS.SEND_MESSAGE}>
     <Form>
       <Row>
         <Col>

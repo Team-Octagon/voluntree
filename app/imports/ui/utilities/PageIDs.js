@@ -22,5 +22,7 @@ export const PAGE_IDS = {
   FEEDBACK: 'feedback',
   DASHBOARD_VOLUNTEER: 'dashboard-volunteer',
   EDIT_EVENT: 'edit-event',
+  SEND_MESSAGE: 'send-message',
+  MESSAGE_SENT: 'message-sent',
 
 };
