@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Container, Row, Card, Button, Form, Carousel, Image } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import { useNavigate } from 'react-router-dom';
 import { Events } from '../../api/event/Events';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -19,6 +20,8 @@ const Landing = () => {
       ready: rdy,
     };
   }, []);
+
+  const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -52,9 +55,9 @@ const Landing = () => {
             <Row xs={1} md={2} lg={3} className="g-4">
               {events.map((event) => (
                 <Col key={event._id}>
-                  <Card className="custom-card"> {/* Add the custom-card class */}
+                  <Card className="custom-card">
                     <Card.Img variant="top" src={event.eventLogo || '/images/volunteer-team-stock-image.jpg'} />
-                    <Card.Body className="text-center"> {/* Apply text-center class */}
+                    <Card.Body className="text-center">
                       <Card.Title>{event.title}</Card.Title>
                       <Card.Text>
                         Date: {new Date(event.eventDate).toLocaleDateString()}
@@ -63,11 +66,18 @@ const Landing = () => {
                         <br />
                         {event.description}
                       </Card.Text>
-                      <Button variant="primary" style={{ backgroundColor: 'teal', borderColor: 'teal', color: 'white' }} href={`/events/${event._id}`}>Learn More</Button>
+                      <Button
+                        variant="primary"
+                        style={{ backgroundColor: 'teal', borderColor: 'teal', color: 'white' }}
+                        onClick={() => navigate(`/volunteer-event-page/${event._id}`)}
+                      >
+                        Learn More
+                      </Button>
                     </Card.Body>
                   </Card>
                 </Col>
               ))}
+
             </Row>
           </Col>
         </Row>
