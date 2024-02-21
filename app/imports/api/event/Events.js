@@ -23,11 +23,8 @@ class EventsCollection extends BaseCollection {
       location: String,
       description: String,
       eventLogo: String,
-      startTime: String,
-      endTime: {
-        type: String,
-        optional: true,
-      },
+      startTime: Date,
+      endTime: Date,
       volunteersNeeded: Number,
       status: {
         type: String,
@@ -235,6 +232,12 @@ class EventsCollection extends BaseCollection {
     const tags = doc.tags;
     return { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags };
   }
+
+  totalHoursOfEvent(event) {
+    const timeDifference = event.endTime - event.startTime;
+    return timeDifference / (1000 * 60 * 60);
+  }
+
 }
 
 /**
