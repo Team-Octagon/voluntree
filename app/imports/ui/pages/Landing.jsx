@@ -4,6 +4,8 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Events } from '../../api/event/Events';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { useNavigate } from 'react-router-dom';
+
 
 const Landing = () => {
   // useTracker connects Meteor data to React components.
