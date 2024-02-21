@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useTracker } from 'meteor/react-meteor-data';
 import UpcomingEventsCardVolunteer from './UpcomingEventsCardVolunteer';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
-import {useTracker} from "meteor/react-meteor-data";
-import {Events} from "../../api/event/Events";
+import { Events } from '../../api/event/Events';
 
 // const eventsData = [
 //   {
@@ -35,16 +35,18 @@ const UpcomingEventsContainerVolunteer = () => {
     };
   }, []);
 
-  return (<Container id={COMPONENT_IDS.DASHBOARD_UPCOMING_EVENTS_VOLUNTEER} className="mt-4">
-    {eventsData.map(event => (
+  return (
+    <Container id={COMPONENT_IDS.DASHBOARD_UPCOMING_EVENTS_VOLUNTEER} className="mt-4">
+      {eventsData.map(event => (
         <UpcomingEventsCardVolunteer key={event._id} eventId={event._id} />
-    ))}
-    <Container className="text-center mt-4">
-      <Link to="/volunteer-list-events">
-        <Button variant="primary">Find More Volunteer Opportunities</Button>
-      </Link>
+      ))}
+      <Container className="text-center mt-4">
+        <Link to="/volunteer-list-events">
+          <Button variant="primary">Find More Volunteer Opportunities</Button>
+        </Link>
+      </Container>
     </Container>
-  </Container>)
+  );
 };
 
 export default UpcomingEventsContainerVolunteer;
