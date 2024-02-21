@@ -24,7 +24,7 @@ const EventFeedbackModal = ({ eventId }) => {
           <Modal.Title>Feedback for {event.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FeedbackForm event={event} formName={formName} />
+          <FeedbackForm eventId={eventId} formName={formName} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

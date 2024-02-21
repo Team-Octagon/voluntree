@@ -18,7 +18,7 @@ const UpcomingEventsContainerVolunteer = () => {
   return (
     <Container id={COMPONENT_IDS.DASHBOARD_PAST_EVENTS_VOLUNTEER}>
       {pastEventsData.map((event) => (
-        <PastEventCardVolunteer eventId={event._id} />
+        <PastEventCardVolunteer key={event._id} eventId={event._id} />
       ))}
     </Container>
   );
