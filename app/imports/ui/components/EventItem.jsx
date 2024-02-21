@@ -11,8 +11,8 @@ const EventItem = ({ event }) => (
     <td>{event.eventDate instanceof Date ? event.eventDate.toLocaleDateString() : event.eventDate}</td>
     <td>{event.location}</td>
     <td>{event.description}</td>
-    <td>{event.startTime}</td>
-    <td>{event.endTime}</td>
+    <td>{event.startTime.toLocaleDateString()}</td>
+    <td>{event.endTime.toLocaleDateString()}</td>
     <td>{event.volunteersNeeded}</td>
     <td>{event.status}</td>
     <td>{Array.isArray(event.tags) ? event.tags.join(', ') : event.tags}</td>
