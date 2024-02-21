@@ -78,10 +78,10 @@ const AddEvent = () => {
                 <TextField name="eventLogo" placeholder="Event Logo URL" />
                 <Row>
                   <Col sm={6}>
-                    <TextField name="startTime" placeholder="Start Time" />
+                    <DateField name="startTime" placeholder="Start Time" />
                   </Col>
                   <Col sm={6}>
-                    <TextField name="endTime" placeholder="End Time (Optional)" />
+                    <DateField name="endTime" placeholder="End Time" />
                   </Col>
                 </Row>
                 <Row>
