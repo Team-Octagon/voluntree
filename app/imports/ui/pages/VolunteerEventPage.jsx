@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Badge } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import { Events } from '../../api/event/Events';
@@ -16,34 +16,32 @@ const VolunteerEventPage = () => {
   }, [_id]);
 
   return ready ? (
-    <Container id={PAGE_IDS.VOLUNTEER_EVENT_PAGE} className="py-3">
-      <Row className="justify-content-center">
-        <Col md={10} lg={8}>
-          <h2 className="text-center mb-4">Event Details</h2>
+    <Container id={PAGE_IDS.VOLUNTEER_EVENT_PAGE} className="py-5">
+      <Row className="justify-content-center mb-4">
+        <Col md={8} lg={6}>
           {doc ? (
-            <Card>
+            <Card className="text-center mt-3">
               <Card.Body>
-                <Row>
-                  <Col sm={6}><strong>Title:</strong> {doc.title}</Col>
-                  <Col sm={6}><strong>Organizer:</strong> {doc.organizer}</Col>
-                </Row>
-                <Row>
-                  <Col sm={6}><strong>Event Date:</strong> {doc.eventDate.toLocaleDateString()}</Col>
+                <Card.Title className="mb-3">{doc.title}</Card.Title>
+                <img src={doc.eventLogo || '/images/default-event-image.jpg'} alt="Event Logo" className="img-fluid mb-3" />
+                <Row className="justify-content-center">
+                  <h5 className="mb-3">{doc.organizer}</h5>
+                  <Col sm={6}><strong>Date:</strong> {doc.eventDate.toLocaleDateString()}</Col>
                   <Col sm={6}><strong>Location:</strong> {doc.location}</Col>
                 </Row>
-                <Row>
-                  <Col><strong>Description:</strong> {doc.description}</Col>
-                </Row>
-                <Row>
+                <Row className="justify-content-center mb-3">
                   <Col sm={6}><strong>Start Time:</strong> {doc.startTime}</Col>
                   <Col sm={6}><strong>End Time:</strong> {doc.endTime || 'Not specified'}</Col>
                 </Row>
-                <Row>
-                  <Col sm={6}><strong>Volunteers Needed:</strong> {doc.volunteersNeeded}</Col>
-                  <Col sm={6}><strong>Tags:</strong> {doc.tags.join(', ')}</Col>
-                </Row>
-                <Row>
-                  <Col><strong>Event Logo:</strong> <img src={doc.eventLogo} alt="Event Logo" style={{ maxWidth: '100px', maxHeight: '100px' }} /></Col>
+                <div className="description-box p-3" style={{ backgroundColor: '#f8f9fa', borderRadius: '5px', margin: 'auto' }}>
+                  <strong>Description:</strong> {doc.description}
+                </div>
+                <Row className="justify-content-center mt-3">
+                  <Col sm={12}>
+                    {doc.tags.map((tag, index) => (
+                      <Badge key={index} bg="primary" className="me-1">{tag}</Badge>
+                    ))}
+                  </Col>
                 </Row>
               </Card.Body>
             </Card>

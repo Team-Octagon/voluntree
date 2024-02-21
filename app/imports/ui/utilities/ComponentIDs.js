@@ -37,4 +37,6 @@ export const COMPONENT_IDS = {
   DASHBOARD_UPCOMING_EVENTS_VOLUNTEER: 'dashboard-upcoming-events',
   DASHBOARD_PAST_EVENTS_VOLUNTEER: 'dashboard-past-events',
   DASHBOARD_STATS_VOLUNTEER: 'dashboard-stats-volunteer',
+  LIST_EVENTS_EDIT: 'list-events-edit',
+
 };
