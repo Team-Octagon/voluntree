@@ -13,7 +13,7 @@ const VolunteerEventDash = () => {
   const [activeTab, setActiveTab] = useState('upcoming');
 
   const { ready, events } = useTracker(() => {
-    const subscription = Events.subscribeEventAdmin(); // Adjust 'subscribeEventAdmin' to match your publication name if necessary
+    const subscription = Events.subscribeEvent(); // Adjust 'subscribeEventAdmin' to match your publication name if necessary
     const rdy = subscription.ready();
     const eventItems = Events.find({}).fetch(); // You can add query parameters to filter the events
     return {
