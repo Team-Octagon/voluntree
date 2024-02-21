@@ -31,6 +31,7 @@ import ListEvents from '../pages/ListEvents';
 import DashboardVolunteer from '../pages/DashboardVolunteer';
 import EditEvent from '../pages/EditEvent';
 import AdminProfile from '../pages/AdminProfile';
+import SendMessage from '../pages/SendMessage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -69,6 +70,7 @@ const App = () => {
           <Route path="/volunteer" element={<ProtectedRoute><ListStuffVolunteer /></ProtectedRoute>} />
           <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
+          <Route path="/message" element={<ProtectedRoute><SendMessage /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
