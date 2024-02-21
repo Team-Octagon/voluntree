@@ -22,12 +22,12 @@
     {
       "title": "Community Cleanup Day",
       "organizer": "Community Council",
-      "eventDate": "2024-03-15",
+      "eventDate": "2024-03-15T00:00:00",
       "location": "City Park",
       "description": "Join us for a day of cleaning up the community park.",
       "eventLogo": "/images/volunteer-team-stock-image.jpg",
-      "startTime": "9:00 AM",
-      "endTime": "12:00 PM",
+      "startTime": "2024-03-15T09:00:00",
+      "endTime": "2024-03-15T12:00:00",
       "volunteersNeeded": 20,
       "status": "not started",
       "tags": ["community", "environment"]
@@ -35,12 +35,12 @@
     {
       "title": "Local Food Drive",
       "organizer": "Food Bank",
-      "eventDate": "2024-04-22",
+      "eventDate": "2024-04-22T00:00:00",
       "location": "Community Center",
       "description": "Help collect and organize food donations for those in need.",
       "eventLogo": "/images/volunteer-team-stock-image.jpg",
-      "startTime": "10:00 AM",
-      "endTime": "3:00 PM",
+      "startTime": "2024-04-22T10:00:00",
+      "endTime": "2024-04-22T15:00:00",
       "volunteersNeeded": 30,
       "status": "not started",
       "tags": ["health", "community"]
@@ -48,12 +48,12 @@
     {
       "title": "Beach Clean-Up",
       "organizer": "Environmental Group",
-      "eventDate": "2024-05-18",
+      "eventDate": "2024-05-18T00:00:00",
       "location": "Seaside Beach",
       "description": "Assist in removing trash and restoring the natural beauty of our beach.",
       "eventLogo": "/images/volunteer-team-stock-image.jpg",
-      "startTime": "8:00 AM",
-      "endTime": "11:00 AM",
+      "startTime": "2024-05-18T08:00:00",
+      "endTime": "2024-05-18T11:00:00",
       "volunteersNeeded": 25,
       "status": "not started",
       "tags": ["education", "community"]
