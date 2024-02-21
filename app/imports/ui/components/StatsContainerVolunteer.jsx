@@ -1,17 +1,31 @@
 import React from 'react';
 import { Card, Container, Col, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import {useTracker} from "meteor/react-meteor-data";
+import {Events} from "../../api/event/Events";
+import {VolunteerProfiles} from "../../api/user/VolunteerProfileCollection";
 
 // Displays example stats for the volunteer when they use the dashboard page.
-const StatsContainerVolunteer = () => (
-  <Container id={PAGE_IDS.DASHBOARD_STATS_VOLUNTEER} className="mt-4">
+const StatsContainerVolunteer = () => {
+  const { eventsData } = useTracker(() => {
+    Events.subscribeEventVolunteer();
+    // Get the Event documents
+    const items = Events.find({}).fetch();
+    return {
+      eventsData: items,
+    };
+  }, []);
+
+  const totalHours = eventsData.reduce((a, event) => a + Events.totalHoursOfEvent(event), 0);
+
+  return (<Container id={PAGE_IDS.DASHBOARD_STATS_VOLUNTEER} className="mt-4">
     <Row>
       <Col md={3}>
         <Card>
           <Card.Body>
             <p className="text-center display-5">⏳</p>
             <Card.Title>Hours Volunteered</Card.Title>
-            <Card.Text>120 hours</Card.Text>
+            <Card.Text>{totalHours} hours</Card.Text>
           </Card.Body>
         </Card>
       </Col>
@@ -31,7 +45,7 @@ const StatsContainerVolunteer = () => (
           <Card.Body>
             <p className="text-center display-5">🙌</p>
             <Card.Title>Attended Events</Card.Title>
-            <Card.Text>15 events</Card.Text>
+            <Card.Text>{eventsData.length} events</Card.Text>
           </Card.Body>
         </Card>
       </Col>
@@ -46,7 +60,7 @@ const StatsContainerVolunteer = () => (
         </Card>
       </Col>
     </Row>
-  </Container>
-);
+  </Container>)
+};
 
 export default StatsContainerVolunteer;
