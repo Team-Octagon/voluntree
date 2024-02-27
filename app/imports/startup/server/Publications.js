@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import * as Events from 'events';
 import { MATPCollections } from '../../api/matp/MATPCollections';
+import { Notifications } from '../../api/notifications/Notifications';
 
 // Call publish for all the collections.
 MATPCollections.collections.forEach(c => c.publish());
@@ -18,4 +19,9 @@ Meteor.publish(null, function () {
 Meteor.publish('eventsPublic', function publish() {
   // Publish specific events to all users, even if not logged in.
   return Events.find({ status: 'public' }); // Example: only find events marked as public
+});
+
+Meteor.publish('notificationsPublic', function publish() {
+  // Publish specific events to all users, even if not logged in.
+  return Notifications.find(); // Example: only find events marked as public
 });
