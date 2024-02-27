@@ -5,7 +5,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 import { Container, Navbar, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
-import { BellFill, BoxArrowRight, CloudDownload, GearFill, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
+import { BellFill, BoxArrowRight, CloudDownload, GearFill, PersonFill, PersonPlusFill, Send } from 'react-bootstrap-icons';
 import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import NotificationsDropdown from './NotificationsDropdown';
@@ -43,6 +43,9 @@ const NavBar = () => {
                 <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage">
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} as={NavLink} to="/manage-database">
                     <CloudDownload /> Database
+                  </NavDropdown.Item>
+                  <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_SEND_NOTIFICATIONS} as={NavLink} to="/send-notifications">
+                    <Send /> Send Notifications
                   </NavDropdown.Item>
                 </NavDropdown>
               </>
