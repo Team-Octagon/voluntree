@@ -33,6 +33,7 @@ import EditEvent from '../pages/EditEvent';
 import AdminProfile from '../pages/AdminProfile';
 import VolunteerEventPage from '../pages/VolunteerEventPage';
 import SendNotifications from '../pages/SendNotifications';
+import ListEventsMapView from '../pages/ListEventsMapView';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -62,6 +63,7 @@ const App = () => {
           <Route path="/volunteer-list-events/:eventId" element={<ProtectedRoute><VolunteerEventDetail /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/listEvents" element={<ProtectedRoute><ListEvents /></ProtectedRoute>} />
+          <Route path="/listEvents-mapview" element={<ProtectedRoute><ListEventsMapView /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/add-event" element={<ProtectedRoute><AddEvent /></ProtectedRoute>} />
           <Route path="/dashboard-volunteer" element={<ProtectedRoute><DashboardVolunteer /></ProtectedRoute>} />
