@@ -60,7 +60,19 @@
     }
   ],
 
+  "defaultNotifications": [
+    {
+      "userId": "admin@foo.com",
+      "message": "Test notification for admin@foo.com"
+    },
+    {
+      "userId": "john@foo.com",
+      "message": "Test notification for john@foo.com"
+    }
+  ],
+
   "public": {
     "development": true
   }
 }
+
