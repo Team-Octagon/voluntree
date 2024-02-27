@@ -11,6 +11,7 @@ class NotificationsCollection extends BaseCollection {
     super('Notifications', new SimpleSchema({
       userId: String,
       message: String,
+      subject: String,
       createdAt: Date,
     }));
   }
@@ -21,13 +22,21 @@ class NotificationsCollection extends BaseCollection {
    * @param message the content of the notification.
    * @return {String} the docID of the new document.
    */
-  define({ userId, message }) {
-    const docID = this._collection.insert({
-      userId,
-      message,
-      createdAt: new Date(),
+  define({ userIds, message, subject }) {
+    const createdAt = new Date();
+    const notificationIds = [];
+
+    userIds.forEach(userId => {
+      const docID = this._collection.insert({
+        userId,
+        message,
+        subject,
+        createdAt,
+      });
+      notificationIds.push(docID);
     });
-    return docID;
+
+    return notificationIds;
   }
 
   /**

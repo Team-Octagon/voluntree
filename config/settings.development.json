@@ -62,12 +62,14 @@
 
   "defaultNotifications": [
     {
-      "userId": "admin@foo.com",
-      "message": "Test notification for admin@foo.com"
+      "userIds": ["admin@foo.com"],
+      "message": "Test notification for admin@foo.com",
+      "subject": "testsssss1"
     },
     {
-      "userId": "john@foo.com",
-      "message": "Test notification for john@foo.com"
+      "userIds": ["john@foo.com"],
+      "message": "Test notification for john@foo.com",
+      "subject": "testss"
     }
   ],
 
