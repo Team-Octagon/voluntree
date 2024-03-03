@@ -110,6 +110,10 @@ class NavBar {
   async gotoFeedbackPage() {
     await t.click(`#${COMPONENT_IDS.NAVBAR_FEEDBACK}`);
   }
+
+  async gotoDashboardVolunteer() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_DASHBOARD_VOLUNTEER}`);
+  }
 }
 
 export const navBar = new NavBar();

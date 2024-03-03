@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Tracker } from 'meteor/tracker';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Events } from '../../api/event/Events';
 import { Notifications } from '../../api/notifications/Notifications';
@@ -46,4 +45,3 @@ if (Events.count() === 0) {
     Meteor.settings.defaultEvent.forEach(data => addEvent(data));
   }
 }
-

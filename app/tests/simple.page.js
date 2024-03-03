@@ -25,3 +25,4 @@ export const manageDatabasePage = new SimplePage(PAGE_IDS.MANAGE_DATABASE);
 export const signOutPage = new SimplePage(PAGE_IDS.SIGN_OUT);
 export const volunteerProfilePage = new SimplePage(PAGE_IDS.VOLUNTEER_PROFILE);
 export const feedbackPage = new SimplePage(PAGE_IDS.FEEDBACK);
+export const dashboardVolunteerPage = new SimplePage(PAGE_IDS.DASHBOARD_VOLUNTEER);
