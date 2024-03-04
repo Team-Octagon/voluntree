@@ -26,7 +26,7 @@ const EventsMap = ({ latAndLon }) => {
   }, [latAndLon]);
 
   return (
-    <div id="map" style={{ height: '80vh', width: '45vw' }} />
+    <div id="map" style={{ height: '50vw', width: '70vw' }} />
   );
 };
 
