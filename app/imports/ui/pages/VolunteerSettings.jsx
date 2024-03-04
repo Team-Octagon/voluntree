@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { GearFill } from 'react-bootstrap-icons';
 import VolunteerProfileSettingsCard from '../components/VolunteerProfileSettingsCard';
+import VolunteerWavierSettingsCard from '../components/VolunteerWavierSettingsCard';
+import VolunteerSecuritySettingsCard from '../components/VolunteerSecuritySettingsCard';
 
 const PAGE_IDS = {
   PROFILE: 'profile',
@@ -82,6 +84,8 @@ const VolunteerSettings = () => {
         </Col>
         <Col md={8}>
           <VolunteerProfileSettingsCard />
+          <VolunteerWavierSettingsCard />
+          <VolunteerSecuritySettingsCard />
         </Col>
       </Row>
     </Container>

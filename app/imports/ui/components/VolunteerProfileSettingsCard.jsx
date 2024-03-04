@@ -9,6 +9,7 @@ const VolunteerProfileSettingsCard = () => {
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     profilePicture: "https://placekitten.com/200/200",
     phoneNumber: "720321431",
+    birthDate: "06/13/01",
   };
   const [editMode, setEditMode] = useState(false);
   const [editedUser, setEditedUser] = useState({ ...user });
@@ -51,6 +52,33 @@ const VolunteerProfileSettingsCard = () => {
               />
             ) : (
               <div className="info-box">{user.firstName}</div>
+            )}
+            {editMode ? (
+              <Form.Control
+                type="text"
+                value={editedUser.lastName}
+                onChange={(e) => handleFieldChange('name', e.target.value)}
+              />
+            ) : (
+              <div className="info-box" style={{ marginTop: '6px' }}>{user.lastName}</div>
+            )}
+            {editMode ? (
+              <Form.Control
+                type="text"
+                value={editedUser.birthDate}
+                onChange={(e) => handleFieldChange('name', e.target.value)}
+              />
+            ) : (
+              <div className="info-box" style={{ marginTop: '6px' }}>{user.birthDate}</div>
+            )}
+            {editMode ? (
+              <Form.Control
+                type="text"
+                value={editedUser.email}
+                onChange={(e) => handleFieldChange('name', e.target.value)}
+              />
+            ) : (
+              <div className="info-box" style={{ marginTop: '10px' }}>{user.email}</div>
             )}
 
           </Col>
