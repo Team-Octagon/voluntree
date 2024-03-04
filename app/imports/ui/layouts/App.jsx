@@ -60,7 +60,7 @@ const App = () => {
           <Route path="/volunteer-profile" element={<ProtectedRoute><VolunteerProfile /></ProtectedRoute>} />
           <Route path="/volunteer-settings" element={<ProtectedRoute><VolunteerSettings /></ProtectedRoute>} />
           <Route path="/volunteer-list-events" element={<ProtectedRoute><VolunteerListEvents /></ProtectedRoute>} />
-          <Route path="/volunteer-list-events/:eventId" element={<ProtectedRoute><VolunteerEventDetail /></ProtectedRoute>} />
+          <Route path="/volunteer-list-events/:_id" element={<ProtectedRoute><VolunteerEventDetail /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/listEvents" element={<ProtectedRoute><ListEvents /></ProtectedRoute>} />
           <Route path="/listEvents-mapview" element={<ProtectedRoute><ListEventsMapView /></ProtectedRoute>} />

@@ -1,22 +1,33 @@
 import React from 'react';
-import { Button, Container } from 'react-bootstrap';
-import { useParams } from 'react-router';
-import { getEventById } from '../../../public/dummy-data/EventData';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { useTracker } from 'meteor/react-meteor-data';
+import { useParams, useNavigate } from 'react-router';
+import { Events } from '../../api/event/Events';
 
 const VolunteerEventDetail = () => {
-  const params = useParams();
-  const eventData = getEventById(params.eventId);
+  const { _id } = useParams();
+  const navigate = useNavigate();
+  const { doc, ready } = useTracker(() => {
+    const subscription = Events.subscribeEvent();
+    const rdy = subscription.ready();
+    const document = rdy ? Events.findOne(_id) : null;
+    return { doc: document, ready: rdy };
+  }, [_id]);
   return (
     <Container>
-      { eventData ? (
+      { ready ? (
         <>
-          <h1>{eventData.title}</h1>
+          <h1>{doc.title}</h1>
           <ul>
-            {eventData.tags.map(tag => <li key={tag}>{tag}</li>)}
+            {doc.tags.map(tag => <li key={tag}>{tag}</li>)}
           </ul>
-          <p>{eventData.description}</p>
-          <p>Contact us at <a href={`mailto: ${eventData.email}`}>{eventData.email}</a></p>
-          <Button>Contribute</Button>
+          <p>{doc.description}</p>
+          <p>Contact us at <a href={`mailto: ${doc.email}`}>{doc.email}</a></p>
+          <Row>
+            <Col>
+              <Button>Volunteer</Button> <Button onClick={() => navigate('/volunteer-list-events')}>Back</Button>
+            </Col>
+          </Row>
         </>
       )
 

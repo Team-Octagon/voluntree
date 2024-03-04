@@ -40,7 +40,7 @@ const VolunteerEventDash = () => {
         <Tab.Container id="dashboard-tabs" activeKey={activeTab} onSelect={handleTabChange}>
           <Row>
             {filteredEvents.map((event, index) => (
-              <Col key={index} sm={4} className="p-2 d-flex justify-content-center" onClick={() => navigate(`./${event._id}`)}>
+              <Col key={index} sm={4} className="p-2 d-flex justify-content-center" onClick={() => navigate(`/volunteer-list-events/${event._id}`)}>
                 <EventCardTest
                   id={COMPONENT_IDS.EVENT_TEST_CARD}
                   eventLogo={event.eventLogo}
