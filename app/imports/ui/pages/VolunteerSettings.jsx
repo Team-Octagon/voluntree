@@ -4,16 +4,11 @@ import { GearFill } from 'react-bootstrap-icons';
 import VolunteerProfileSettingsCard from '../components/VolunteerProfileSettingsCard';
 import VolunteerWavierSettingsCard from '../components/VolunteerWavierSettingsCard';
 import VolunteerSecuritySettingsCard from '../components/VolunteerSecuritySettingsCard';
-
-const PAGE_IDS = {
-  PROFILE: 'profile',
-  WAIVERS: 'waivers',
-  PREFERENCES: 'preferences',
-  SECURITY: 'security',
-};
+import VolunteerPreferencesSettingsCard from '../components/VolunteerPreferencesSettingsCard';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const VolunteerSettings = () => {
-  const [activeSection, setActiveSection] = useState(PAGE_IDS.PROFILE);
+  const [activeSection, setActiveSection] = useState(COMPONENT_IDS.PROFILE_SETTINGS_CARD_VOLUNTEER);
 
   const handleButtonClick = (sectionId) => {
     setActiveSection(sectionId);
@@ -23,19 +18,19 @@ const VolunteerSettings = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const profileOffset = document.getElementById(PAGE_IDS.PROFILE).offsetTop - 50;
-      const waiversOffset = document.getElementById(PAGE_IDS.WAIVERS).offsetTop - 50;
-      const preferencesOffset = document.getElementById(PAGE_IDS.PREFERENCES).offsetTop - 50;
-      const securityOffset = document.getElementById(PAGE_IDS.SECURITY).offsetTop - 50;
+      const profileOffset = document.getElementById(COMPONENT_IDS.PROFILE_SETTINGS_CARD_VOLUNTEER).offsetTop - 5;
+      const waiversOffset = document.getElementById(COMPONENT_IDS.WAVIERS_SETTINGS_CARD_VOLUNTEER).offsetTop - 5;
+      const preferencesOffset = document.getElementById(COMPONENT_IDS.PREFERENCES_SETTINGS_CARD_VOLUNTEER).offsetTop - 80;
+      const securityOffset = document.getElementById(COMPONENT_IDS.SECURITY_SETTINGS_CARD_VOLUNTEER).offsetTop + 200;
 
-      if (scrollPosition < waiversOffset) {
-        setActiveSection(PAGE_IDS.PROFILE);
-      } else if (scrollPosition < preferencesOffset) {
-        setActiveSection(PAGE_IDS.WAIVERS);
-      } else if (scrollPosition < securityOffset) {
-        setActiveSection(PAGE_IDS.PREFERENCES);
+      if (scrollPosition >= profileOffset && scrollPosition < waiversOffset) {
+        setActiveSection(COMPONENT_IDS.PROFILE_SETTINGS_CARD_VOLUNTEER);
+      } else if (scrollPosition >= waiversOffset && scrollPosition < preferencesOffset) {
+        setActiveSection(COMPONENT_IDS.WAVIERS_SETTINGS_CARD_VOLUNTEER);
+      } else if (scrollPosition >= preferencesOffset && scrollPosition < securityOffset) {
+        setActiveSection(COMPONENT_IDS.PREFERENCES_SETTINGS_CARD_VOLUNTEER);
       } else {
-        setActiveSection(PAGE_IDS.SECURITY);
+        setActiveSection(COMPONENT_IDS.SECURITY_SETTINGS_CARD_VOLUNTEER);
       }
     };
 
@@ -53,29 +48,29 @@ const VolunteerSettings = () => {
           <div className="position-sticky" style={{ top: '50px', left: '0px' }}>
             <h2 style={{ marginTop: '15px' }}>Settings <GearFill /></h2>
             <Button
-              variant={activeSection === PAGE_IDS.PROFILE ? 'primary' : 'light'}
-              onClick={() => handleButtonClick(PAGE_IDS.PROFILE)}
+              variant={activeSection === COMPONENT_IDS.PROFILE_SETTINGS_CARD_VOLUNTEER ? 'primary' : 'light'}
+              onClick={() => handleButtonClick(COMPONENT_IDS.PROFILE_SETTINGS_CARD_VOLUNTEER)}
               className="mb-2 d-block"
             >
               Profile
             </Button>
             <Button
-              variant={activeSection === PAGE_IDS.WAIVERS ? 'primary' : 'light'}
-              onClick={() => handleButtonClick(PAGE_IDS.WAIVERS)}
+              variant={activeSection === COMPONENT_IDS.WAVIERS_SETTINGS_CARD_VOLUNTEER ? 'primary' : 'light'}
+              onClick={() => handleButtonClick(COMPONENT_IDS.WAVIERS_SETTINGS_CARD_VOLUNTEER)}
               className="mb-2 d-block"
             >
               Waivers
             </Button>
             <Button
-              variant={activeSection === PAGE_IDS.PREFERENCES ? 'primary' : 'light'}
-              onClick={() => handleButtonClick(PAGE_IDS.PREFERENCES)}
+              variant={activeSection === COMPONENT_IDS.PREFERENCES_SETTINGS_CARD_VOLUNTEER ? 'primary' : 'light'}
+              onClick={() => handleButtonClick(COMPONENT_IDS.PREFERENCES_SETTINGS_CARD_VOLUNTEER)}
               className="mb-2 d-block"
             >
               Preferences
             </Button>
             <Button
-              variant={activeSection === PAGE_IDS.SECURITY ? 'primary' : 'light'}
-              onClick={() => handleButtonClick(PAGE_IDS.SECURITY)}
+              variant={activeSection === COMPONENT_IDS.SECURITY_SETTINGS_CARD_VOLUNTEER ? 'primary' : 'light'}
+              onClick={() => handleButtonClick(COMPONENT_IDS.SECURITY_SETTINGS_CARD_VOLUNTEER)}
               className="d-block"
             >
               Security
@@ -83,9 +78,10 @@ const VolunteerSettings = () => {
           </div>
         </Col>
         <Col md={8}>
-          <VolunteerProfileSettingsCard />
-          <VolunteerWavierSettingsCard />
-          <VolunteerSecuritySettingsCard />
+          <VolunteerProfileSettingsCard id={COMPONENT_IDS.PROFILE_SETTINGS_CARD_VOLUNTEER} />
+          <VolunteerWavierSettingsCard id={COMPONENT_IDS.WAVIERS_SETTINGS_CARD_VOLUNTEER} />
+          <VolunteerPreferencesSettingsCard id={COMPONENT_IDS.PREFERENCES_SETTINGS_CARD_VOLUNTEER} />
+          <VolunteerSecuritySettingsCard id={COMPONENT_IDS.SECURITY_SETTINGS_CARD_VOLUNTEER} />
         </Col>
       </Row>
     </Container>

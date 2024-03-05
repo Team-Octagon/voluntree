@@ -39,5 +39,8 @@ export const COMPONENT_IDS = {
   DASHBOARD_PAST_EVENTS_VOLUNTEER: 'dashboard-past-events',
   DASHBOARD_STATS_VOLUNTEER: 'dashboard-stats-volunteer',
   LIST_EVENTS_EDIT: 'list-events-edit',
-
+  PROFILE_SETTINGS_CARD_VOLUNTEER: 'profile-settings-card-volunteer',
+  WAVIERS_SETTINGS_CARD_VOLUNTEER: 'waviers-settings-card-volunteer',
+  PREFERENCES_SETTINGS_CARD_VOLUNTEER: 'preferences-settings-card-volunteer',
+  SECURITY_SETTINGS_CARD_VOLUNTEER: 'security-settings-card-volunteer',
 };

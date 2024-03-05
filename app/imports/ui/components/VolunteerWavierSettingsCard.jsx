@@ -1,6 +1,7 @@
 // WaiverList.js
 import React from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Row, Col, Card, Button } from 'react-bootstrap';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const sampleWaivers = [
   { title: 'Waiver 1', date: '2024-01-01', status: 'Signed' },
@@ -10,7 +11,7 @@ const sampleWaivers = [
 
 const VolunteerWavierSettingsCard = () => {
   return (
-    <Card>
+    <Card id={COMPONENT_IDS.WAVIERS_SETTINGS_CARD_VOLUNTEER} style={{ marginTop: '40px' }}>
       <Card.Header className="text-center">Wavier's Signed</Card.Header>
       <Card.Body>
         <Row>

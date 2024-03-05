@@ -1,6 +1,6 @@
-// VolunteerSecuritySettingsCard.jsx
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const VolunteerSecuritySettingsCard = () => {
   const [password, setPassword] = useState('');
@@ -9,23 +9,20 @@ const VolunteerSecuritySettingsCard = () => {
   const [is2FAEnabled, setIs2FAEnabled] = useState(false);
 
   const handleChangePassword = () => {
-    // Add logic to handle password change
     console.log('Password changed successfully!');
   };
 
   const handleToggle2FA = () => {
-    // Add logic to toggle 2FA status
     setIs2FAEnabled((prevValue) => !prevValue);
     console.log(`2FA is ${is2FAEnabled ? 'disabled' : 'enabled'}.`);
   };
 
   const handleAdditionalFeature = () => {
-    // Placeholder for additional feature logic
-    console.log('Additional feature clicked.');
+    console.log('clicked.');
   };
 
   return (
-    <Card>
+    <Card id={COMPONENT_IDS.SECURITY_SETTINGS_CARD_VOLUNTEER} style={{ marginTop: '40px' }}>
       <Card.Header className="text-center">Security Settings</Card.Header>
       <Card.Body>
         <Card.Title>Security Settings</Card.Title>
@@ -74,7 +71,7 @@ const VolunteerSecuritySettingsCard = () => {
           </Form.Group>
 
           <Button variant="primary" onClick={handleAdditionalFeature}>
-            Additional Feature
+            More Features
           </Button>
         </Form>
       </Card.Body>

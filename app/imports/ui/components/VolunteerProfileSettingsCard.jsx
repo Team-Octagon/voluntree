@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Row, Button, Card, Form } from 'react-bootstrap';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const VolunteerProfileSettingsCard = () => {
   const user = {
@@ -26,13 +27,12 @@ const VolunteerProfileSettingsCard = () => {
   };
 
   const handleSaveChanges = () => {
-    // Implement logic to save changes (e.g., update user in the database)
     console.log('Saving changes:', editedUser);
     setEditMode(false);
   };
 
   return (
-    <Card>
+    <Card id={COMPONENT_IDS.PROFILE_SETTINGS_CARD_VOLUNTEER}>
       <Card.Header className="text-center">User Profile</Card.Header>
       <Card.Body>
         <Row>
