@@ -5,6 +5,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import EventCardTest from './EventCardTest';
 import { Events } from '../../api/event/Events';
 import LoadingSpinner from './LoadingSpinner';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const VolunteerEventDash = () => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const VolunteerEventDash = () => {
     ready ? (
       <Container fluid className="mt-4">
         <Form.Control
+          id={COMPONENT_IDS.SEARCH_EVENTS}
           type="text"
           placeholder="Search events by title or tags"
           value={searchTerm}

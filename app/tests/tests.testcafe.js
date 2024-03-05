@@ -47,7 +47,7 @@ test('Test that user pages show up', async () => {
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.isLoggedIn(credentials.username);
   await footer.gotoAboutUsPage();
-  // await navBar.gotoEventsPage();
+  await navBar.gotoEventsPage();
   await navBar.gotoDashboardVolunteer();
   // await aboutUsPage.isDisplayed();
   // await navBar.gotoAddStuffPage();
