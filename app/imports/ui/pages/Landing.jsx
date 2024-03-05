@@ -26,8 +26,9 @@ const Landing = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (event) => {
-    event.preventDefault();
-    console.log(searchTerm); // Implement search logic or filtering based on searchTerm here.
+    event.preventDefault(); // Prevent the default form submit behavior
+    // Navigate to the volunteer-list-events page with the search term as a query parameter
+    navigate(`/volunteer-list-events?search=${encodeURIComponent(searchTerm)}`);
   };
 
   return (
@@ -36,9 +37,9 @@ const Landing = () => {
         {/* Search and header section */}
         <Row className="justify-content-center mt-4">
           <Col md={6}>
-            <Form className="d-flex justify-content-center">
+            <Form className="d-flex justify-content-center" onSubmit={handleSearch}>
               <Form.Control type="search" placeholder="Search..." aria-label="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="me-2" />
-              <Button variant="primary" style={{ backgroundColor: 'teal', borderColor: 'teal', color: 'white' }} onClick={handleSearch}>Search</Button>
+              <Button variant="primary" type="submit" style={{ backgroundColor: 'teal', borderColor: 'teal', color: 'white' }}>Search</Button>
             </Form>
           </Col>
         </Row>
