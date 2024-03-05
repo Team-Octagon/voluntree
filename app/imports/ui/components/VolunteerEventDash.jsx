@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Container, Row, Form } from 'react-bootstrap';
+import { Col, Container, Row, Form, Button } from 'react-bootstrap'; // Make sure to import Button
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
-import EventCardTest from './EventCardTest'; // Ensure this path is correct
-import { Events } from '../../api/event/Events'; // Adjust this import path as necessary
-import LoadingSpinner from './LoadingSpinner'; // Ensure this path is correct
+import EventCardTest from './EventCardTest';
+import { Events } from '../../api/event/Events';
+import LoadingSpinner from './LoadingSpinner';
 
 const VolunteerEventDash = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Extract search term from URL
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const search = queryParams.get('search');
@@ -46,16 +45,40 @@ const VolunteerEventDash = () => {
         />
         <Row>
           {filteredEvents.map((event, index) => (
-            <Col key={index} sm={4} className="p-2 d-flex justify-content-center" onClick={() => navigate(`/volunteer-event/${event._id}`)}>
-              <EventCardTest
-                eventLogo={event.eventLogo}
-                title={event.title}
-                description={event.description}
-                tags={event.tags}
-              />
+            <Col key={index} sm={4} className="p-2 d-flex justify-content-center">
+              <div
+                className="event-card-container"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%', // Make sure the container takes full height
+                }}
+              >
+                <EventCardTest
+                  eventLogo={event.eventLogo}
+                  title={event.title}
+                  description={event.description}
+                  tags={event.tags}
+                />
+                <Button
+                  variant="primary"
+                  className="" // Removed "mt-3" to eliminate the top margin
+                  style={{
+                    backgroundColor: 'teal',
+                    borderColor: 'darkslategray',
+                    color: 'white',
+                    width: '100%', // Ensure the button takes the full width of its container
+                  }}
+                  onClick={() => navigate(`/volunteer-event-page/${event._id}`)}
+                >
+                  Learn More
+                </Button>
+
+              </div>
             </Col>
           ))}
         </Row>
+
       </Container>
     ) : <LoadingSpinner />
   );
