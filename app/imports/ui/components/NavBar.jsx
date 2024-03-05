@@ -27,6 +27,7 @@ const NavBar = () => {
           {/* Ensure your logo fits the white background */}
           <img src="/images/Voluntree-logo.png" width="35" height="35" className="d-inline-block align-top" alt="Brand Logo" /> Voluntree
         </Navbar.Brand>
+        <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_EVENTS} as={NavLink} to="/volunteer-list-events">Events</Nav.Link>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto">
