@@ -5,7 +5,7 @@ import { UserProfiles } from '../user/UserProfileCollection';
 import { VolunteerProfiles } from '../user/VolunteerProfileCollection';
 import { Events } from '../event/Events';
 import { Notifications } from '../notifications/Notifications';
-import {Feedback} from "../feedback/Feedback";
+import { Feedback } from '../feedback/Feedback';
 
 class MATPClass {
   collections;
