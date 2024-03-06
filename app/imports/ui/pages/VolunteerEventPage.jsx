@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { Events } from '../../api/event/Events';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import FeedbackList from "../components/FeedbackList";
 
 const VolunteerEventPage = () => {
   const { _id } = useParams();
@@ -50,6 +51,7 @@ const VolunteerEventPage = () => {
           )}
         </Col>
       </Row>
+      <FeedbackList eventId={_id}/>
     </Container>
   ) : <LoadingSpinner />;
 };
