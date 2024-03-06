@@ -1,13 +1,14 @@
 import React from 'react';
-import { Card, Col, Container, Row, Badge } from 'react-bootstrap';
+import { Card, Col, Container, Row, Badge, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Events } from '../../api/event/Events';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 const VolunteerEventPage = () => {
   const { _id } = useParams();
+  const navigate = useNavigate();
   const { doc, ready } = useTracker(() => {
     const subscription = Events.subscribeEvent();
     const rdy = subscription.ready();
@@ -44,6 +45,18 @@ const VolunteerEventPage = () => {
                   </Col>
                 </Row>
               </Card.Body>
+              <Card.Footer>
+                <Row className="justify-content-between">
+                  <Col xs={6}>
+                    <Button className="w-100">Volunteer</Button>
+                  </Col>
+                  <Col xs={6}>
+                    <Button className="w-100" onClick={() => navigate('/volunteer-list-events')}>
+                      Back
+                    </Button>
+                  </Col>
+                </Row>
+              </Card.Footer>
             </Card>
           ) : (
             <p>Event not found</p>
