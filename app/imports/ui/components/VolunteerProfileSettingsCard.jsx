@@ -4,13 +4,13 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const VolunteerProfileSettingsCard = () => {
   const user = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    profilePicture: "https://placekitten.com/200/200",
-    phoneNumber: "720321431",
-    birthDate: "06/13/01",
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@example.com',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    profilePicture: 'https://placekitten.com/200/200',
+    phoneNumber: '720321431',
+    birthDate: '06/13/01',
   };
   const [editMode, setEditMode] = useState(false);
   const [editedUser, setEditedUser] = useState({ ...user });
