@@ -100,7 +100,7 @@ class BaseCollection {
    * @param { Object } options MongoDB options.
    * @returns { Object }
    */
-  findOne(selector, options) {
+  findOne(selector, options = null) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
     return this._collection.findOne(theSelector, options);
   }
