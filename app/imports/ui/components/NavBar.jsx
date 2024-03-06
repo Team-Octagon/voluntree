@@ -19,6 +19,8 @@ const NavBar = () => {
 
   // Determine if the currentUser is an ADMIN
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
+  const isOrganization = Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]);
+  console.log('Is Organization:', isOrganization);
 
   return (
     <Navbar expand="lg" variant="light" style={{ backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
@@ -34,10 +36,13 @@ const NavBar = () => {
             {currentUser ? (
               <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD_VOLUNTEER} as={NavLink} to="/dashboard-volunteer">Dashboard</Nav.Link>
             ) : null}
+            {isOrganization && (
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADD_EVENT_ORGANIZATION} as={NavLink} to="/add-event">Add Event</Nav.Link>
+            )}
             {isAdmin && (
               <>
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/admin">Admin</Nav.Link>
-                <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/add-event">Add Event</Nav.Link>
+                <Nav.Link id={COMPONENT_IDS.NAVBAR_ADD_EVENT_ADMIN} as={NavLink} to="/add-event">Add Event</Nav.Link>
                 <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage">
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} as={NavLink} to="/manage-database">
                     <CloudDownload /> Database
