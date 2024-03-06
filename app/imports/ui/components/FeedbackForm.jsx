@@ -2,9 +2,13 @@ import React from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Events } from '../../api/event/Events';
+import {VolunteerProfiles} from "../../api/user/VolunteerProfileCollection";
+
+VolunteerProfiles.subscribe();
 
 const FeedbackForm = ({ eventId, formName }) => {
-  const event = Events.findDoc((eventId));
+  const event = Events.findDoc(eventId);
+  const profile = VolunteerProfiles.getProfile(Meteor.userId());
 
   return (
     <Container>
@@ -27,19 +31,19 @@ const FeedbackForm = ({ eventId, formName }) => {
           <Col>
             <Form.Group className="mb-3">
               <Form.Label>First Name</Form.Label>
-              <Form.Control type="text" value="John" disabled />
+              <Form.Control type="text" value={profile.firstName} disabled />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
-              <Form.Control type="text" value="Smith" disabled />
+              <Form.Control type="text" value={profile.lastName} disabled />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" value="john@foo.com" />
+              <Form.Control type="email" value={profile.email} disabled />
             </Form.Group>
           </Col>
         </Row>
