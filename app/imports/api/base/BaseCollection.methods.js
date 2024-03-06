@@ -22,6 +22,7 @@ export const defineMethod = new ValidatedMethod({
       // console.log(collectionName, this.userId, definitionData);
       const collection = MATPCollections.getCollection(collectionName);
       collection.assertValidRoleForMethod(this.userId);
+
       return collection.define(definitionData);
     }
     return '';

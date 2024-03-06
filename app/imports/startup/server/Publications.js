@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import * as Events from 'events';
 import { MATPCollections } from '../../api/matp/MATPCollections';
 import { Notifications } from '../../api/notifications/Notifications';
+import {Feedback} from "../../api/feedback/Feedback";
 
 // Call publish for all the collections.
 MATPCollections.collections.forEach(c => c.publish());
