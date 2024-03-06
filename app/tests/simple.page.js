@@ -18,6 +18,7 @@ class SimplePage {
 
 export const aboutUsPage = new SimplePage(PAGE_IDS.ABOUT_US);
 export const addStuffPage = new SimplePage(PAGE_IDS.ADD_STUFF);
+export const adminPage = new SimplePage(PAGE_IDS.ADMIN_PAGE);
 export const editStuffPage = new SimplePage(PAGE_IDS.EDIT_STUFF);
 export const listStuffPage = new SimplePage(PAGE_IDS.LIST_STUFF);
 export const listStuffAdminPage = new SimplePage(PAGE_IDS.LIST_STUFF_ADMIN);

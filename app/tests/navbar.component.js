@@ -114,6 +114,11 @@ class NavBar {
   async gotoDashboardVolunteer() {
     await t.click(`#${COMPONENT_IDS.NAVBAR_DASHBOARD_VOLUNTEER}`);
   }
+
+  async gotoAdminPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_VOLUNTEER_PROFILE_DROPDOWN}`);
+  }
 }
 
 export const navBar = new NavBar();

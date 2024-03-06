@@ -1,10 +1,9 @@
 // import { Selector, t } from 'testcafe';
 import {
-  aboutUsPage, /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
+  aboutUsPage, adminPage, /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
   signOutPage,
   volunteerProfilePage,
 } from './simple.page';
-// import { aboutUsPage } from './aboutus.page';
 import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 // import { signUpPage } from './signup.page';
@@ -47,6 +46,7 @@ test('Test that user pages show up', async () => {
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.isLoggedIn(credentials.username);
   await footer.gotoAboutUsPage();
+  await aboutUsPage.isDisplayed();
   await navBar.gotoEventsPage();
   await navBar.gotoDashboardVolunteer();
   // await aboutUsPage.isDisplayed();
@@ -77,8 +77,8 @@ test('Test that admin pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(adminCredentials.username);
-  await footer.gotoAboutUsPage();
-  await aboutUsPage.isDisplayed();
+  await navBar.gotoAdminPage();
+  await adminPage.isDisplayed();
   // await navBar.gotoAddStuffPage();
   // await addStuffPage.isDisplayed();
   // await navBar.gotoListStuffPage();
