@@ -106,7 +106,7 @@ class EventsCollection extends BaseCollection {
       updateData.description = description;
     }
     if (eventLogo) {
-      updateData.description = description;
+      updateData.eventLogo = eventLogo;
     }
     if (startTime) {
       updateData.startTime = startTime;

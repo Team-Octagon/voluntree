@@ -43,4 +43,7 @@ export const COMPONENT_IDS = {
   WAVIERS_SETTINGS_CARD_VOLUNTEER: 'waviers-settings-card-volunteer',
   PREFERENCES_SETTINGS_CARD_VOLUNTEER: 'preferences-settings-card-volunteer',
   SECURITY_SETTINGS_CARD_VOLUNTEER: 'security-settings-card-volunteer',
+  NAVBAR_ADD_EVENT_ORGANIZATION: 'navbar-add-event-organization',
+  NAVBAR_ADD_EVENT_ADMIN: 'navbar-add-event-admin',
+
 };

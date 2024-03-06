@@ -11,7 +11,7 @@ const sampleWaivers = [
 
 const VolunteerWavierSettingsCard = () => (
   <Card id={COMPONENT_IDS.WAVIERS_SETTINGS_CARD_VOLUNTEER} style={{ marginTop: '40px' }}>
-    <Card.Header className="text-center">Waivers Signed</Card.Header>
+    <Card.Header className="text-center">Wavier Is Signed</Card.Header>
     <Card.Body>
       <Row>
         {sampleWaivers.map((waiver, index) => (
