@@ -11,10 +11,10 @@ class AdminProfileCollection extends BaseProfileCollection {
 
   /**
    * Defines the profile associated with an Admin and the associated Meteor account.
-   * @param email The email associated with this profile. Will be the username.
-   * @param password The password for this user.
-   * @param firstName The first name.
-   * @param lastName The last name.
+   * @param email The email associated with this profile. This will be the username.
+   * @param password The password associated with this user.
+   * @param firstName The first name of this user.
+   * @param lastName The last name of this user.
    */
   define({ email, firstName, lastName, password }) {
     if (Meteor.isServer) {
@@ -91,7 +91,7 @@ class AdminProfileCollection extends BaseProfileCollection {
 
   /**
    * Returns an object representing the AdminProfile docID in a format acceptable to define().
-   * @param docID The docID of a AdminProfile
+   * @param docID The docID of an AdminProfile
    * @returns { Object } An object representing the definition of docID.
    */
   dumpOne(docID) {
@@ -99,12 +99,13 @@ class AdminProfileCollection extends BaseProfileCollection {
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    const password = doc.password;
+    return { email, firstName, lastName, password }; // CAM this is not enough for the define method. We lose the password.
   }
 }
 
 /**
- * Profides the singleton instance of this class to all other entities.
+ * Provides the singleton instance of this class to all other entities.
  * @type {AdminProfileCollection}
  */
 export const AdminProfiles = new AdminProfileCollection();
