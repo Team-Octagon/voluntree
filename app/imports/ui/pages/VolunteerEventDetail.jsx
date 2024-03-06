@@ -7,22 +7,22 @@ import { Events } from '../../api/event/Events';
 const VolunteerEventDetail = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
-  const { event, eventReady } = useTracker(() => {
+  const { doc, ready } = useTracker(() => {
     const subscription = Events.subscribeEvent();
     const rdy = subscription.ready();
     const document = rdy ? Events.findOne(_id) : null;
-    return { event: document, eventReady: rdy };
+    return { doc: document, ready: rdy };
   }, [_id]);
   return (
     <Container>
-      { eventReady ? (
+      { ready ? (
         <>
-          <h1>{event.title}</h1>
+          <h1>{doc.title}</h1>
           <ul>
-            {event.tags.map(tag => <li key={tag}>{tag}</li>)}
+            {doc.tags.map(tag => <li key={tag}>{tag}</li>)}
           </ul>
-          <p>{event.description}</p>
-          <p>Contact us at <a href={`mailto: ${event.email}`}>{event.email}</a></p>
+          <p>{doc.description}</p>
+          <p>Contact us at <a href={`mailto: ${doc.email}`}>{doc.email}</a></p>
           <Row>
             <Col>
               <Button>Volunteer</Button> <Button onClick={() => navigate('/volunteer-list-events')}>Back</Button>

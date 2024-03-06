@@ -1,44 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Events } from '../../api/event/Events';
 import {VolunteerProfiles} from "../../api/user/VolunteerProfileCollection";
-import {Feedback} from "../../api/feedback/Feedback";
-import {Meteor} from "meteor/meteor";
-import {defineMethod} from "../../api/base/BaseCollection.methods";
-import swal from "sweetalert";
 
 VolunteerProfiles.subscribe();
-Feedback.subscribe();
 
 const FeedbackForm = ({ eventId, formName }) => {
   const event = Events.findDoc(eventId);
   const profile = VolunteerProfiles.getProfile(Meteor.userId());
 
-  const [formData, setFormData] = useState({
-    eventId: eventId,
-    userId: Meteor.userId(),
-    rating: 5,
-    comments: "",
-    isAnonymous: false,
-  });
-
-  const submit = () => {
-    const collectionName = Feedback.getCollectionName();
-    const definitionData = formData;
-    defineMethod.callPromise({ collectionName, definitionData })
-        .then(() => {
-          swal('Success', 'Feedback added successfully', 'success');
-        })
-        .catch(error => console.log(error));
-  };
-
   return (
     <Container>
-      <Form id={formName} onSubmit={e => {
-        e.preventDefault();
-        submit();
-      }}>
+      <Form id={formName}>
         <Row>
           <Col>
             <Form.Group className="mb-3">
@@ -75,11 +49,7 @@ const FeedbackForm = ({ eventId, formName }) => {
         </Row>
         <Form.Group className="mb-3">
           <Form.Label>Feedback</Form.Label>
-          <Form.Control as="textarea" value={formData.comments} rows={3} onChange={ e=> {
-            e.preventDefault();
-            setFormData({...formData, comments: e.target.value, timestamp: Date.now()})
-          }
-          }/>
+          <Form.Control as="textarea" rows={3} />
         </Form.Group>
       </Form>
     </Container>
