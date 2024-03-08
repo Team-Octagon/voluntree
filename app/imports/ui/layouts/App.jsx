@@ -34,6 +34,8 @@ import AdminProfile from '../pages/AdminProfile';
 import VolunteerEventPage from '../pages/VolunteerEventPage';
 import SendNotifications from '../pages/SendNotifications';
 import ListEventsMapView from '../pages/ListEventsMapView';
+import ChatIcon from '../components/ChatIcon';
+import { ChatProvider } from '../contexts/ChatContext';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -45,40 +47,43 @@ const App = () => {
   });
   return (
     <Router>
-      <div className="d-flex flex-column min-vh-100">
-        <NavBar />
-        <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signout" element={<SignOut />} />
-          <Route path="/feedback" element={<Feedback />} />
-          <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/organization-page" element={<ProtectedRoute><OrganizationPage /></ProtectedRoute>} />
-          <Route path="/admin-page" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
-          <Route path="/volunteer-profile" element={<ProtectedRoute><VolunteerProfile /></ProtectedRoute>} />
-          <Route path="/volunteer-settings" element={<ProtectedRoute><VolunteerSettings /></ProtectedRoute>} />
-          <Route path="/volunteer-list-events" element={<VolunteerListEvents />} />
-          <Route path="/volunteer-list-events/:_id" element={<ProtectedRoute><VolunteerEventDetail /></ProtectedRoute>} />
-          <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-          <Route path="/listEvents" element={<ProtectedRoute><ListEvents /></ProtectedRoute>} />
-          <Route path="/listEvents-mapview" element={<ProtectedRoute><ListEventsMapView /></ProtectedRoute>} />
-          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/add-event" element={<ProtectedRoute><AddEvent /></ProtectedRoute>} />
-          <Route path="/dashboard-volunteer" element={<ProtectedRoute><DashboardVolunteer /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-          <Route path="/edit-event/:_id" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
-          <Route path="/volunteer-event-page/:_id" element={<VolunteerEventPage />} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListEvents /></AdminProtectedRoute>} />
-          <Route path="/volunteer" element={<ProtectedRoute><ListStuffVolunteer /></ProtectedRoute>} />
-          <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />
-          <Route path="/send-notifications" element={<AdminProtectedRoute ready={ready}><SendNotifications /></AdminProtectedRoute>} />
-          <Route path="/notauthorized" element={<NotAuthorized />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </div>
+      <ChatProvider>
+        <div className="d-flex flex-column min-vh-100">
+          <NavBar />
+          <ChatIcon />
+          <Routes>
+            <Route exact path="/" element={<Landing />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signout" element={<SignOut />} />
+            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/organization-page" element={<ProtectedRoute><OrganizationPage /></ProtectedRoute>} />
+            <Route path="/admin-page" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
+            <Route path="/volunteer-profile" element={<ProtectedRoute><VolunteerProfile /></ProtectedRoute>} />
+            <Route path="/volunteer-settings" element={<ProtectedRoute><VolunteerSettings /></ProtectedRoute>} />
+            <Route path="/volunteer-list-events" element={<VolunteerListEvents />} />
+            <Route path="/volunteer-list-events/:_id" element={<ProtectedRoute><VolunteerEventDetail /></ProtectedRoute>} />
+            <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
+            <Route path="/listEvents" element={<ProtectedRoute><ListEvents /></ProtectedRoute>} />
+            <Route path="/listEvents-mapview" element={<ProtectedRoute><ListEventsMapView /></ProtectedRoute>} />
+            <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+            <Route path="/add-event" element={<ProtectedRoute><AddEvent /></ProtectedRoute>} />
+            <Route path="/dashboard-volunteer" element={<ProtectedRoute><DashboardVolunteer /></ProtectedRoute>} />
+            <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+            <Route path="/edit-event/:_id" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
+            <Route path="/volunteer-event-page/:_id" element={<VolunteerEventPage />} />
+            <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListEvents /></AdminProtectedRoute>} />
+            <Route path="/volunteer" element={<ProtectedRoute><ListStuffVolunteer /></ProtectedRoute>} />
+            <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />
+            <Route path="/send-notifications" element={<AdminProtectedRoute ready={ready}><SendNotifications /></AdminProtectedRoute>} />
+            <Route path="/notauthorized" element={<NotAuthorized />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </div>
+      </ChatProvider>
     </Router>
   );
 };
