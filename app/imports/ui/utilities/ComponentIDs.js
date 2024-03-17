@@ -1,4 +1,8 @@
 export const COMPONENT_IDS = {
+  CREATE_ORGANIZATION_FORM_NAME: 'create-organization-form-name',
+  CREATE_ORGANIZATION_FORM_EMAIL: 'create-organization-form-email',
+  CREATE_ORGANIZATION_FORM_PASSWORD: 'create-organization-form-password',
+  CREATE_ORGANIZATION_FORM_SUBMIT: 'create-organization-form-submit',
   FOOTER: 'footer',
   FOOTER_ABOUT_US: 'footer-about-us',
   LIST_STUFF_EDIT: 'list-stuff-edit',

@@ -12,7 +12,7 @@ import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { OrganizationRequests } from '../../api/requests/OrganizationRequests';
 
 /**
- * SignUp component is similar to signin component, but we create a new user instead.
+ * CreateOrganization component is similar to signin component, but we create a request for new organization user instead.
  */
 const CreateOrganization = () => {
   const [error, setError] = useState('');
@@ -25,7 +25,7 @@ const CreateOrganization = () => {
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
-  /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
+  /* Handle CreateOrganization submission. Create request for an organization entry, then redirect to the home page. */
   const submit = (doc) => {
     const collectionName = OrganizationRequests.getCollectionName();
     const definitionData = doc;
@@ -52,7 +52,7 @@ const CreateOrganization = () => {
     return <Navigate to="/volunteer-profile" />;
   }
   return (
-    <Container id={PAGE_IDS.SIGN_UP} className="py-3">
+    <Container id={PAGE_IDS.CREATE_ORGANIZATION} className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center">
@@ -62,11 +62,11 @@ const CreateOrganization = () => {
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME} name="organizationName" placeholder="Organization name" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL} name="email" placeholder="E-mail address" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} name="password" placeholder="Password" type="password" />
+                <TextField id={COMPONENT_IDS.CREATE_ORGANIZATION_FORM_NAME} name="organizationName" placeholder="Organization name" />
+                <TextField id={COMPONENT_IDS.CREATE_ORGANIZATION_FORM_EMAIL} name="email" placeholder="E-mail address" />
+                <TextField id={COMPONENT_IDS.CREATE_ORGANIZATION_FORM_PASSWORD} name="password" placeholder="Password" type="password" />
                 <ErrorsField />
-                <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} />
+                <SubmitField id={COMPONENT_IDS.CREATE_ORGANIZATION_FORM_SUBMIT} />
               </Card.Body>
             </Card>
           </AutoForm>
