@@ -37,6 +37,7 @@ import ListEventsMapView from '../pages/ListEventsMapView';
 import ChatIcon from '../components/ChatIcon';
 import { ChatProvider } from '../contexts/ChatContext';
 import StartOrganization from '../pages/StartOrganization';
+import CreateOrganization from '../pages/CreateOrganization';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -78,6 +79,7 @@ const App = () => {
             <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListEvents /></AdminProtectedRoute>} />
             <Route path="/volunteer" element={<ProtectedRoute><ListStuffVolunteer /></ProtectedRoute>} />
             <Route path="/start-organization" element={<StartOrganization />} />
+            <Route path="/create-organization" element={<CreateOrganization />} />
             <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />
             <Route path="/send-notifications" element={<AdminProtectedRoute ready={ready}><SendNotifications /></AdminProtectedRoute>} />
             <Route path="/notauthorized" element={<NotAuthorized />} />
