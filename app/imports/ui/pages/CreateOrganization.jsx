@@ -5,7 +5,7 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, DateField, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { VolunteerProfiles } from '../../api/user/VolunteerProfileCollection';
@@ -19,9 +19,7 @@ const CreateOrganization = () => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
 
   const schema = new SimpleSchema({
-    firstName: String,
-    lastName: String,
-    birthDate: Date,
+    organizationName: String,
     email: String,
     password: String,
   });
@@ -58,16 +56,13 @@ const CreateOrganization = () => {
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center">
-            <h2>Register your account</h2>
+            <h2>Register your organization</h2>
             <h5>and start finding volunteer opportunities.</h5>
           </Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME} name="firstName" placeholder="First name" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME} name="lastName" placeholder="Last name" />
-                {/* Birth Date field used for volunteer opportunity matching. */}
-                <DateField type="date" id={COMPONENT_IDS.SIGN_UP_FORM_BIRTHDATE} name="birthDate" placeholder="Birth date" />
+                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME} name="organizationName" placeholder="Organization name" />
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL} name="email" placeholder="E-mail address" />
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} name="password" placeholder="Password" type="password" />
                 <ErrorsField />
@@ -76,7 +71,7 @@ const CreateOrganization = () => {
             </Card>
           </AutoForm>
           <Alert variant="secondary">
-            Already have an account? Login <Link to="/signin">here</Link>
+            Already have an organization? Login <Link to="/signin">here</Link>
           </Alert>
           {error === '' ? (
             ''
