@@ -1,4 +1,4 @@
-const UpcomingEvents = [
+const DummyEvents = [
   { id: 'tree-planting', title: 'Tree Planting Day', email: 'test@foo.com',
     description: 'Join us in making our community greener by planting trees in local parks. Learn about environmental conservation and contribute to a sustainable future.',
     tags: ['Community', 'Environment', 'Conservation'],
@@ -20,6 +20,6 @@ const UpcomingEvents = [
     tags: ['Diversity', 'Culture', 'Community'], eventLogo: 'https://media.istockphoto.com/id/668214842/photo/voluteer-group-of-people-for-charity-donation-in-the-park.jpg?s=2048x2048&w=is&k=20&c=XdTRKKNCDLlsKkmlqHafGmCAhhefU85BTJ20O8jpv6E=' },
 ];
 
-const getEventById = (id) => UpcomingEvents.find(event => event.id === id);
+const getEventById = (id) => DummyEvents.find(event => event.id === id);
 
-export { UpcomingEvents, getEventById };
+export { DummyEvents, getEventById };

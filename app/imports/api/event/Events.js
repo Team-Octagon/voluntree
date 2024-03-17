@@ -6,7 +6,8 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const eventTags = ['adoption', 'animals', 'arts', 'community', 'culture', 'education', 'environment', 'health', 'human services', 'seniors', 'sports', 'technology', 'youth'];
+// eslint-disable-next-line max-len
+export const eventTags = ['adoption', 'animals', 'arts', 'community', 'culture', 'disaster relief', 'education', 'employment', 'environment', 'health', 'homeless & housing', 'human services', 'LGBTQ+', 'seniors', 'sports', 'technology', 'veterans & military families', 'youth'];
 
 export const eventPublications = {
   event: 'Event',
