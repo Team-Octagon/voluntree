@@ -1,7 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection from '../BaseProfileCollection';
 import { ROLE } from '../../role/Role';
-import { Users } from '../UserCollection';
 
 class OrganizationRequestsCollection extends BaseProfileCollection {
   constructor() {
@@ -15,19 +14,12 @@ class OrganizationRequestsCollection extends BaseProfileCollection {
    * @param name The name of the organization. This will be the username for the associated Meteor account.
    */
   define({ email, name, password }) {
-    // if (Meteor.isServer) {
-    const username = name;
-    const user = this.findOne({ email, name });
-    if (!user) {
-      const role = ROLE.ORGANIZATION;
-      const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, name, userID, role });
-      // this._collection.update(profileID, { $set: { userID } });
-      return profileID;
-    }
-    return user._id;
-    // }
-    // return undefined;
+    const docID = this._collection.insert({
+      email,
+      name,
+      password,
+    });
+    return docID;
   }
 
   /**

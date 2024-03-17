@@ -8,8 +8,8 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
-import { VolunteerProfiles } from '../../api/user/VolunteerProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { OrganizationRequests } from '../../api/requests/OrganizationRequests';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -19,7 +19,7 @@ const CreateOrganization = () => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
 
   const schema = new SimpleSchema({
-    organizationName: String,
+    name: String,
     email: String,
     password: String,
   });
@@ -27,7 +27,7 @@ const CreateOrganization = () => {
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const collectionName = VolunteerProfiles.getCollectionName();
+    const collectionName = OrganizationRequests.getCollectionName();
     const definitionData = doc;
     // create the new VolunteerProfile
     defineMethod.callPromise({ collectionName, definitionData })
