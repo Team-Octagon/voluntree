@@ -3,6 +3,8 @@ import { ChatMessages } from '../../api/chat/ChatMessages';
 
 export const ChatContext = createContext();
 
+// TODO: Fix below. Remove eslint-disable-next-line and fix the eslint error.
+// eslint-disable-next-line react/prop-types
 export const ChatProvider = ({ children }) => {
   const [isChatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
