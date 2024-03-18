@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
-import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import swal from 'sweetalert';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
-import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { OrganizationRequests } from '../../api/requests/OrganizationRequests';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
 
 /**
  * CreateOrganization component is similar to signin component, but we create a request for new organization user instead.
@@ -19,7 +19,7 @@ const CreateOrganization = () => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
 
   const schema = new SimpleSchema({
-    name: String,
+    organizationName: String,
     email: String,
     password: String,
   });
@@ -29,27 +29,19 @@ const CreateOrganization = () => {
   const submit = (doc) => {
     const collectionName = OrganizationRequests.getCollectionName();
     const definitionData = doc;
-    // create the new VolunteerProfile
     defineMethod.callPromise({ collectionName, definitionData })
       .then(() => {
-        // log the new user in.
-        const { email, password } = doc;
-        Meteor.loginWithPassword(email, password, (err) => {
-          if (err) {
-            setError(err.reason);
-          } else {
-            setError('');
-            setRedirectToRef(true);
-          }
-        });
+        swal('Success', 'Request made', 'success');
+        setError('');
+        setRedirectToRef(true);
       })
       .catch((err) => setError(err.reason));
   };
 
-  /* Display the signup form. Redirect to add page after successful registration and login. */
+  /* Display the request form. Redirect to add page after successful registration and login. */
   // if correct authentication, redirect to from: page instead of signup screen
   if (redirectToReferer) {
-    return <Navigate to="/volunteer-profile" />;
+    return <Navigate to="/" />;
   }
   return (
     <Container id={PAGE_IDS.CREATE_ORGANIZATION} className="py-3">

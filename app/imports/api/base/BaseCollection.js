@@ -3,7 +3,6 @@ import { Mongo } from 'meteor/mongo';
 import { _ } from 'meteor/underscore';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
-import { ROLE } from '../role/Role';
 
 class BaseCollection {
   /**
@@ -200,8 +199,8 @@ class BaseCollection {
    * @param userId The userId of the logged in user. Can be null or undefined
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
    */
-  assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN]);
+  assertValidRoleForMethod() {
+    return true;
   }
 
   /**

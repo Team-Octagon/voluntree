@@ -6,6 +6,7 @@ import { VolunteerProfiles } from '../user/VolunteerProfileCollection';
 import { Events } from '../event/Events';
 import { Notifications } from '../notifications/Notifications';
 import { Feedback } from '../feedback/Feedback';
+import { OrganizationRequests } from '../requests/OrganizationRequests';
 
 class MATPClass {
   collections;
@@ -24,6 +25,7 @@ class MATPClass {
       VolunteerProfiles,
       Notifications,
       Feedback,
+      OrganizationRequests,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -36,6 +38,7 @@ class MATPClass {
       Events,
       Notifications,
       Feedback,
+      OrganizationRequests,
     ];
 
     /*
