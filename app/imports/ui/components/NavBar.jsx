@@ -50,6 +50,9 @@ const NavBar = () => {
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} as={NavLink} to="/manage-database">
                     <CloudDownload /> Database
                   </NavDropdown.Item>
+                  <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_ORGANIZATION_REQUESTS} as={NavLink} to="/organization-requests">
+                    <Send /> Organization Requests
+                  </NavDropdown.Item>
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_SEND_NOTIFICATIONS} as={NavLink} to="/send-notifications">
                     <Send /> Send Notifications
                   </NavDropdown.Item>

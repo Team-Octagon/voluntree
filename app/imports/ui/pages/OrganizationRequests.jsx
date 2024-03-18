@@ -1,27 +1,35 @@
 import React from 'react';
-import { Container, ListGroup, Alert } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { OrganizationRequests } from '../../api/requests/OrganizationRequests';
+import LoadingSpinner from '../components/LoadingSpinner';
+import ListRequests from '../components/ListRequests';
 
 const OrganizationRequestsPage = () => {
-  const requests = useTracker(() => OrganizationRequests.find().fetch());
+  const { ready, requests } = useTracker(() => {
+    const sub = OrganizationRequests.subscribe();
+    const requestItems = OrganizationRequests.find().fetch();
+    return {
+      ready: sub.ready(),
+      requests: requestItems,
+    };
+  }, []);
 
-  return (
+  return ready ? (
     <Container>
       <h1>Organization Requests</h1>
-      {requests.length === 0 ? (
-        <Alert variant="info">There are no organization requests at the moment.</Alert>
-      ) : (
-        <ListGroup>
-          {requests.map((request) => (
-            <ListGroup.Item key={request._id}>
-              <strong>Email:</strong> {request.email}, <strong>Organization Name:</strong> {request.organizationName}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      )}
+      <div>
+        {requests.map((request) => (
+          <ListRequests
+            key={request._id}
+            createdAt={request.createdAt}
+            email={request.email}
+            organizationName={request.organizationName}
+          />
+        ))}
+      </div>
     </Container>
-  );
+  ) : <LoadingSpinner />;
 };
 
 export default OrganizationRequestsPage;

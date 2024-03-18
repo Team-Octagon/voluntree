@@ -26,6 +26,7 @@ export const COMPONENT_IDS = {
   NAVBAR_VOLUNTEER_PROFILE_DROPDOWN: 'navbar-volunteer-profile-dropdown',
   NAVBAR_VOLUNTEER_ORGANIZATION_DROPDOWN: 'navbar-organization-profile-dropdown',
   NAVBAR_MANAGE_DROPDOWN_SETTINGS: 'navbar-manage-dropdown-settings',
+  NAVBAR_MANAGE_DROPDOWN_ORGANIZATION_REQUESTS: 'navbar-manage-dropdown-organization-requests',
   NAVBAR_SIGN_OUT: 'navbar-sign-out',
   NAVBAR_START_ORGANIZATION: 'navbar-start-organization',
   NAVBAR_NOTIFICATIONS_BUTTON: 'navbar-notifications-button',
