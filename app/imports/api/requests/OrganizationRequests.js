@@ -18,10 +18,12 @@ class OrganizationRequestsCollection extends BaseCollection {
    * @param organizationName The name of the organization. This will be the username for the associated Meteor account if accepted.
    */
   define({ email, organizationName, password }) {
+    const createdAt = new Date();
     const docID = this._collection.insert({
       email,
       organizationName,
       password,
+      createdAt,
     });
     console.log(`Defining ${organizationName} with password ${password}`);
     return docID;

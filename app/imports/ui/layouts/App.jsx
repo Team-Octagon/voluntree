@@ -38,6 +38,7 @@ import ChatIcon from '../components/ChatIcon';
 import { ChatProvider } from '../contexts/ChatContext';
 import StartOrganization from '../pages/StartOrganization';
 import CreateOrganization from '../pages/CreateOrganization';
+import OrganizationRequests from '../pages/OrganizationRequests';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -82,6 +83,7 @@ const App = () => {
             <Route path="/create-organization" element={<CreateOrganization />} />
             <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />
             <Route path="/send-notifications" element={<AdminProtectedRoute ready={ready}><SendNotifications /></AdminProtectedRoute>} />
+            <Route path="/organization-requests" element={<AdminProtectedRoute ready={ready}><OrganizationRequests /></AdminProtectedRoute>} />
             <Route path="/notauthorized" element={<NotAuthorized />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
