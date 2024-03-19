@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Container, Button, Row, Image } from 'react-bootstrap';
+import { Col, Container, Row, Image } from 'react-bootstrap';
+import EditProfileCard from './EditProfileCard';
 
 const VolunteerProfileCard = ({ firstName, lastName, bio, avatar }) => (
   <Container fluid id="profile-card" className="my-5">
@@ -18,7 +19,7 @@ const VolunteerProfileCard = ({ firstName, lastName, bio, avatar }) => (
         </Row>
         <Row>
           <Col>
-            <Button variant="primary">Edit</Button>
+            <EditProfileCard />
           </Col>
         </Row>
       </Col>
