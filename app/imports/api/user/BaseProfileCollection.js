@@ -8,13 +8,24 @@ import { Users } from './UserCollection';
 const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADMIN] = 'AdminProfileCollection';
 rolesToCollectionNames[ROLE.VOLUNTEER] = 'VolunteerProfileCollection';
+rolesToCollectionNames[ROLE.ORGANIZATION] = 'OrganizationProfileCollection';
 
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
     super(type, schema.extend(new SimpleSchema({
       email: String,
-      firstName: String,
-      lastName: String,
+      firstName: {
+        type: String,
+        optional: true,
+      },
+      lastName: {
+        type: String,
+        optional: true,
+      },
+      name: {
+        type: String,
+        optional: true,
+      },
       role: String,
       birthDate: {
         type: Date,

@@ -22,7 +22,7 @@ const OrganizationRequestsPage = () => {
         <table className="table">
           <thead>
             <tr>
-              <th className="text-left">Created At</th>
+              <th className="text-left">Date Made</th>
               <th className="text-left">Email</th>
               <th className="text-right">Organization Name</th>
               <th className="test-center">Actions</th>
@@ -35,6 +35,7 @@ const OrganizationRequestsPage = () => {
                 createdAt={request.createdAt.toString()}
                 email={request.email}
                 organizationName={request.organizationName}
+                password={request.password}
               />
             ))}
           </tbody>

@@ -1,11 +1,12 @@
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from '../BaseProfileCollection';
-import { ROLE } from '../../role/Role';
-import { Users } from '../UserCollection';
+import BaseProfileCollection from './BaseProfileCollection';
+import { ROLE } from '../role/Role';
+import { Users } from './UserCollection';
 
 class OrganizationProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('OrganizationProfile', new SimpleSchema({}));
+    super('OrganizationProfile', new SimpleSchema({
+    }));
   }
 
   /**
@@ -16,7 +17,7 @@ class OrganizationProfileCollection extends BaseProfileCollection {
    */
   define({ email, name, password }) {
     // if (Meteor.isServer) {
-    const username = name;
+    const username = email;
     const user = this.findOne({ email, name });
     if (!user) {
       const role = ROLE.ORGANIZATION;
