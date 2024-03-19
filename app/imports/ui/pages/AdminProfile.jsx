@@ -22,10 +22,7 @@ const AdminProfile = () => {
   return ready ? (
     <Container id={PAGE_IDS.ADMIN_PAGE} className="py-3">
       <VolunteerProfileCard
-        firstName={profile.firstName}
-        lastName={profile.lastName}
-        bio={profile.bio}
-        avatar={profile.avatar}
+        profile={profile}
       />
       <VolunteerProfileDash />
     </Container>
