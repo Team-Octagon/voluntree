@@ -8,7 +8,7 @@ class OrganizationRequestsCollection extends BaseCollection {
       email: String,
       organizationName: String,
       password: String,
-      // createdAt: Date,
+      createdAt: Date,
     }));
   }
 

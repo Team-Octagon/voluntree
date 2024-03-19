@@ -19,14 +19,25 @@ const OrganizationRequestsPage = () => {
     <Container>
       <h1>Organization Requests</h1>
       <div>
-        {requests.map((request) => (
-          <ListRequests
-            key={request._id}
-            createdAt={request.createdAt}
-            email={request.email}
-            organizationName={request.organizationName}
-          />
-        ))}
+        <table className="table">
+          <thead>
+            <tr>
+              <th className="text-left">Created At</th>
+              <th className="text-left">Email</th>
+              <th className="text-right">Organization Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {requests.map((request) => (
+              <ListRequests
+                key={request._id}
+                createdAt={request.createdAt.toString()}
+                email={request.email}
+                organizationName={request.organizationName}
+              />
+            ))}
+          </tbody>
+        </table>
       </div>
     </Container>
   ) : <LoadingSpinner />;

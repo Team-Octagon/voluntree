@@ -2,24 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ListRequests = ({ createdAt, email, organizationName }) => (
-  <div>
-    <table className="table">
-      <thead>
-        <tr>
-          <th className="text-center">Created At</th>
-          <th className="text-center">Email</th>
-          <th className="text-center">Organization Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className="text-left">{createdAt}</td>
-          <td className="text-center">{email}</td>
-          <td className="text-right">{organizationName}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <tr>
+    <td className="text-left">{createdAt}</td>
+    <td className="text-left">{email}</td>
+    <td className="text-right">{organizationName}</td>
+  </tr>
 );
 
 ListRequests.propTypes = {
