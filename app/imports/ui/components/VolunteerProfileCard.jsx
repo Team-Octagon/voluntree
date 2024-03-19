@@ -18,7 +18,7 @@ const VolunteerProfileCard = ({ firstName, lastName, bio, avatar }) => (
         </Row>
         <Row>
           <Col>
-            <Button variant="primary">Message</Button>
+            <Button variant="primary">Edit</Button>
           </Col>
         </Row>
       </Col>
