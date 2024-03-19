@@ -27,6 +27,7 @@ class OrganizationRequestsCollection extends BaseCollection {
       createdAt,
     });
     console.log(`Defining ${organizationName} with password ${password}`);
+    console.log(`docID: ${docID}`);
     return docID;
   }
 

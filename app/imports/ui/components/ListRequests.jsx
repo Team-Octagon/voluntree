@@ -5,9 +5,10 @@ import swal from 'sweetalert';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { OrganizationProfiles } from '../../api/user/OrganizationProfileCollection';
-import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { OrganizationRequests } from '../../api/requests/OrganizationRequests';
+import { defineMethod, removeItMethod } from '../../api/base/BaseCollection.methods';
 
-const ListRequests = ({ createdAt, email, organizationName, password }) => {
+const ListRequests = ({ createdAt, email, organizationName, password, _id }) => {
 
   const schema = new SimpleSchema({
     email: String,
@@ -17,15 +18,23 @@ const ListRequests = ({ createdAt, email, organizationName, password }) => {
   const bridge = new SimpleSchema2Bridge(schema);
 
   const [error, setError] = useState('');
+
+  const deleteRequest = () => {
+    const collectionName = OrganizationRequests.getCollectionName();
+    const instance = _id;
+    removeItMethod.callPromise({ collectionName, instance })
+      .then(() => {
+        swal('Success', 'Request completed', 'success');
+      })
+      .catch((err) => setError(err.reason));
+  };
   const approveRequest = () => {
     const collectionName = OrganizationProfiles.getCollectionName();
     const definitionData = { email, name: organizationName, password };
-    console.log(collectionName, definitionData);
     defineMethod.callPromise({ collectionName, definitionData })
       .then(() => {
-        swal('Success', 'Request approved', 'success');
         setError('');
-        console.log('Request approved');
+        deleteRequest();
       })
       .catch((err) => setError(err.reason));
   };
@@ -42,7 +51,11 @@ const ListRequests = ({ createdAt, email, organizationName, password }) => {
           onClick={approveRequest}
         >Approve
         </Button>{' '}
-        <Button variant="danger">Delete</Button>
+        <Button
+          variant="danger"
+          onClick={deleteRequest}
+        >Delete
+        </Button>
         {error === '' ? (
           ''
         ) : (
@@ -61,6 +74,7 @@ ListRequests.propTypes = {
   email: PropTypes.string.isRequired,
   organizationName: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
 };
 
 export default ListRequests;

@@ -36,6 +36,7 @@ const OrganizationRequestsPage = () => {
                 email={request.email}
                 organizationName={request.organizationName}
                 password={request.password}
+                _id={request._id}
               />
             ))}
           </tbody>
