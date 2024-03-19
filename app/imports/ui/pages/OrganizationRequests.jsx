@@ -25,6 +25,7 @@ const OrganizationRequestsPage = () => {
               <th className="text-left">Created At</th>
               <th className="text-left">Email</th>
               <th className="text-right">Organization Name</th>
+              <th className="test-center">Actions</th>
             </tr>
           </thead>
           <tbody>
