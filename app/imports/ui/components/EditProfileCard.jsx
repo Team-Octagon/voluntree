@@ -14,16 +14,13 @@ const EditProfileCard = ({ profile }) => {
   const formRef = useRef(null);
 
   const handleClose = () => {
-    console.log('EditProfileCard.handleClose');
     setShow(false);
   };
   const handleShow = () => setShow(true);
 
   const submit = (data) => {
-    console.log('EditProfileCard.submit', data);
     const collectionName = VolunteerProfiles.getCollectionName();
     const updateData = { id: profile._id, ...data };
-    console.log('EditProfileCard.submit', collectionName, updateData);
     updateMethod.callPromise({ collectionName, updateData })
       .then(() => {
         swal('Success', 'Updated successfully', 'success');
