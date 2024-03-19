@@ -28,6 +28,7 @@ const EditProfileCard = ({ profile }) => {
       .then(() => {
         swal('Success', 'Updated successfully', 'success');
         setShow(false);
+        window.location.reload();
       })
       .catch(error => swal('Error', error.message, 'error'));
   };
@@ -37,7 +38,7 @@ const EditProfileCard = ({ profile }) => {
       <Button variant="primary" onClick={handleShow}>
         Edit
       </Button>
-      <AutoForm ref={formRef} schema={bridge} onSubmit={submit} model={profile}>
+      <AutoForm id="editForm" ref={formRef} schema={bridge} onSubmit={submit} model={profile}>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Edit Profile</Modal.Title>
@@ -50,7 +51,7 @@ const EditProfileCard = ({ profile }) => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" form="editForm">
               Save Changes
             </Button>
           </Modal.Footer>
