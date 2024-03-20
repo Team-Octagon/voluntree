@@ -8,6 +8,8 @@ import { Notifications } from '../notifications/Notifications';
 import { Feedback } from '../feedback/Feedback';
 import { OrganizationRequests } from '../requests/OrganizationRequests';
 import { OrganizationProfiles } from '../user/OrganizationProfileCollection';
+import { VolunteerProfileSkills } from '../user/VolunteerProfileSkills';
+import { VolunteerProfileEvents } from '../user/VolunteerProfileEvents';
 
 class MATPClass {
   collections;
@@ -24,6 +26,8 @@ class MATPClass {
       Events,
       UserProfiles,
       VolunteerProfiles,
+      VolunteerProfileEvents,
+      VolunteerProfileSkills,
       Notifications,
       Feedback,
       OrganizationRequests,
@@ -36,6 +40,8 @@ class MATPClass {
       AdminProfiles,
       UserProfiles,
       VolunteerProfiles,
+      VolunteerProfileEvents,
+      VolunteerProfileSkills,
       Stuffs,
       Events,
       Notifications,
