@@ -27,6 +27,10 @@ class EventsCollection extends BaseCollection {
       startTime: Date,
       endTime: Date,
       volunteersNeeded: Number,
+      numberOfAttendees: {
+        type: Number,
+        defaultValue: 0,
+      },
       status: {
         type: String,
         allowedValues: ['not started', 'completed'],
@@ -86,10 +90,11 @@ class EventsCollection extends BaseCollection {
    * @param startTime the start time of the event. (optional).
    * @param endTime the end time of the event. (optional).
    * @param volunteersNeeded the number of volunteers needed for the event. (optional).
+   * @param numberOfAttendees the number of people who attended the event. (optional).
    * @param status the status of the event. (optional).
    * @param tags the tags describing the event type. (optional).
    */
-  update(docID, { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, status, tags }) {
+  update(docID, { title, organizer, eventDate, location, description, eventLogo, startTime, endTime, volunteersNeeded, numberOfAttendees, status, tags }) {
     const updateData = {}; // TODO Shorten this code
     if (title) {
       updateData.title = title;
@@ -118,6 +123,10 @@ class EventsCollection extends BaseCollection {
     // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
     if (_.isNumber(volunteersNeeded)) {
       updateData.volunteersNeeded = volunteersNeeded;
+    }
+    // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
+    if (_.isNumber(numberOfAttendees)) {
+      updateData.numberOfAttendees = numberOfAttendees;
     }
     if (status) {
       updateData.status = status;
