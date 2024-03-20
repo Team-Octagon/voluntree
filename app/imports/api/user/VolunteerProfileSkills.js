@@ -88,7 +88,7 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
         return this.ready();
       });
 
-      /** This subscription publishes all documentsregardless of user, but only if the logged in user is a Volunteer. */
+      /** This subscription publishes all documents regardless of user, but only if the logged in user is a Volunteer. */
       Meteor.publish(volunteerProfileSkillPublications.volunteerProfileSkillVolunteer, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.VOLUNTEER)) {
           return instance._collection.find();
@@ -99,7 +99,7 @@ class VolunteerProfileSkillsCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for event made by the current user.
+   * Subscription method for skill made by the current user.
    */
   subscribeVolunteerProfileSkills() {
     if (Meteor.isClient) {
