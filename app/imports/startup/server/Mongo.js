@@ -58,15 +58,13 @@ if (dummyVolunteers) {
   console.log('Adding dummy events to dummy volunteers');
   const volunteerEventData = JSON.parse(dummyVolunteers);
   volunteerEventData.forEach((volunteer) => {
-    volunteer.events.forEach((event) => {
-      console.log(`  Adding: ${event.title}`);
-      VolunteerProfileEvents.define({ volunteer: volunteer.email, event: event.title });
-    });
     // Make sure events are defined in Events collection if they are not already.
     volunteer.events.forEach((event) => {
       if (!Events.isDefined(event._id)) {
+        const eventId = Events.define(event);
+        console.log(`  Adding: ${event.title} of id ${eventId} from organization ${event.organizer} to Events collection`);
         console.log(`  Adding: ${event.title}`);
-        Events.define(event);
+        VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
       }
     });
   });
