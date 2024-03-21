@@ -1,28 +1,30 @@
-{
-  "email": "volunteer@foo.com",
-  "password": "changeme",
-  "role": "VOLUNTEER",
-  "firstName": "Volunteer",
-  "lastName": "Person",
-  "age": 25,
-  "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  "avatar": "https://example.com/avatar.jpg",
-  "events": [
-    {
-      "title": "Adopt a Pet Day",
-      "organizer": "Animal Shelter",
-      "eventDate": "2024-04-05T00:00:00",
-      "location": "Local Pet Store",
-      "description": "Find your new furry friend and give them a forever home.",
-      "eventLogo": "/images/volunteer-team-stock-image.jpg",
-      "startTime": "2024-04-05T10:00:00",
-      "endTime": "2024-04-05T16:00:00",
-      "volunteersNeeded": 10,
-      "status": "not started",
-      "tags": [
-        "adoption",
-        "animals"
-      ]
-    }
-  ]
-}
+[
+  {
+    "email": "volunteer@foo.com",
+    "password": "changeme",
+    "role": "VOLUNTEER",
+    "firstName": "Volunteer",
+    "lastName": "Person",
+    "age": 25,
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "https://example.com/avatar.jpg",
+    "events": [
+      {
+        "title": "Adopt a Pet Day",
+        "organizer": "Animal Shelter",
+        "eventDate": "2024-04-05T00:00:00",
+        "location": "Local Pet Store",
+        "description": "Find your new furry friend and give them a forever home.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-04-05T10:00:00",
+        "endTime": "2024-04-05T16:00:00",
+        "volunteersNeeded": 10,
+        "status": "not started",
+        "tags": [
+          "adoption",
+          "animals"
+        ]
+      }
+    ]
+  }
+]

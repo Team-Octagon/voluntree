@@ -21,7 +21,7 @@ class VolunteerProfileEventsCollection extends BaseCollection {
 
   /**
    * Defines a new VolunteerEvent item.
-   * @param volunteer the name of the volunteer.
+   * @param volunteer the email of the volunteer.
    * @param event the name of the event.
    * @return {String} the docID of the new document.
    */
@@ -36,7 +36,7 @@ class VolunteerProfileEventsCollection extends BaseCollection {
   /**
  * Updates the given document.
  * @param docID the id of the document to update. (optional).
- * @param volunteer the name of the volunteer. (optional).
+ * @param volunteer the email of the volunteer. (optional).
  * @param event the name of the event. (optional).
  */
   update(docID, { volunteer, event }) {
