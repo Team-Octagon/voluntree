@@ -14,7 +14,7 @@ export const volunteerProfileEventPublications = {
 class VolunteerProfileEventsCollection extends BaseCollection {
   constructor() {
     super('VolunteerProfileEvents', new SimpleSchema({
-      volunteerProfile: String,
+      volunteer: String,
       event: String,
     }));
   }

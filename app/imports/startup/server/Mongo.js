@@ -2,9 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Events } from '../../api/event/Events';
 import { Notifications } from '../../api/notifications/Notifications';
+import { VolunteerProfileEvents } from '../../api/user/VolunteerProfileEvents';
 
 // eslint-disable-next-line no-undef
 const dummyEvents = Assets.getText('events/dummy-events.json');
+// eslint-disable-next-line no-undef
+const dummyVolunteers = Assets.getText('volunteers/dummy-volunteers.json');
 
 /* eslint-disable no-console */
 
@@ -48,4 +51,16 @@ if (Events.count() === 0) {
     const eventsData = JSON.parse(dummyEvents);
     eventsData.forEach(data => addEvent(data));
   }
+}
+
+// Add dummy events to dummy volunteers
+if (dummyVolunteers) {
+  console.log('Adding dummy events to dummy volunteers');
+  const volunteerEventData = JSON.parse(dummyVolunteers);
+  volunteerEventData.forEach((volunteer) => {
+    volunteer.events.forEach((event) => {
+      console.log(`  Adding: ${event.title}`);
+      VolunteerProfileEvents.define({ volunteer: volunteer.email, event: event.title });
+    });
+  });
 }
