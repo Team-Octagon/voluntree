@@ -25,6 +25,103 @@
           "education",
           "youth"
         ]
+      },
+      {
+        "title": "Environmental Cleanup Drive",
+        "organizer": "Green Earth Society",
+        "eventDate": "2024-12-15T00:00:00",
+        "location": "City Park",
+        "description": "Join us in cleaning up the park and making our environment cleaner.",
+        "eventLogo": "/images/environmental-cleanup.jpg",
+        "startTime": "2024-12-15T08:00:00",
+        "endTime": "2024-12-15T12:00:00",
+        "volunteersNeeded": 20,
+        "status": "not started",
+        "tags": [
+          "environment",
+          "community"
+        ]
+      },
+      {
+        "title": "Holiday Toy Drive",
+        "organizer": "Community Charity Fund",
+        "eventDate": "2024-12-20T00:00:00",
+        "location": "Local Community Center",
+        "description": "Help us collect and distribute toys to children in need for the holidays.",
+        "eventLogo": "/images/toy-drive.jpg",
+        "startTime": "2024-12-20T09:00:00",
+        "endTime": "2024-12-20T15:00:00",
+        "volunteersNeeded": 15,
+        "status": "not started",
+        "tags": [
+          "youth",
+          "community"
+        ]
+      },
+      {
+        "title": "Winter Clothing Donation Drive",
+        "organizer": "Warm Hearts Foundation",
+        "eventDate": "2024-12-25T00:00:00",
+        "location": "Various Drop-off Points",
+        "description": "Donate winter clothing items to help those in need stay warm this winter.",
+        "eventLogo": "/images/clothing-drive.jpg",
+        "startTime": "2024-12-25T10:00:00",
+        "endTime": "2024-12-25T16:00:00",
+        "volunteersNeeded": 10,
+        "status": "not started",
+        "tags": [
+          "human services",
+          "community",
+          "homeless & housing"
+        ]
+      },
+      {
+        "title": "Beach Cleanup",
+        "organizer": "Coastal Conservation Society",
+        "eventDate": "2023-08-20T00:00:00",
+        "location": "Local Beach",
+        "description": "Help clean up the beach and protect marine life.",
+        "eventLogo": "/images/beach-cleanup.jpg",
+        "startTime": "2023-08-20T09:00:00",
+        "endTime": "2023-08-20T12:00:00",
+        "volunteersNeeded": 15,
+        "status": "completed",
+        "tags": [
+          "environment",
+          "community"
+        ]
+      },
+      {
+        "title": "Community Garden Planting",
+        "organizer": "Urban Farming Collective",
+        "eventDate": "2022-10-10T00:00:00",
+        "location": "Community Garden",
+        "description": "Join us in planting vegetables and flowers in the community garden.",
+        "eventLogo": "/images/community-garden.jpg",
+        "startTime": "2022-10-10T10:00:00",
+        "endTime": "2022-10-10T14:00:00",
+        "volunteersNeeded": 10,
+        "status": "completed",
+        "tags": [
+          "environment",
+          "community"
+        ]
+      },
+      {
+        "title": "Homeless Shelter Volunteer Day",
+        "organizer": "Shelter Support Services",
+        "eventDate": "2022-05-15T00:00:00",
+        "location": "Local Homeless Shelter",
+        "description": "Spend a day volunteering at the homeless shelter and help those in need.",
+        "eventLogo": "/images/homeless-shelter.jpg",
+        "startTime": "2022-05-15T08:00:00",
+        "endTime": "2022-05-15T16:00:00",
+        "volunteersNeeded": 20,
+        "status": "completed",
+        "tags": [
+          "community",
+          "homeless & housing"
+        ]
       }
     ]
   }
