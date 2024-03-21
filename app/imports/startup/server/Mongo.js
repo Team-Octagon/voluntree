@@ -62,5 +62,12 @@ if (dummyVolunteers) {
       console.log(`  Adding: ${event.title}`);
       VolunteerProfileEvents.define({ volunteer: volunteer.email, event: event.title });
     });
+    // Make sure events are defined in Events collection if they are not already.
+    volunteer.events.forEach((event) => {
+      if (!Events.isDefined(event._id)) {
+        console.log(`  Adding: ${event.title}`);
+        Events.define(event);
+      }
+    });
   });
 }

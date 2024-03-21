@@ -10,19 +10,20 @@
     "avatar": "https://example.com/avatar.jpg",
     "events": [
       {
-        "title": "Adopt a Pet Day",
-        "organizer": "Animal Shelter",
+        "title": "Virtual Music Education for Underprivileged Children",
+        "organizer": "Music Foundation",
         "eventDate": "2024-04-05T00:00:00",
-        "location": "Local Pet Store",
-        "description": "Find your new furry friend and give them a forever home.",
+        "location": "Online",
+        "description": "If you know how to play music, please help share your knowledge.",
         "eventLogo": "/images/volunteer-team-stock-image.jpg",
-        "startTime": "2024-04-05T10:00:00",
-        "endTime": "2024-04-05T16:00:00",
+        "startTime": "2024-11-05T10:00:00",
+        "endTime": "2024-11-05T16:00:00",
         "volunteersNeeded": 10,
         "status": "not started",
         "tags": [
-          "adoption",
-          "animals"
+          "arts",
+          "education",
+          "youth"
         ]
       }
     ]
