@@ -62,8 +62,7 @@ if (dummyVolunteers) {
     volunteer.events.forEach((event) => {
       if (!Events.isDefined(event._id)) {
         const eventId = Events.define(event);
-        console.log(`  Adding: ${event.title} of id ${eventId} from organization ${event.organizer} to Events collection`);
-        console.log(`  Adding: ${event.title}`);
+        console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
         VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
       }
     });
