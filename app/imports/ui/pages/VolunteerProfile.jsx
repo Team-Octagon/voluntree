@@ -23,12 +23,19 @@ const VolunteerProfile = () => {
     };
   }, []);
   const profile = VolunteerProfiles.findOne({ email });
+  console.log(profile);
+  const profileEvents = VolunteerProfileEvents.find({ volunteer: email }).fetch();
+  console.log(profileEvents);
+  const eventData = Events.find({ _id: { $in: profileEvents.map((pe) => pe.event) } }).fetch();
+  console.log(eventData);
   return ready ? (
     <Container id={PAGE_IDS.VOLUNTEER_PROFILE} className="py-3">
       <VolunteerProfileCard
         profile={profile}
       />
-      <VolunteerProfileDash />
+      <VolunteerProfileDash
+        eventData={eventData}
+      />
     </Container>
   ) : <LoadingSpinner />;
 };
