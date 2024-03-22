@@ -10,8 +10,14 @@ const VolunteerProfileDash = ({ eventData }) => {
     setActiveTab(tab);
   };
 
-  const upcomingEvents = eventData.filter(event => event.status === 'not started');
-  const volunteerHistory = eventData.filter(event => event.status === 'completed');
+  const upcomingEvents = eventData.filter(event => event.status === 'not started').sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+  const volunteerHistory = eventData
+    .filter(event => event.status === 'completed')
+    .sort((a, b) => {
+      const dateA = new Date(a.eventDate);
+      const dateB = new Date(b.eventDate);
+      return dateA - dateB;
+    });
 
   return (
     <Container fluid className="mt-4">
@@ -37,6 +43,7 @@ const VolunteerProfileDash = ({ eventData }) => {
                     title={event.title}
                     description={event.description}
                     tags={event.tags}
+                    startTime={event.startTime}
                   />
                 ))}
               </Tab.Pane>
@@ -48,6 +55,7 @@ const VolunteerProfileDash = ({ eventData }) => {
                     title={event.title}
                     description={event.description}
                     tags={event.tags}
+                    startTime={event.startTime}
                   />
                 ))}
               </Tab.Pane>

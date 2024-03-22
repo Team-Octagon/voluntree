@@ -13,7 +13,6 @@ import { Events } from '../../api/event/Events';
 const VolunteerProfile = () => {
 
   const { ready, email } = useTracker(() => {
-    // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = VolunteerProfiles.subscribe();
     const sub2 = VolunteerProfileEvents.subscribeVolunteerProfileEventsVolunteer();
     const sub3 = Events.subscribeEventVolunteer();
@@ -23,11 +22,9 @@ const VolunteerProfile = () => {
     };
   }, []);
   const profile = VolunteerProfiles.findOne({ email });
-  console.log(profile);
   const profileEvents = VolunteerProfileEvents.find({ volunteer: email }).fetch();
-  console.log(profileEvents);
   const eventData = Events.find({ _id: { $in: profileEvents.map((pe) => pe.event) } }).fetch();
-  console.log(eventData);
+
   return ready ? (
     <Container id={PAGE_IDS.VOLUNTEER_PROFILE} className="py-3">
       <VolunteerProfileCard
