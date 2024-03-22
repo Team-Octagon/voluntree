@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Container, Nav, Tab, Row, Card } from 'react-bootstrap';
+import { Col, Container, Nav, Tab, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import EventCard from './EventCard';
 
@@ -11,20 +11,7 @@ const VolunteerProfileDash = ({ eventData }) => {
   };
 
   const upcomingEvents = eventData.filter(event => event.status === 'not started');
-
-  const renderEvents = (events) => events.map((event, index) => (
-    <Card key={index} className="mb-3">
-      <Card.Body>
-        <Card.Title>{event.title}</Card.Title>
-        <Card.Text>{event.description}</Card.Text>
-      </Card.Body>
-    </Card>
-  ));
-
-  const volunteerHistory = [
-    { title: 'Event 3', description: 'Description for Event 3' },
-    { title: 'Event 4', description: 'Description for Event 4' },
-  ];
+  const volunteerHistory = eventData.filter(event => event.status === 'completed');
 
   return (
     <Container fluid className="mt-4">
@@ -55,7 +42,14 @@ const VolunteerProfileDash = ({ eventData }) => {
               </Tab.Pane>
               <Tab.Pane eventKey="history">
                 <h2>Volunteer History</h2>
-                {renderEvents(volunteerHistory)}
+                {volunteerHistory.map((event, index) => (
+                  <EventCard
+                    key={index}
+                    title={event.title}
+                    description={event.description}
+                    tags={event.tags}
+                  />
+                ))}
               </Tab.Pane>
             </Tab.Content>
           </Col>
