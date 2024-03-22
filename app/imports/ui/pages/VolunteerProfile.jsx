@@ -7,14 +7,18 @@ import VolunteerProfileCard from '../components/VolunteerProfileCard';
 import VolunteerProfileDash from '../components/VolunteerProfileDash';
 import { VolunteerProfiles } from '../../api/user/VolunteerProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { VolunteerProfileEvents } from '../../api/user/VolunteerProfileEvents';
+import { Events } from '../../api/event/Events';
 
 const VolunteerProfile = () => {
 
   const { ready, email } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = VolunteerProfiles.subscribe();
+    const sub2 = VolunteerProfileEvents.subscribeVolunteerProfileEventsVolunteer();
+    const sub3 = Events.subscribeEventVolunteer();
     return {
-      ready: sub1.ready(),
+      ready: sub1.ready() && sub2.ready() && sub3.ready(),
       email: Meteor.user()?.username,
     };
   }, []);
