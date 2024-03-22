@@ -54,17 +54,19 @@ if (Events.count() === 0) {
 }
 
 // Add dummy events to dummy volunteers
-if (dummyVolunteers) {
-  console.log('Adding dummy events to dummy volunteers');
-  const volunteerEventData = JSON.parse(dummyVolunteers);
-  volunteerEventData.forEach((volunteer) => {
-    // Make sure events are defined in Events collection if they are not already.
-    volunteer.events.forEach((event) => {
-      if (!Events.isDefined(event._id)) {
-        const eventId = Events.define(event);
-        console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
-        VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
-      }
+if (Events.find({ title: 'Virtual Music Education for Underprivileged Children' }).count() === 0) {
+  if (dummyVolunteers) {
+    console.log('Adding dummy events to dummy volunteers');
+    const volunteerEventData = JSON.parse(dummyVolunteers);
+    volunteerEventData.forEach((volunteer) => {
+      // Make sure events are defined in Events collection if they are not already.
+      volunteer.events.forEach((event) => {
+        if (!Events.isDefined(event._id)) {
+          const eventId = Events.define(event);
+          console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
+          VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
+        }
+      });
     });
-  });
+  }
 }
