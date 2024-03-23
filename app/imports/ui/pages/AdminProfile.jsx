@@ -3,8 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { Container } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import VolunteerProfileCard from '../components/VolunteerProfileCard';
-import VolunteerProfileDash from '../components/VolunteerProfileDash';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -21,10 +19,11 @@ const AdminProfile = () => {
   const profile = AdminProfiles.findOne({ email });
   return ready ? (
     <Container id={PAGE_IDS.ADMIN_PAGE} className="py-3">
-      <VolunteerProfileCard
-        profile={profile}
-      />
-      <VolunteerProfileDash />
+      <h1>Admin Profile</h1>
+      <p><strong>Email:</strong> {profile.email}</p>
+      <p><strong>First Name:</strong> {profile.firstName}</p>
+      <p><strong>Last Name:</strong> {profile.lastName}</p>
+      <p><strong>Phone Number:</strong> {profile.phoneNumber}</p>
     </Container>
   ) : <LoadingSpinner />;
 };
