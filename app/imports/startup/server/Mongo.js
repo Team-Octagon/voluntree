@@ -3,11 +3,14 @@ import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Events } from '../../api/event/Events';
 import { Notifications } from '../../api/notifications/Notifications';
 import { VolunteerProfileEvents } from '../../api/user/VolunteerProfileEvents';
+import { OrganizationEvents } from '../../api/user/OrganizationEvents';
 
 // eslint-disable-next-line no-undef
 const dummyEvents = Assets.getText('events/dummy-events.json');
 // eslint-disable-next-line no-undef
 const dummyVolunteers = Assets.getText('volunteers/dummy-volunteers.json');
+// eslint-disable-next-line no-undef
+const dummyOrganizations = Assets.getText('organizations/dummy-organizations.json');
 
 /* eslint-disable no-console */
 
@@ -65,6 +68,23 @@ if (Events.find({ title: 'Virtual Music Education for Underprivileged Children' 
           const eventId = Events.define(event);
           console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
           VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
+        }
+      });
+    });
+  }
+}
+
+if (Events.find({ title: 'Music Therapy for the Elderly' }).count() === 0) {
+  if (dummyOrganizations) {
+    console.log('Adding dummy events to dummy organizations');
+    const organizationEventData = JSON.parse(dummyOrganizations);
+    organizationEventData.forEach((organization) => {
+      // Make sure events are defined in Events collection if they are not already.
+      organization.events.forEach((event) => {
+        if (!Events.isDefined(event._id)) {
+          const eventId = Events.define(event);
+          console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
+          OrganizationEvents.define({ organization: organization.email, event: eventId });
         }
       });
     });

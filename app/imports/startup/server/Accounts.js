@@ -7,6 +7,8 @@ import { OrganizationProfiles } from '../../api/user/OrganizationProfileCollecti
 
 // eslint-disable-next-line no-undef
 const dummyVolunteers = Assets.getText('volunteers/dummy-volunteers.json');
+// eslint-disable-next-line no-undef
+const dummyOrganizations = Assets.getText('organizations/dummy-organizations.json');
 
 /* eslint-disable no-console */
 
@@ -44,11 +46,20 @@ if (Meteor.users.find().count() === 0) {
   }
 }
 
-// For creating test user
+// For creating test volunteer user
 if (Meteor.users.find({ 'emails.address': 'volunteer@foo.com' }).count() === 0) {
   if (dummyVolunteers) {
     console.log('Creating the test volunteer user(s)');
     const volunteersData = JSON.parse(dummyVolunteers);
     volunteersData.forEach(({ email, password, role, firstName, lastName, name }) => createTestUser(email, role, firstName, lastName, name, password));
+  }
+}
+
+// For creating test organization user
+if (Meteor.users.find({ 'emails.address': 'musicOrganization@foo.com' }).count() === 0) {
+  if (dummyOrganizations) {
+    console.log('Creating the test organization user(s)');
+    const organizationsData = JSON.parse(dummyOrganizations);
+    organizationsData.forEach(({ email, password, role, firstName, lastName, name }) => createTestUser(email, role, firstName, lastName, name, password));
   }
 }
