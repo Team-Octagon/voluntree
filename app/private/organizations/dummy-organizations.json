@@ -1,0 +1,46 @@
+[
+  {
+    "email": "musicOrganization@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Music Foundation",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "https://example.com/avatar.jpg",
+    "events": [
+      {
+        "title": "Virtual Music Education for Underprivileged Children",
+        "organizer": "Music Foundation",
+        "eventDate": "2024-04-05T00:00:00",
+        "location": "Online",
+        "description": "If you know how to play music, please help share your knowledge.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-11-05T10:00:00",
+        "endTime": "2024-11-05T16:00:00",
+        "volunteersNeeded": 10,
+        "status": "not started",
+        "tags": [
+          "arts",
+          "education",
+          "youth"
+        ]
+      },
+      {
+        "title": "Music Therapy for the Elderly",
+        "organizer": "Music Foundation",
+        "eventDate": "2023-05-15T00:00:00",
+        "location": "Retirement Home",
+        "description": "Music therapy is a great way to help the elderly.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2023-05-15T08:00:00",
+        "endTime": "2023-05-15T16:00:00",
+        "volunteersNeeded": 6,
+        "status": "completed",
+        "tags": [
+          "community",
+          "health",
+          "seniors"
+        ]
+      }
+    ]
+  }
+]
