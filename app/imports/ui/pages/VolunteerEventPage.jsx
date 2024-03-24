@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row, Badge, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -9,7 +9,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import FeedbackList from '../components/FeedbackList';
 import { VolunteerProfileEvents } from '../../api/user/VolunteerProfileEvents';
-import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { defineMethod, removeItMethod } from '../../api/base/BaseCollection.methods';
 
 const VolunteerEventPage = () => {
   const { _id } = useParams();
@@ -22,15 +22,30 @@ const VolunteerEventPage = () => {
     return { doc: document, ready: rdy };
   }, [_id]);
 
-  const volunteerEvent = () => {
+  const [isVolunteering, setIsVolunteering] = useState(false);
+
+  const submit = () => {
     const currentUser = Meteor.user().username;
-    const collectionName = VolunteerProfileEvents.getCollectionName();
-    const definitionData = { event: _id, volunteer: currentUser };
-    defineMethod.callPromise({ collectionName, definitionData })
-      .then(() => {
-        swal('Success', 'Event added successfully', 'success');
-      })
-      .catch(error => swal('Error', error.message, 'error'));
+    const isSubscribed = VolunteerProfileEvents.find({ event: _id, volunteer: currentUser }).count() > 0;
+    if (!isSubscribed) {
+      const collectionName = VolunteerProfileEvents.getCollectionName();
+      const definitionData = { event: _id, volunteer: currentUser };
+      defineMethod.callPromise({ collectionName, definitionData })
+        .then(() => {
+          swal('Success', 'Event added successfully', 'success');
+          setIsVolunteering(true);
+        })
+        .catch(error => swal('Error', error.message, 'error'));
+    } else {
+      const collectionName = VolunteerProfileEvents.getCollectionName();
+      const instance = VolunteerProfileEvents.findDoc({ event: _id, volunteer: currentUser });
+      removeItMethod.callPromise({ collectionName, instance })
+        .then(() => {
+          swal('Success', 'Event removed successfully', 'success');
+          setIsVolunteering(false);
+        })
+        .catch(error => swal('Error', error.message, 'error'));
+    }
   };
 
   return ready ? (
@@ -67,8 +82,9 @@ const VolunteerEventPage = () => {
                   <Col xs={6}>
                     <Button
                       className="w-100"
-                      onClick={volunteerEvent}
-                    >Volunteer
+                      onClick={submit}
+                    >
+                      {isVolunteering ? 'Remove Event' : 'Volunteer'}
                     </Button>
                   </Col>
                   <Col xs={6}>
