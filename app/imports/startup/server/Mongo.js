@@ -67,11 +67,10 @@ if (Events.find({ title: 'Virtual Music Education for Underprivileged Children' 
         if (!Events.isDefined(event)) {
           const eventId = Events.define(event);
           // Extract shared event data to define in both volunteer and organization collections.
-          const musicEvent = (Events.findOne({ title: 'Virtual Music Education for Underprivileged Children' }));
           if (event.title === 'Virtual Music Education for Underprivileged Children') {
             // console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
-            VolunteerProfileEvents.define({ volunteer: volunteer.email, event: musicEvent._id });
-            OrganizationEvents.define({ organization: volunteer.email, event: musicEvent._id });
+            VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
+            OrganizationEvents.define({ organization: 'musicOrganization@foo.com', event: eventId });
           } else {
             // console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
             VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
