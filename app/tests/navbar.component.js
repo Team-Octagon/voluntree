@@ -117,7 +117,7 @@ class NavBar {
 
   async gotoAdminPage() {
     await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
-    await t.click(`#${COMPONENT_IDS.NAVBAR_VOLUNTEER_PROFILE_DROPDOWN}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_ADMIN_PAGE_DROPDOWN}`);
   }
 }
 

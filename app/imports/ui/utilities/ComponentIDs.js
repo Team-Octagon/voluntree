@@ -7,6 +7,7 @@ export const COMPONENT_IDS = {
   FOOTER_ABOUT_US: 'footer-about-us',
   LIST_STUFF_EDIT: 'list-stuff-edit',
   MANGAGE_DATABASE_DUMP: 'manage-database-dump',
+  NAVBAR_ADMIN_PAGE_DROPDOWN: 'navbar-admin-page',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',
   NAVBAR_FEEDBACK: 'navbar-feedback',
   NAVBAR_LIST_EVENTS: 'navbar-list-events',
