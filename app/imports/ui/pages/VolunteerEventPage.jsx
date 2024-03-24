@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row, Badge, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -14,18 +14,23 @@ import { defineMethod, removeItMethod } from '../../api/base/BaseCollection.meth
 const VolunteerEventPage = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
-  const { doc, ready } = useTracker(() => {
+  const currentUser = Meteor.user()?.username;
+  const { doc, ready, status } = useTracker(() => {
     const sub1 = Events.subscribeEvent();
     const sub2 = VolunteerProfileEvents.subscribeVolunteerProfileEventsVolunteer();
     const rdy = sub1.ready() && sub2.ready();
     const document = rdy ? Events.findOne(_id) : null;
-    return { doc: document, ready: rdy };
+    const isSubscribed = rdy && currentUser ? !!VolunteerProfileEvents.findOne({ event: _id, volunteer: currentUser }) : false;
+    return { doc: document, ready: rdy, status: isSubscribed };
   }, [_id]);
 
-  const [isVolunteering, setIsVolunteering] = useState(false);
+  const [isVolunteering, setIsVolunteering] = useState(status);
+
+  useEffect(() => {
+    setIsVolunteering(status);
+  }, [status]);
 
   const submit = () => {
-    const currentUser = Meteor.user().username;
     const isSubscribed = VolunteerProfileEvents.find({ event: _id, volunteer: currentUser }).count() > 0;
     if (!isSubscribed) {
       const collectionName = VolunteerProfileEvents.getCollectionName();
@@ -84,7 +89,7 @@ const VolunteerEventPage = () => {
                       className="w-100"
                       onClick={submit}
                     >
-                      {isVolunteering ? 'Remove Event' : 'Volunteer'}
+                      {isVolunteering ? 'Unsubscribe' : 'Subscribe'}
                     </Button>
                   </Col>
                   <Col xs={6}>
