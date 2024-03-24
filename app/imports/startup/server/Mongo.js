@@ -69,11 +69,11 @@ if (Events.find({ title: 'Virtual Music Education for Underprivileged Children' 
           // Extract shared event data to define in both volunteer and organization collections.
           const musicEvent = (Events.findOne({ title: 'Virtual Music Education for Underprivileged Children' }));
           if (event.title === 'Virtual Music Education for Underprivileged Children') {
-            console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
+            // console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
             VolunteerProfileEvents.define({ volunteer: volunteer.email, event: musicEvent._id });
             OrganizationEvents.define({ organization: volunteer.email, event: musicEvent._id });
           } else {
-            console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
+            // console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
             VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
           }
         }
@@ -81,7 +81,7 @@ if (Events.find({ title: 'Virtual Music Education for Underprivileged Children' 
     });
   }
 }
-
+// Add dummy events to dummy organizations
 if (Events.find({ title: 'Music Therapy for the Elderly' }).count() === 0) {
   if (dummyOrganizations) {
     console.log('Adding dummy events to dummy organizations');
@@ -89,9 +89,10 @@ if (Events.find({ title: 'Music Therapy for the Elderly' }).count() === 0) {
     organizationEventData.forEach((organization) => {
       // Make sure events are defined in Events collection if they are not already.
       organization.events.forEach((event) => {
+        // Makes sure Virtual Music Education event is not added twice
         if (event.title !== 'Virtual Music Education for Underprivileged Children' && !Events.isDefined(event)) {
           const eventId = Events.define(event);
-          console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
+          // console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
           OrganizationEvents.define({ organization: organization.email, event: eventId });
         }
       });
