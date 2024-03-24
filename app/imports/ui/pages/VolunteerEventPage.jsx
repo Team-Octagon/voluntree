@@ -1,21 +1,37 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row, Badge, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { useNavigate, useParams } from 'react-router';
+import swal from 'sweetalert';
 import { Events } from '../../api/event/Events';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import FeedbackList from '../components/FeedbackList';
+import { VolunteerProfileEvents } from '../../api/user/VolunteerProfileEvents';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
 
 const VolunteerEventPage = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
   const { doc, ready } = useTracker(() => {
-    const subscription = Events.subscribeEvent();
-    const rdy = subscription.ready();
+    const sub1 = Events.subscribeEvent();
+    const sub2 = VolunteerProfileEvents.subscribeVolunteerProfileEventsVolunteer();
+    const rdy = sub1.ready() && sub2.ready();
     const document = rdy ? Events.findOne(_id) : null;
     return { doc: document, ready: rdy };
   }, [_id]);
+
+  const volunteerEvent = () => {
+    const currentUser = Meteor.user().username;
+    const collectionName = VolunteerProfileEvents.getCollectionName();
+    const definitionData = { event: _id, volunteer: currentUser };
+    defineMethod.callPromise({ collectionName, definitionData })
+      .then(() => {
+        swal('Success', 'Event added successfully', 'success');
+      })
+      .catch(error => swal('Error', error.message, 'error'));
+  };
 
   return ready ? (
     <Container id={PAGE_IDS.VOLUNTEER_EVENT_PAGE} className="py-5">
@@ -49,7 +65,11 @@ const VolunteerEventPage = () => {
               <Card.Footer>
                 <Row className="justify-content-between">
                   <Col xs={6}>
-                    <Button className="w-100">Volunteer</Button>
+                    <Button
+                      className="w-100"
+                      onClick={volunteerEvent}
+                    >Volunteer
+                    </Button>
                   </Col>
                   <Col xs={6}>
                     <Button className="w-100" onClick={() => navigate('/volunteer-list-events')}>
