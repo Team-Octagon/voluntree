@@ -91,7 +91,7 @@ const NavBar = () => {
                     </NavDropdown.Item>
                   )}
                   {isOrganization && (
-                    <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_ORGANIZATION_DROPDOWN} as={NavLink} to="/organization-profile">
+                    <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_ORGANIZATION_DROPDOWN} as={NavLink} to="/organization-page">
                       Organization Profile
                     </NavDropdown.Item>
                   )}
