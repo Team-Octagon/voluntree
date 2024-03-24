@@ -9,6 +9,7 @@ export const volunteerProfileEventPublications = {
   volunteerProfileEvent: 'VolunteerProfileEvent',
   volunteerProfileEventAdmin: 'VolunteerProfileEventAdmin',
   volunteerProfileEventVolunteer: 'VolunteerProfileEventVolunteer',
+  volunteerProfileEventOrganization: 'VolunteerProfileEventOrganization',
 };
 
 class VolunteerProfileEventsCollection extends BaseCollection {
@@ -95,6 +96,13 @@ class VolunteerProfileEventsCollection extends BaseCollection {
         }
         return this.ready();
       });
+      /** This subscription publishes all documents regardless of user, but only if the logged in user is an Organization. */
+      Meteor.publish(volunteerProfileEventPublications.volunteerProfileEventOrganization, function publish() {
+        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ORGANIZATION)) {
+          return instance._collection.find();
+        }
+        return this.ready();
+      });
     }
   }
 
@@ -125,6 +133,17 @@ class VolunteerProfileEventsCollection extends BaseCollection {
   subscribeVolunteerProfileEventsVolunteer() {
     if (Meteor.isClient) {
       return Meteor.subscribe(volunteerProfileEventPublications.volunteerProfileEventVolunteer);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for organization users.
+   * It subscribes to the entire collection.
+   */
+  subscribeVolunteerProfileEventsOrganization() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(volunteerProfileEventPublications.volunteerProfileEventOrganization);
     }
     return null;
   }

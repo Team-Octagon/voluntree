@@ -10,6 +10,7 @@ import { OrganizationRequests } from '../requests/OrganizationRequests';
 import { OrganizationProfiles } from '../user/OrganizationProfileCollection';
 import { VolunteerProfileSkills } from '../user/VolunteerProfileSkills';
 import { VolunteerProfileEvents } from '../user/VolunteerProfileEvents';
+import { OrganizationEvents } from '../user/OrganizationEvents';
 
 class MATPClass {
   collections;
@@ -32,6 +33,7 @@ class MATPClass {
       Feedback,
       OrganizationRequests,
       OrganizationProfiles,
+      OrganizationEvents,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -48,6 +50,7 @@ class MATPClass {
       Feedback,
       OrganizationRequests,
       OrganizationProfiles,
+      OrganizationEvents,
     ];
 
     /*

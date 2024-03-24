@@ -13,6 +13,7 @@ export const eventPublications = {
   event: 'Event',
   eventAdmin: 'EventAdmin',
   eventVolunteer: 'EventVolunteer',
+  eventOrganization: 'EventOrganization',
 };
 
 class EventsCollection extends BaseCollection {
@@ -168,6 +169,14 @@ class EventsCollection extends BaseCollection {
         }
         return this.ready();
       });
+
+      /** This subscription publishes all documents regardless of user, but only if the logged in user is an organization. */
+      Meteor.publish(eventPublications.eventOrganization, function publish() {
+        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ORGANIZATION)) {
+          return instance._collection.find();
+        }
+        return this.ready();
+      });
     }
   }
 
@@ -204,13 +213,24 @@ class EventsCollection extends BaseCollection {
   }
 
   /**
+   * Subscription method for organization users.
+   * It subscribes to the entire collection.
+   */
+  subscribeEventOrganization() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(eventPublications.eventOrganization);
+    }
+    return null;
+  }
+
+  /**
    * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or User.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
    * @param userId The userId of the logged in user. Can be null or undefined
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.VOLUNTEER]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.ORGANIZATION, ROLE.VOLUNTEER]);
   }
 
   /**

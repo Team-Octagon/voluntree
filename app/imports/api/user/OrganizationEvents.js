@@ -9,6 +9,7 @@ export const organizationEventPublications = {
   organizationEvent: 'OrganizationEvent',
   organizationEventAdmin: 'OrganizationEventAdmin',
   organizationEventOrganization: 'OrganizationEventOrganization',
+  organizationEventVolunteer: 'OrganizationEventVolunteer',
 };
 
 class OrganizationEventsCollection extends BaseCollection {
@@ -95,6 +96,13 @@ class OrganizationEventsCollection extends BaseCollection {
         }
         return this.ready();
       });
+      /** This subscription publishes all documents regardless of user, but only if the logged in user is an organization. */
+      Meteor.publish(organizationEventPublications.organizationEventOrganization, function publish() {
+        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ORGANIZATION)) {
+          return instance._collection.find();
+        }
+        return this.ready();
+      });
     }
   }
 
@@ -120,12 +128,12 @@ class OrganizationEventsCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for volunteer users.
+   * Subscription method for organization users.
    * It subscribes to the entire collection.
    */
-  subscribeOrganizationEventsVolunteer() {
+  subscribeOrganizationEventsOrganization() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(organizationEventPublications.organizationEventVolunteer);
+      return Meteor.subscribe(organizationEventPublications.organizationEventOrganization);
     }
     return null;
   }
@@ -137,7 +145,7 @@ class OrganizationEventsCollection extends BaseCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.VOLUNTEER]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.ORGANIZATION, ROLE.VOLUNTEER]);
   }
 
   /**
