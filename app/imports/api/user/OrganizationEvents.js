@@ -128,7 +128,7 @@ class OrganizationEventsCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for volunteer users.
+   * Subscription method for organization users.
    * It subscribes to the entire collection.
    */
   subscribeOrganizationEventsOrganization() {
@@ -139,7 +139,7 @@ class OrganizationEventsCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for organization users.
+   * Subscription method for volunteer users.
    * It subscribes to the entire collection.
    */
   subscribeOrganizationEventsVolunteer() {
