@@ -128,12 +128,23 @@ class OrganizationEventsCollection extends BaseCollection {
   }
 
   /**
-   * Subscription method for organization users.
+   * Subscription method for volunteer users.
    * It subscribes to the entire collection.
    */
   subscribeOrganizationEventsOrganization() {
     if (Meteor.isClient) {
       return Meteor.subscribe(organizationEventPublications.organizationEventOrganization);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for organization users.
+   * It subscribes to the entire collection.
+   */
+  subscribeOrganizationEventsVolunteer() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(organizationEventPublications.organizationEventVolunteer);
     }
     return null;
   }

@@ -39,6 +39,7 @@ import { ChatProvider } from '../contexts/ChatContext';
 import StartOrganization from '../pages/StartOrganization';
 import CreateOrganization from '../pages/CreateOrganization';
 import OrganizationRequests from '../pages/OrganizationRequests';
+import OrganizationPagePublic from '../pages/OrganizationPagePublic';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -63,6 +64,7 @@ const App = () => {
             <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/organization-page" element={<ProtectedRoute><OrganizationPage /></ProtectedRoute>} />
+            <Route path="/organization-page/:_id" element={<OrganizationPagePublic />} />
             <Route path="/admin-page" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
             <Route path="/volunteer-profile" element={<ProtectedRoute><VolunteerProfile /></ProtectedRoute>} />
             <Route path="/volunteer-settings" element={<ProtectedRoute><VolunteerSettings /></ProtectedRoute>} />
