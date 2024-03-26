@@ -25,12 +25,12 @@ function createUser(email, role, firstName, lastName, name, password) {
   }
 }
 
-function createTestUser(email, role, firstName, lastName, name, password) {
+function createTestUser(email, role, firstName, lastName, name, password, avatar) {
   console.log(`  Creating test user ${email} with role ${role}.`);
   if (role === ROLE.VOLUNTEER) {
     VolunteerProfiles.define({ email, firstName, lastName, password });
   } else if (role === ROLE.ORGANIZATION) {
-    OrganizationProfiles.define({ email, name, password });
+    OrganizationProfiles.define({ email, name, password, avatar });
   } else { // everyone else is just a user.
     UserProfiles.define({ email, firstName, lastName, password });
   }
@@ -60,6 +60,6 @@ if (Meteor.users.find({ 'emails.address': 'musicOrganization@foo.com' }).count()
   if (dummyOrganizations) {
     console.log('Creating the test organization user(s)');
     const organizationsData = JSON.parse(dummyOrganizations);
-    organizationsData.forEach(({ email, password, role, firstName, lastName, name }) => createTestUser(email, role, firstName, lastName, name, password));
+    organizationsData.forEach(({ email, password, role, firstName, lastName, name, avatar }) => createTestUser(email, role, firstName, lastName, name, password, avatar));
   }
 }

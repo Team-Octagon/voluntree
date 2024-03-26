@@ -34,8 +34,6 @@ const Landing = () => {
     // Navigate to the volunteer-list-events page with the search term as a query parameter
     navigate(`/volunteer-list-events?search=${encodeURIComponent(searchTerm)}`);
   };
-  console.log(events);
-  console.log(organizations);
 
   return (
     ready ? (
@@ -102,7 +100,7 @@ const Landing = () => {
               {organizations.map((organization) => (
                 <Col key={organization._id}>
                   <Card className="custom-card">
-                    <Card.Img variant="top" src={organization.avatar || '/images/volunteer-team-stock-image.jpg'} />
+                    <Card.Img variant="top" src={organization.avatar || '/images/volunteer-team-stock-image.jpg'} style={{ height: '200px', objectFit: 'cover' }} />
                     <Card.Body className="text-center">
                       <Card.Title>{organization.name}</Card.Title>
                       <Button

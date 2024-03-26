@@ -14,15 +14,16 @@ class OrganizationProfileCollection extends BaseProfileCollection {
    * @param email The email associated with this profile.
    * @param password The password for this user.
    * @param name The name of the organization. This will be the username for the associated Meteor account.
+   * @param avatar The URL for the avatar image.
    */
-  define({ email, name, password }) {
+  define({ email, name, password, avatar }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, name });
     if (!user) {
       const role = ROLE.ORGANIZATION;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, name, userID, role });
+      const profileID = this._collection.insert({ email, name, userID, role, avatar });
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }
