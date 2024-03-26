@@ -5,7 +5,7 @@
     "role": "ORGANIZATION",
     "name": "Music Foundation",
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "avatar": "https://example.com/avatar.jpg",
+    "avatar": "/images/Music_Foundation_avatar.png",
     "events": [
       {
         "title": "Virtual Music Education for Underprivileged Children",
@@ -49,7 +49,7 @@
     "role": "ORGANIZATION",
     "name": "Disaster Relief Foundation",
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "avatar": "https://example.com/avatar.jpg",
+    "avatar": "/images/Disaster_Relief_avatar.png",
     "events": [
       {
         "title": "Emergency Shelter Setup",
@@ -93,7 +93,7 @@
     "role": "ORGANIZATION",
     "name": "Pawsitive Pet Society",
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "avatar": "https://example.com/avatar.jpg",
+    "avatar": "/images/Pawsitive_Pets_avatar.png",
     "events": [
       {
         "title": "Pet Adoption Day",
