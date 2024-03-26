@@ -15,14 +15,11 @@ const OrganizationPage = () => {
 
   const { ready } = useTracker(() => {
     const sub1 = OrganizationProfiles.subscribe();
-    const sub2 = OrganizationEvents.subscribeOrganizationEvents();
-    const sub3 = OrganizationEvents.subscribeOrganizationEventsOrganization();
-    const sub4 = OrganizationEvents.subscribeOrganizationEventsAdmin();
-    const sub5 = OrganizationEvents.subscribeOrganizationEventsVolunteer();
-    const sub6 = Events.subscribeEvent();
+    const sub2 = OrganizationEvents.subscribeOrganizationEventsPublic();
+    const sub3 = Events.subscribeEvent();
 
     return {
-      ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready(),
+      ready: sub1.ready() && sub2.ready() && sub3.ready(),
     };
   }, [_id]);
 

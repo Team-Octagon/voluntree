@@ -10,6 +10,7 @@ export const organizationEventPublications = {
   organizationEventAdmin: 'OrganizationEventAdmin',
   organizationEventOrganization: 'OrganizationEventOrganization',
   organizationEventVolunteer: 'OrganizationEventVolunteer',
+  organizationEventPublic: 'OrganizationEventPublic',
 };
 
 class OrganizationEventsCollection extends BaseCollection {
@@ -103,6 +104,10 @@ class OrganizationEventsCollection extends BaseCollection {
         }
         return this.ready();
       });
+      /** This subscription publishes all documents to anyone accessing page. */
+      Meteor.publish(organizationEventPublications.organizationEventPublic, function publish() {
+        return instance._collection.find();
+      });
     }
   }
 
@@ -145,6 +150,16 @@ class OrganizationEventsCollection extends BaseCollection {
   subscribeOrganizationEventsVolunteer() {
     if (Meteor.isClient) {
       return Meteor.subscribe(organizationEventPublications.organizationEventVolunteer);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for event made by the current user.
+   */
+  subscribeOrganizationEventsPublic() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(organizationEventPublications.organizationEventPublic);
     }
     return null;
   }
