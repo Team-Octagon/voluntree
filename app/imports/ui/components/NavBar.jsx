@@ -1,4 +1,3 @@
-// Import necessary modules
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';

@@ -99,7 +99,7 @@ const Landing = () => {
             <Row xs={1} md={2} lg={3} className="g-4">
               {organizations.map((organization) => (
                 <Col key={organization._id}>
-                  <Card className="custom-card">
+                  <Card>
                     <Card.Img variant="top" src={organization.avatar || '/images/volunteer-team-stock-image.jpg'} style={{ height: '200px', objectFit: 'cover' }} />
                     <Card.Body className="text-center">
                       <Card.Title>{organization.name}</Card.Title>
