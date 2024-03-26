@@ -42,5 +42,109 @@
         ]
       }
     ]
+  },
+  {
+    "email": "disasterReliefOrg@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Disaster Relief Foundation",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "https://example.com/avatar.jpg",
+    "events": [
+      {
+        "title": "Emergency Shelter Setup",
+        "organizer": "Disaster Relief Foundation",
+        "eventDate": "2024-06-10T00:00:00",
+        "location": "Tornado-affected area",
+        "description": "Setting up emergency shelters for tornado victims.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-06-10T09:00:00",
+        "endTime": "2024-06-10T17:00:00",
+        "volunteersNeeded": 20,
+        "status": "not started",
+        "tags": [
+          "disaster relief",
+          "community",
+          "human services"
+        ]
+      },
+      {
+        "title": "Food Distribution",
+        "organizer": "Disaster Relief Foundation",
+        "eventDate": "2024-06-15T00:00:00",
+        "location": "Flood-affected area",
+        "description": "Distributing food and supplies to flood victims.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-06-15T08:00:00",
+        "endTime": "2024-06-15T16:00:00",
+        "volunteersNeeded": 15,
+        "status": "not started",
+        "tags": [
+          "disaster relief",
+          "human services",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "pawsitivePetSociety@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Pawsitive Pet Society",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "https://example.com/avatar.jpg",
+    "events": [
+      {
+        "title": "Pet Adoption Day",
+        "organizer": "Pawsitive Pet Society",
+        "eventDate": "2024-07-20T00:00:00",
+        "location": "Local Pet Shelter",
+        "description": "A day dedicated to finding loving homes for shelter pets.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-07-20T10:00:00",
+        "endTime": "2024-07-20T16:00:00",
+        "volunteersNeeded": 15,
+        "status": "not started",
+        "tags": [
+          "animals",
+          "adoption",
+          "community"
+        ]
+      },
+      {
+        "title": "Pet Health Check-up Camp",
+        "organizer": "Pawsitive Pet Society",
+        "eventDate": "2024-08-05T00:00:00",
+        "location": "Community Park",
+        "description": "Providing free health check-ups and vaccinations for pets.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-08-05T09:00:00",
+        "endTime": "2024-08-05T15:00:00",
+        "volunteersNeeded": 10,
+        "status": "not started",
+        "tags": [
+          "animals",
+          "health",
+          "community"
+        ]
+      },
+      {
+        "title": "Pet Therapy Session",
+        "organizer": "Pawsitive Pet Society",
+        "eventDate": "2024-08-20T00:00:00",
+        "location": "Nursing Home",
+        "description": "Bringing joy to residents with therapy pets.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-08-20T10:00:00",
+        "endTime": "2024-08-20T12:00:00",
+        "volunteersNeeded": 8,
+        "status": "not started",
+        "tags": [
+          "animals",
+          "community"
+        ]
+      }
+    ]
   }
 ]

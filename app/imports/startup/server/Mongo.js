@@ -68,11 +68,9 @@ if (Events.find({ title: 'Virtual Music Education for Underprivileged Children' 
           const eventId = Events.define(event);
           // Extract shared event data to define in both volunteer and organization collections.
           if (event.title === 'Virtual Music Education for Underprivileged Children') {
-            // console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
             VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
             OrganizationEvents.define({ organization: 'musicOrganization@foo.com', event: eventId });
           } else {
-            // console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
             VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
           }
         }
@@ -91,7 +89,6 @@ if (Events.find({ title: 'Music Therapy for the Elderly' }).count() === 0) {
         // Makes sure Virtual Music Education event is not added twice
         if (event.title !== 'Virtual Music Education for Underprivileged Children' && !Events.isDefined(event)) {
           const eventId = Events.define(event);
-          // console.log(`  Adding: ${event.title} of id ${eventId} to Events collection`);
           OrganizationEvents.define({ organization: organization.email, event: eventId });
         }
       });
