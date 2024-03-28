@@ -4,6 +4,7 @@ import { Events } from '../../api/event/Events';
 import { Notifications } from '../../api/notifications/Notifications';
 import { VolunteerProfileEvents } from '../../api/user/VolunteerProfileEvents';
 import { OrganizationEvents } from '../../api/user/OrganizationEvents';
+import { OrganizationProfiles } from '../../api/user/OrganizationProfileCollection';
 
 // eslint-disable-next-line no-undef
 const dummyVolunteers = Assets.getText('volunteers/dummy-volunteers.json');
@@ -49,9 +50,10 @@ if (Events.count() === 0) {
       volunteer.events.forEach((event) => {
         if (!Events.isDefined(event)) {
           const eventId = Events.define(event);
+          const organizer = OrganizationProfiles.findOne({ name: event.organizer });
           // Extract shared event data to define in both volunteer and organization collections.
           VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
-          OrganizationEvents.define({ organization: 'musicOrganization@foo.com', event: eventId });
+          OrganizationEvents.define({ organization: organizer.email, event: eventId });
         }
       });
     });
