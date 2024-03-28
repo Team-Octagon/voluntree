@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row, Badge, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import { Link } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router';
 import swal from 'sweetalert';
 import { Events } from '../../api/event/Events';
@@ -10,18 +11,21 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import FeedbackList from '../components/FeedbackList';
 import { VolunteerProfileEvents } from '../../api/user/VolunteerProfileEvents';
 import { defineMethod, removeItMethod } from '../../api/base/BaseCollection.methods';
+import { OrganizationProfiles } from '../../api/user/OrganizationProfileCollection';
 
 const VolunteerEventPage = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
   const currentUser = Meteor.user()?.username;
-  const { doc, ready, status } = useTracker(() => {
+  const { doc, ready, status, organizer } = useTracker(() => {
     const sub1 = Events.subscribeEvent();
     const sub2 = VolunteerProfileEvents.subscribeVolunteerProfileEventsVolunteer();
-    const rdy = sub1.ready() && sub2.ready();
+    const sub3 = OrganizationProfiles.subscribe();
+    const rdy = sub1.ready() && sub2.ready() && sub3.ready();
     const document = rdy ? Events.findOne(_id) : null;
     const isSubscribed = rdy && currentUser ? !!VolunteerProfileEvents.findOne({ event: _id, volunteer: currentUser }) : false;
-    return { doc: document, ready: rdy, status: isSubscribed };
+    const organization = rdy ? OrganizationProfiles.findOne({ name: document?.organizer }) : null;
+    return { doc: document, ready: rdy, status: isSubscribed, organizer: organization };
   }, [_id]);
 
   const [isVolunteering, setIsVolunteering] = useState(status);
@@ -63,7 +67,9 @@ const VolunteerEventPage = () => {
                 <Card.Title className="mb-3">{doc.title}</Card.Title>
                 <img src={doc.eventLogo || '/images/default-event-image.jpg'} alt="Event Logo" className="img-fluid mb-3" />
                 <Row className="justify-content-center">
-                  <h5 className="mb-3">{doc.organizer}</h5>
+                  <Link to={`/organization-page/${organizer._id}`}>
+                    <h5 className="mb-3">{doc.organizer}</h5>
+                  </Link>
                   <Col sm={6}><strong>Date:</strong> {doc.eventDate.toLocaleDateString()}</Col>
                   <Col sm={6}><strong>Location:</strong> {doc.location}</Col>
                 </Row>
