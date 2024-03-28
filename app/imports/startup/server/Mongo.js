@@ -6,8 +6,6 @@ import { VolunteerProfileEvents } from '../../api/user/VolunteerProfileEvents';
 import { OrganizationEvents } from '../../api/user/OrganizationEvents';
 
 // eslint-disable-next-line no-undef
-const dummyEvents = Assets.getText('events/dummy-events.json');
-// eslint-disable-next-line no-undef
 const dummyVolunteers = Assets.getText('volunteers/dummy-volunteers.json');
 // eslint-disable-next-line no-undef
 const dummyOrganizations = Assets.getText('organizations/dummy-organizations.json');
@@ -28,12 +26,6 @@ if (Stuffs.count() === 0) {
   }
 }
 
-// Initialize the database with a default data document.
-function addEvent(data) {
-  console.log(`  Adding: ${data.title}`);
-  Events.define(data);
-}
-
 function addNotification(data) {
   console.log('addning notifcation');
   Notifications.define(data);
@@ -44,15 +36,6 @@ if (Notifications.count() === 0) {
   if (Meteor.settings.defaultNotifications) {
     console.log('Creating default notifications event data.');
     Meteor.settings.defaultNotifications.forEach(data => addNotification(data));
-  }
-}
-
-// Initialize the EventsCollection if empty using dummyEvents.
-if (Events.count() === 0) {
-  if (dummyEvents) {
-    console.log('Creating default event data from dummy events.');
-    const eventsData = JSON.parse(dummyEvents);
-    eventsData.forEach(data => addEvent(data));
   }
 }
 

@@ -196,6 +196,38 @@
           "arts",
           "community"
         ]
+      },
+      {
+        "title": "Youth Art Workshop",
+        "organizer": "Local Art Society",
+        "eventDate": "2025-06-15T00:00:00",
+        "location": "Art Studio",
+        "description": "A creative workshop for young artists to explore different art forms.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-06-15T09:00:00",
+        "endTime": "2025-06-15T12:00:00",
+        "volunteersNeeded": 8,
+        "status": "not started",
+        "tags": [
+          "arts",
+          "youth"
+        ]
+      },
+      {
+        "title": "Arts and Crafts Fair",
+        "organizer": "Local Artist Society",
+        "eventDate": "2024-08-20T00:00:00",
+        "location": "City Park",
+        "description": "Discover handmade crafts and artworks by local artisans.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-08-20T10:00:00",
+        "endTime": "2024-08-20T16:00:00",
+        "volunteersNeeded": 12,
+        "status": "not started",
+        "tags": [
+          "arts",
+          "community"
+        ]
       }
     ]
   },
@@ -216,6 +248,22 @@
         "eventLogo": "/images/volunteer-team-stock-image.jpg",
         "startTime": "2024-04-15T14:00:00",
         "endTime": "2024-04-15T17:00:00",
+        "volunteersNeeded": 12,
+        "status": "not started",
+        "tags": [
+          "community",
+          "seniors"
+        ]
+      },
+      {
+        "title": "Senior Citizens' Social",
+        "organizer": "Senior Center",
+        "eventDate": "2024-12-10T00:00:00",
+        "location": "Senior Community Center",
+        "description": "Join us for games, music, and socializing with our senior residents.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-12-10T14:00:00",
+        "endTime": "2024-12-10T17:00:00",
         "volunteersNeeded": 12,
         "status": "not started",
         "tags": [
@@ -246,6 +294,52 @@
         "status": "not started",
         "tags": [
           "technology"
+        ]
+      },
+      {
+        "title": "Technology Expo",
+        "organizer": "Tech Hub",
+        "eventDate": "2025-11-20T00:00:00",
+        "location": "Tech Hub",
+        "description": "Explore the latest in technology and innovation.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-11-20T10:00:00",
+        "endTime": "2025-11-20T16:00:00",
+        "volunteersNeeded": 20,
+        "status": "not started",
+        "tags": [
+          "technology"
+        ]
+      },
+      {
+        "title": "Tech Expo",
+        "organizer": "Tech Hub",
+        "eventDate": "2025-02-15T00:00:00",
+        "location": "Tech Center",
+        "description": "Explore the latest technological innovations and advancements.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-02-15T10:00:00",
+        "endTime": "2025-02-15T16:00:00",
+        "volunteersNeeded": 15,
+        "status": "not started",
+        "tags": [
+          "technology"
+        ]
+      },
+      {
+        "title": "Youth Technology Workshop",
+        "organizer": "Tech Hub",
+        "eventDate": "2024-09-25T00:00:00",
+        "location": "City Library",
+        "description": "Learn about the latest technology trends and innovations.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-09-25T11:00:00",
+        "endTime": "2024-09-25T15:00:00",
+        "volunteersNeeded": 10,
+        "status": "not started",
+        "tags": [
+          "technology",
+          "youth"
         ]
       }
     ]
@@ -299,6 +393,38 @@
           "sports",
           "youth"
         ]
+      },
+      {
+        "title": "Sports Tournament",
+        "organizer": "Youth Sports Club",
+        "eventDate": "2024-07-15T00:00:00",
+        "location": "City Sports Complex",
+        "description": "Join us for a day of exciting sports competitions.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-07-15T08:00:00",
+        "endTime": "2024-07-15T17:00:00",
+        "volunteersNeeded": 25,
+        "status": "not started",
+        "tags": [
+          "sports",
+          "youth"
+        ]
+      },
+      {
+        "title": "Youth Sports Camp",
+        "organizer": "Youth Sports Club",
+        "eventDate": "2025-01-20T00:00:00",
+        "location": "City Sports Complex",
+        "description": "A week-long sports camp for kids and teens to learn and play various sports.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-01-20T09:00:00",
+        "endTime": "2025-01-27T17:00:00",
+        "volunteersNeeded": 35,
+        "status": "not started",
+        "tags": [
+          "sports",
+          "youth"
+        ]
       }
     ]
   },
@@ -323,6 +449,279 @@
         "status": "not started",
         "tags": [
           "education",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "homelessShelter@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Homeless Shelter",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "/images/volunteer-team-stock-image.jpg",
+    "events": [
+      {
+        "title": "Homeless Shelter Volunteer Day",
+        "organizer": "Homeless Shelter",
+        "eventDate": "2026-03-15T00:00:00",
+        "location": "Local Shelter",
+        "description": "Help serve meals and provide assistance to those experiencing homelessness.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2026-03-15T08:00:00",
+        "endTime": "2026-03-15T14:00:00",
+        "volunteersNeeded": 30,
+        "status": "not started",
+        "tags": [
+          "homeless & housing",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "healthDepartment@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Health Department",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "/images/volunteer-team-stock-image.jpg",
+    "events": [
+      {
+        "title": "Health Fair",
+        "organizer": "Health Department",
+        "eventDate": "2024-06-10T00:00:00",
+        "location": "City Health Center",
+        "description": "Learn about health and wellness from local experts.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-06-10T09:00:00",
+        "endTime": "2024-06-10T13:00:00",
+        "volunteersNeeded": 15,
+        "status": "not started",
+        "tags": [
+          "health",
+          "community"
+        ]
+      },
+      {
+        "title": "Health Fair",
+        "organizer": "Health Department",
+        "eventDate": "2025-09-15T00:00:00",
+        "location": "City Park",
+        "description": "Get free health screenings, wellness tips, and fitness demos.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-09-15T09:00:00",
+        "endTime": "2025-09-15T13:00:00",
+        "volunteersNeeded": 25,
+        "status": "not started",
+        "tags": [
+          "health",
+          "community"
+        ]
+      },
+      {
+        "title": "Health and Wellness Seminar",
+        "organizer": "Health Department",
+        "eventDate": "2025-05-20T00:00:00",
+        "location": "City Hall",
+        "description": "Learn about maintaining a healthy lifestyle and holistic wellness practices.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-05-20T11:00:00",
+        "endTime": "2025-05-20T15:00:00",
+        "volunteersNeeded": 15,
+        "status": "not started",
+        "tags": [
+          "health",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "prideAlliance@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Pride Alliance",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "/images/volunteer-team-stock-image.jpg",
+    "events": [
+      {
+        "title": "LGBTQ+ Pride Parade",
+        "organizer": "Pride Alliance",
+        "eventDate": "2025-10-10T00:00:00",
+        "location": "Downtown",
+        "description": "Celebrate diversity and equality with a colorful parade.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-10-10T12:00:00",
+        "endTime": "2025-10-10T16:00:00",
+        "volunteersNeeded": 30,
+        "status": "not started",
+        "tags": [
+          "culture",
+          "LGBTQ+",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "localRedCross@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Local Red Cross",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "/images/volunteer-team-stock-image.jpg",
+    "events": [
+      {
+        "title": "Disaster Relief Fundraiser",
+        "organizer": "Local Red Cross",
+        "eventDate": "2025-07-10T00:00:00",
+        "location": "City Hall",
+        "description": "Join us in raising funds for disaster relief efforts around the world.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-07-10T12:00:00",
+        "endTime": "2025-07-10T18:00:00",
+        "volunteersNeeded": 20,
+        "status": "not started",
+        "tags": [
+          "disaster relief",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "veteransAssociation@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Veterans Association",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "/images/volunteer-team-stock-image.jpg",
+    "events": [
+      {
+        "title": "Veterans Day Tribute",
+        "organizer": "Veterans Association",
+        "eventDate": "2025-12-15T00:00:00",
+        "location": "Veterans Memorial Park",
+        "description": "Honor and remember our veterans with a special tribute event.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-12-15T11:00:00",
+        "endTime": "2025-12-15T14:00:00",
+        "volunteersNeeded": 15,
+        "status": "not started",
+        "tags": [
+          "veterans & military families",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "communityCouncil@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Community Council",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "/images/volunteer-team-stock-image.jpg",
+    "events": [
+      {
+        "title": "Community Cleanup Day",
+        "organizer": "Community Council",
+        "eventDate": "2024-10-05T00:00:00",
+        "location": "City Park",
+        "description": "Join us for a day of cleaning up the community park.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-10-05T09:00:00",
+        "endTime": "2024-10-05T12:00:00",
+        "volunteersNeeded": 20,
+        "status": "not started",
+        "tags": [
+          "community",
+          "environment"
+        ]
+      },
+      {
+        "title": "Culture Festival",
+        "organizer": "Community Council",
+        "eventDate": "2024-11-15T00:00:00",
+        "location": "City Square",
+        "description": "Celebrate the diverse cultures in our community with music, food, and performances.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2024-11-15T12:00:00",
+        "endTime": "2024-11-15T20:00:00",
+        "volunteersNeeded": 30,
+        "status": "not started",
+        "tags": [
+          "culture",
+          "community"
+        ]
+      },
+      {
+        "title": "Youth Leadership Summit",
+        "organizer": "Community Council",
+        "eventDate": "2026-01-10T00:00:00",
+        "location": "Youth Center",
+        "description": "Empower young leaders to make a positive impact in their communities.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2026-01-10T09:00:00",
+        "endTime": "2026-01-10T15:00:00",
+        "volunteersNeeded": 25,
+        "status": "not started",
+        "tags": [
+          "youth",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "greenEarth@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Green Earth Organization",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "/images/volunteer-team-stock-image.jpg",
+    "events": [
+      {
+        "title": "Environmental Cleanup",
+        "organizer": "Green Earth Organization",
+        "eventDate": "2025-04-05T00:00:00",
+        "location": "City Beach",
+        "description": "Help clean up the beach and protect the environment.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-04-05T08:00:00",
+        "endTime": "2025-04-05T12:00:00",
+        "volunteersNeeded": 20,
+        "status": "not started",
+        "tags": [
+          "environment",
+          "community"
+        ]
+      }
+    ]
+  },
+  {
+    "email": "jobSeekersNetwork@foo.com",
+    "password": "changeme",
+    "role": "ORGANIZATION",
+    "name": "Job Seekers Network",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "avatar": "/images/volunteer-team-stock-image.jpg",
+    "events": [
+      {
+        "title": "Employment Workshop",
+        "organizer": "Job Seekers Network",
+        "eventDate": "2025-08-05T00:00:00",
+        "location": "Community Center",
+        "description": "Learn job search skills, resume writing, and interview techniques.",
+        "eventLogo": "/images/volunteer-team-stock-image.jpg",
+        "startTime": "2025-08-05T10:00:00",
+        "endTime": "2025-08-05T14:00:00",
+        "volunteersNeeded": 15,
+        "status": "not started",
+        "tags": [
+          "employment",
           "community"
         ]
       }
