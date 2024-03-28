@@ -40,7 +40,7 @@ if (Notifications.count() === 0) {
 }
 
 // Add dummy events to dummy volunteers
-if (Events.find({ title: 'Virtual Music Education for Underprivileged Children' }).count() === 0) {
+if (Events.count() === 0) {
   if (dummyVolunteers) {
     console.log('Adding dummy events to dummy volunteers');
     const volunteerEventData = JSON.parse(dummyVolunteers);
@@ -50,27 +50,30 @@ if (Events.find({ title: 'Virtual Music Education for Underprivileged Children' 
         if (!Events.isDefined(event)) {
           const eventId = Events.define(event);
           // Extract shared event data to define in both volunteer and organization collections.
-          if (event.title === 'Virtual Music Education for Underprivileged Children') {
-            VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
-            OrganizationEvents.define({ organization: 'musicOrganization@foo.com', event: eventId });
-          } else {
-            VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
-          }
+          VolunteerProfileEvents.define({ volunteer: volunteer.email, event: eventId });
+          OrganizationEvents.define({ organization: 'musicOrganization@foo.com', event: eventId });
         }
       });
     });
   }
-}
-// Add dummy events to dummy organizations
-if (Events.find({ title: 'Music Therapy for the Elderly' }).count() === 0) {
   if (dummyOrganizations) {
     console.log('Adding dummy events to dummy organizations');
     const organizationEventData = JSON.parse(dummyOrganizations);
     organizationEventData.forEach((organization) => {
       // Make sure events are defined in Events collection if they are not already.
       organization.events.forEach((event) => {
-        // Makes sure Virtual Music Education event is not added twice
-        if (event.title !== 'Virtual Music Education for Underprivileged Children' && !Events.isDefined(event)) {
+        const excludedTitles = [
+          'Virtual Music Education for Underprivileged Children',
+          'Environmental Cleanup Drive',
+          'Holiday Toy Drive',
+          'Winter Clothing Donation Drive',
+          'Beach Cleanup',
+          'Community Garden Planting',
+          'Homeless Shelter Volunteer Day',
+        ];
+
+        // Makes sure excluded events are not added
+        if (!Events.isDefined(event) && !excludedTitles.includes(event.title)) {
           const eventId = Events.define(event);
           OrganizationEvents.define({ organization: organization.email, event: eventId });
         }
