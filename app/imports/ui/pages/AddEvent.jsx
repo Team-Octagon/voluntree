@@ -2,17 +2,20 @@ import React, { useRef } from 'react';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { AutoForm, ErrorsField, NumField, TextField, DateField, LongTextField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
-import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import { useTracker } from 'meteor/react-meteor-data';
 import { Events, eventTags } from '../../api/event/Events';
+import { OrganizationEvents } from '../../api/user/OrganizationEvents';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { OrganizationProfiles } from '../../api/user/OrganizationProfileCollection';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 // Adjusted schema definition for multiple tag selection
 const formSchema = new SimpleSchema({
   title: String,
-  organizer: { type: String, index: true, unique: false },
+  organizer: String,
   eventDate: Date,
   location: String,
   description: String,
@@ -35,22 +38,51 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
+const defineEvent = async (data) => {
+  const collectionName = Events.getCollectionName();
+  const definitionData = { ...data };
+
+  try {
+    await defineMethod.callPromise({ collectionName, definitionData });
+    return definitionData; // Return the event data
+  } catch (error) {
+    throw new Error('Failed to define event');
+  }
+};
+
+const defineOrganizationEvent = (data) => {
+  const collectionName = OrganizationEvents.getCollectionName();
+  const organizationEmail = OrganizationProfiles.findOne({ name: data.organizer }).email;
+  const definitionData = { organization: organizationEmail, event: data };
+  console.log(definitionData);
+  defineMethod.callPromise({ collectionName, definitionData })
+    .then(() => {
+      console.log('Organization event added successfully');
+    })
+    .catch((error) => {
+      swal('Error', error.message, 'error');
+    });
+};
+
 const AddEvent = () => {
   const formRef = useRef(null);
+  const { ready } = useTracker(() => {
+    const sub1 = OrganizationProfiles.subscribe();
+    return {
+      ready: sub1.ready(),
+    };
+  }, []);
 
-  const submit = (data) => {
-    const owner = Meteor.user()?.username;
-    const collectionName = Events.getCollectionName();
-    const definitionData = { ...data, owner };
-    defineMethod.callPromise({ collectionName, definitionData })
-      .then(() => {
-        swal('Success', 'Event added successfully', 'success');
-        formRef.current.reset();
-      })
-      .catch(error => swal('Error', error.message, 'error'));
+  const submit = async (data) => {
+    try {
+      const eventData = await defineEvent(data);
+      defineOrganizationEvent(eventData);
+    } catch (error) {
+      swal('Error', error.message, 'error');
+    }
   };
 
-  return (
+  return ready ? (
     <Container id={PAGE_IDS.ADD_EVENT} className="py-3">
       <Row className="justify-content-center">
         <Col md={10} lg={8}>
@@ -102,7 +134,7 @@ const AddEvent = () => {
         </Col>
       </Row>
     </Container>
-  );
+  ) : <LoadingSpinner />;
 };
 
 export default AddEvent;
