@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Meteor } from 'meteor/meteor';
+import { useTracker } from 'meteor/react-meteor-data';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { AutoForm, ErrorsField, NumField, TextField, DateField, LongTextField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { useTracker } from 'meteor/react-meteor-data';
 import { Events, eventTags } from '../../api/event/Events';
 import { OrganizationEvents } from '../../api/user/OrganizationEvents';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
@@ -39,13 +40,31 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 
 const AddEvent = () => {
   const formRef = useRef(null);
-  const { ready } = useTracker(() => {
+  const [organizerName, setOrganizerName] = useState('Organizer');
+
+  const { ready, organizationName } = useTracker(() => {
+    const user = Meteor.user();
     const sub1 = OrganizationProfiles.subscribe();
     const sub2 = Events.subscribeEventOrganization();
+    let organizationNameTemp = 'Organizer'; // Default placeholder
+
+    if (user) {
+      // Adjust according to your schema, assuming email is in the profile
+      const email = user.emails && user.emails[0].address;
+      const organizationProfile = OrganizationProfiles.findOne({ email: email });
+      if (organizationProfile) {
+        organizationNameTemp = organizationProfile.name;
+      }
+    }
     return {
       ready: sub1.ready() && sub2.ready(),
+      organizationName: organizationNameTemp,
     };
   }, []);
+
+  useEffect(() => {
+    setOrganizerName(organizationName);
+  }, [organizationName]);
 
   const defineEvent = async (data) => {
     const collectionName = Events.getCollectionName();
@@ -70,7 +89,7 @@ const AddEvent = () => {
         formRef.current.reset();
       })
       .catch((error) => {
-        swal('Error', error.message, 'error');
+        swal('Error', error.message, 'error ?');
       });
   };
 
@@ -96,7 +115,7 @@ const AddEvent = () => {
                     <TextField name="title" placeholder="Title" />
                   </Col>
                   <Col sm={6}>
-                    <TextField name="organizer" placeholder="Organizer" />
+                    <TextField name="organizer" value={organizerName} />
                   </Col>
                 </Row>
                 <Row>
