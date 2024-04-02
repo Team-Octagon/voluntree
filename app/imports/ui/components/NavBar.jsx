@@ -30,7 +30,9 @@ const NavBar = () => {
         </Navbar.Brand>
         <Nav>
           <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_EVENTS} as={NavLink} to="/volunteer-list-events">Events</Nav.Link>
-          <Nav.Link id={COMPONENT_IDS.NAVBAR_START_ORGANIZATION} as={NavLink} to="/start-organization">Start Organization</Nav.Link>
+          {!isOrganization && (
+            <Nav.Link id={COMPONENT_IDS.NAVBAR_START_ORGANIZATION} as={NavLink} to="/start-organization">Start Organization</Nav.Link>
+          )}
         </Nav>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
