@@ -12,7 +12,6 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { OrganizationProfiles } from '../../api/user/OrganizationProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-// Adjusted schema definition for multiple tag selection
 const formSchema = new SimpleSchema({
   title: String,
   organizer: String,
@@ -38,40 +37,42 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-const defineEvent = async (data) => {
-  const collectionName = Events.getCollectionName();
-  const definitionData = { ...data };
-
-  try {
-    await defineMethod.callPromise({ collectionName, definitionData });
-    return definitionData; // Return the event data
-  } catch (error) {
-    throw new Error('Failed to define event');
-  }
-};
-
-const defineOrganizationEvent = (data) => {
-  const collectionName = OrganizationEvents.getCollectionName();
-  const organizationEmail = OrganizationProfiles.findOne({ name: data.organizer }).email;
-  const definitionData = { organization: organizationEmail, event: data };
-  console.log(definitionData);
-  defineMethod.callPromise({ collectionName, definitionData })
-    .then(() => {
-      console.log('Organization event added successfully');
-    })
-    .catch((error) => {
-      swal('Error', error.message, 'error');
-    });
-};
-
 const AddEvent = () => {
   const formRef = useRef(null);
   const { ready } = useTracker(() => {
     const sub1 = OrganizationProfiles.subscribe();
+    const sub2 = Events.subscribeEventOrganization();
     return {
-      ready: sub1.ready(),
+      ready: sub1.ready() && sub2.ready(),
     };
   }, []);
+
+  const defineEvent = async (data) => {
+    const collectionName = Events.getCollectionName();
+    const definitionData = { ...data };
+
+    try {
+      await defineMethod.callPromise({ collectionName, definitionData });
+      return definitionData;
+    } catch (error) {
+      throw new Error('Failed to define event');
+    }
+  };
+
+  const defineOrganizationEvent = (data) => {
+    const collectionName = OrganizationEvents.getCollectionName();
+    const organizationEmail = OrganizationProfiles.findOne({ name: data.organizer }).email;
+    const eventID = Events.findOne({ title: data.title })._id;
+    const definitionData = { organization: organizationEmail, event: eventID };
+    defineMethod.callPromise({ collectionName, definitionData })
+      .then(() => {
+        swal('Success', 'Event added successfully', 'success');
+        formRef.current.reset();
+      })
+      .catch((error) => {
+        swal('Error', error.message, 'error');
+      });
+  };
 
   const submit = async (data) => {
     try {
