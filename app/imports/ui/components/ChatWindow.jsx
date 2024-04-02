@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Button, Form, ListGroup } from 'react-bootstrap';
 import { ChatContext } from '../contexts/ChatContext';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { ChatMessages } from '../../api/chat/ChatMessages';
 
 const ChatWindow = () => {
   const { messages, recipients, sendMessage, closeChat } = useContext(ChatContext);
@@ -15,6 +17,26 @@ const ChatWindow = () => {
 
   const handleNewChat = () => {
     // Logic for adding new chat
+  };
+
+  const handleTest = () => {
+    const collectionName = ChatMessages.getCollectionName();
+    console.log('Adding test message...');
+    const testData = {
+      users: ['userId1', 'userId2'], // Example user IDs
+      messages: [{
+        sender: 'userId1',
+        recipient: 'userId2',
+        text: 'Test message',
+      }],
+    };
+
+    defineMethod.callPromise({ collectionName, definitionData: testData })
+      .then((result) => {
+        console.log('Test message added with ID:', result);
+        // Optionally, update the UI or perform any other actions upon success
+      })
+      .catch(error => console.error('Error adding test message:', error));
   };
 
   const handleSendMessage = () => {
@@ -59,6 +81,9 @@ const ChatWindow = () => {
           </ListGroup>
           <Button variant="primary" onClick={handleNewChat}>
             Add New Chat
+          </Button>
+          <Button variant="primary" onClick={handleTest}>
+            Test Add!
           </Button>
         </div>
       )}

@@ -9,20 +9,25 @@ export const chatMessagesPublications = {
 class ChatMessagesCollection extends BaseCollection {
   constructor() {
     super('ChatMessages', new SimpleSchema({
-      sender: String,
-      recipient: String,
-      text: String,
-      createdAt: Date,
+      users: Array,
+      'users.$': String,
+      messages: Array,
+      'messages.$': Object,
+      'messages.$.sender': String,
+      'messages.$.recipient': String,
+      'messages.$.createdAt': Date,
+      'messages.$.text': String,
     }));
   }
 
-  define({ sender, recipient, text }) {
+  define({ users, messages }) {
     const createdAt = new Date();
     return this._collection.insert({
-      sender,
-      recipient,
-      text,
-      createdAt,
+      users,
+      messages: messages.map(message => ({
+        ...message,
+        createdAt,
+      })),
     });
   }
 
@@ -32,10 +37,7 @@ class ChatMessagesCollection extends BaseCollection {
       Meteor.publish(chatMessagesPublications.chatMessages, function publish() {
         if (this.userId) {
           return instance._collection.find({
-            $or: [
-              { sender: this.userId },
-              { recipient: this.userId },
-            ],
+            users: this.userId,
           });
         }
         return this.ready();
@@ -52,11 +54,14 @@ class ChatMessagesCollection extends BaseCollection {
 
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const sender = doc.sender;
-    const recipient = doc.recipient;
-    const text = doc.text;
-    const createdAt = doc.createdAt;
-    return { sender, recipient, text, createdAt };
+    const users = doc.users;
+    const messages = doc.messages.map(message => ({
+      sender: message.sender,
+      recipient: message.recipient,
+      text: message.text,
+      createdAt: message.createdAt,
+    }));
+    return { users, messages };
   }
 }
 
