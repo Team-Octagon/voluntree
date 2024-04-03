@@ -92,3 +92,33 @@ test('Test that admin pages show up', async () => {
   // await navBar.gotoManageDatabasePage();
   // await manageDatabasePage.isDisplayed();
 });
+test('Test for event detail', async t => {
+  // Define selectors for form fields and submit button
+  const titleInput = Selector('input[name="title"]');
+  const organizerInput = Selector('input[name="organizer"]');
+  const eventDateInput = Selector('input[name="eventDate"]');
+  const locationInput = Selector('input[name="location"]');
+  const descriptionInput = Selector('textarea[name="description"]');
+  const startTimeInput = Selector('input[name="startTime"]');
+  const endTimeInput = Selector('input[name="endTime"]');
+  const volunteersNeededInput = Selector('input[name="volunteersNeeded"]');
+  const submitButton = Selector('button').withText('Submit');
+
+
+  // Fill in the form fields with valid data
+  await t.typeText(titleInput, 'Test Event')
+  await t.typeText(organizerInput, 'Test Organizer')
+  await t.typeText(eventDateInput, '2024-04-10')
+  await t.typeText(locationInput, 'Test Location')
+  await t.typeText(descriptionInput, 'Test Description')
+  await t.typeText(startTimeInput, '10:00 AM')
+  await t.typeText(endTimeInput, '12:00 PM')
+  await t.typeText(volunteersNeededInput, '5');
+
+  // Click on the submit button
+  await t.click(submitButton);
+
+  // Assert that success message appears after form submission
+  const successMessage = Selector('div').withText('Event added successfully');
+  await t.expect(successMessage.exists).ok();
+});
