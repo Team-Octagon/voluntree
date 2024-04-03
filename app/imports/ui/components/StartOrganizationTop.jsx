@@ -6,17 +6,29 @@ const StartOrganizationTop = () => {
   const navigate = useNavigate();
 
   return (
-    <Container className="d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <Row>
+    <Container className="d-flex flex-column align-items-center" style={{ minHeight: '100vh' }}>
+      {/* Move the Button Row to the top */}
+      <Row className="mb-3"> {/* Add margin bottom to separate the button and image */}
         <Col className="text-center">
-          <Image src="/images/volunteer-team-stock-image.jpg" rounded />
+          {/* Increase Button size by using the 'lg' prop and custom styles for even larger size */}
+          <Button
+            variant="primary"
+            style={{
+              backgroundColor: 'teal',
+              borderColor: 'teal',
+              color: 'white',
+              padding: '10px 20px', // Increase padding for bigger size
+              fontSize: '20px', // Increase font size for better visibility
+            }}
+            onClick={() => navigate('/create-organization')}
+          >
+            Create Organization
+          </Button>
         </Col>
       </Row>
       <Row>
-        <Col className="text-center mt-3">
-          <Button variant="primary" onClick={() => navigate('/create-organization')}>
-            Create Organization
-          </Button>
+        <Col className="text-center">
+          <Image src="/images/stock-image1.png" rounded />
         </Col>
       </Row>
     </Container>
