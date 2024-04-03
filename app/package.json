@@ -6,7 +6,7 @@
     "bootstrap": "^5.3.0",
     "classnames": "^2.3.2",
     "core-js": "^3.31.1",
-    "graphql": "^16.7.1",
+    "graphql": "^16.8.1",
     "leaflet": "^1.9.4",
     "meteor-node-stubs": "^1.2.5",
     "moment": "^2.29.4",
@@ -38,8 +38,9 @@
     "eslint-utils": "^3.0.0",
     "faker": "^5.5.3",
     "fast-check": "^3.11.0",
+    "jest": "^29.7.0",
     "puppeteer": "^19.11.1",
-    "testcafe": "^3.0.1"
+    "testcafe": "^3.5.0"
   },
   "scripts": {
     "start": "meteor --no-release-check --exclude-archs web.browser.legacy,web.cordova --settings ../config/settings.development.json",
@@ -51,6 +52,6 @@
     "test-acceptance-development-single": "testcafe chrome tests/*.testcafe.js -t \"Test that sign up and sign out work\"",
     "test-acceptance-ci": "testcafe chrome:headless tests/*.testcafe.js -q --app \"meteor npm run start\"",
     "unimported": "npx unimported",
-    "test-all": "meteor reset && meteor npm run lint && meteor npm run unimported && meteor npm run test-unit && meteor npm run test-integration && meteor npm run test-acceptance-ci"
+    "test-all": "meteor reset && meteor npm run lint && meteor npm run unimported && meteor npm run test-unit && meteor npm run test-integration && meteor npm run test-acceptance-ci",
   }
 }
