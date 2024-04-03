@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import faker from 'faker';
 import fc from 'fast-check';
-import { stuffConditions, Stuffs } from './StuffCollection';
+import { Stuffs } from './StuffCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { MATPCollections } from '../matp/MATPCollections';
 import { testDefine, testDumpRestore, testUpdate } from '../utilities/test-helpers';
