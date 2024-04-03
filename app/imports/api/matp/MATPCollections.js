@@ -11,6 +11,7 @@ import { OrganizationProfiles } from '../user/OrganizationProfileCollection';
 import { VolunteerProfileSkills } from '../user/VolunteerProfileSkills';
 import { VolunteerProfileEvents } from '../user/VolunteerProfileEvents';
 import { OrganizationEvents } from '../user/OrganizationEvents';
+import { ChatMessages } from '../chat/ChatMessages';
 
 class MATPClass {
   collections;
@@ -34,6 +35,7 @@ class MATPClass {
       OrganizationRequests,
       OrganizationProfiles,
       OrganizationEvents,
+      ChatMessages,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -51,6 +53,7 @@ class MATPClass {
       OrganizationRequests,
       OrganizationProfiles,
       OrganizationEvents,
+      ChatMessages,
     ];
 
     /*
