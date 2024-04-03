@@ -2,8 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
-import BaseCollection from '../../base/BaseCollection';
-import { ROLE } from '../../role/Role';
+import BaseCollection from '../base/BaseCollection';
+import { ROLE } from '../role/Role';
 
 export const organizationEventPublications = {
   organizationEvent: 'OrganizationEvent',
@@ -121,7 +121,7 @@ class OrganizationEventsCollection extends BaseCollection {
 
   /**
    * Subscription method for volunteer users.
-   * It subscribes to the entire collection.
+   * Function subscribes to the entire collection.
    */
   subscribeOrganizationEventsVolunteer() {
     if (Meteor.isClient) {
