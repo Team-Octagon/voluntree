@@ -4,9 +4,9 @@ import StartOrganizationTop from '../components/StartOrganizationTop';
 import StartOrganizationBottom from '../components/StartOrganizationBottom';
 
 const StartOrganization = () => (
-  <Container>
-    <StartOrganizationTop />
+  <Container fluid className="p-0" style={{ backgroundImage: 'url("/images/landing-background.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
     <StartOrganizationBottom />
+    <StartOrganizationTop />
   </Container>
 );
 
