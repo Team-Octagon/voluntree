@@ -25,4 +25,5 @@ export const PAGE_IDS = {
   EDIT_EVENT: 'edit-event',
   VOLUNTEER_EVENT_PAGE: 'volunteer-event-page',
   SEND_NOTIFCATIONS: 'send-notifications',
+  START_ORGANIZATION: 'start-organization',
 };

@@ -1,7 +1,7 @@
 // import { Selector, t } from 'testcafe';
 import {
   aboutUsPage, adminPage, /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
-  signOutPage,
+  signOutPage, startOrganizationPage,
   volunteerProfilePage,
 } from './simple.page';
 import { landingPage } from './landing.page';
@@ -91,4 +91,12 @@ test('Test that admin pages show up', async () => {
   // await listStuffAdminPage.isDisplayed();
   // await navBar.gotoManageDatabasePage();
   // await manageDatabasePage.isDisplayed();
+});
+
+test('Test that start organization shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(credentials.username, credentials.password);
+  await navBar.isLoggedIn(credentials.username);
+  await navBar.gotoStartOrganizationPage();
+  await startOrganizationPage.isDisplayed();
 });

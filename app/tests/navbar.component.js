@@ -119,6 +119,10 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
     await t.click(`#${COMPONENT_IDS.NAVBAR_ADMIN_PAGE_DROPDOWN}`);
   }
+
+  async gotoStartOrganizationPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_START_ORGANIZATION}`);
+  }
 }
 
 export const navBar = new NavBar();
