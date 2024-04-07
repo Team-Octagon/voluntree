@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Card, Badge } from 'react-bootstrap';
 
-const EventCard = ({ title, description, tags, startTime }) => (
+const EventCard = ({ eventId, title, description, tags, startTime }) => (
   <Card className="my-2">
     <Card.Header className="d-flex justify-content-between">
-      <strong>{title}</strong>
+      <Link to={`/volunteer-event-page/${eventId}`}>
+        <strong>{title}</strong>
+      </Link>
       <span className="text-end">{startTime.toLocaleDateString()}</span>
     </Card.Header>
     <Card.Body>
@@ -22,6 +25,7 @@ const EventCard = ({ title, description, tags, startTime }) => (
 );
 
 EventCard.propTypes = {
+  eventId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,

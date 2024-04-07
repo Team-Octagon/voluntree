@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import EventCard from './EventCard';
 
 const VolunteerProfileDash = ({ eventData }) => {
+  console.log(eventData);
   const [activeTab, setActiveTab] = useState('upcoming');
 
   const handleTabChange = (tab) => {
@@ -40,6 +41,7 @@ const VolunteerProfileDash = ({ eventData }) => {
                 {upcomingEvents.map((event, index) => (
                   <EventCard
                     key={index}
+                    eventId={event._id}
                     title={event.title}
                     description={event.description}
                     tags={event.tags}
@@ -52,6 +54,7 @@ const VolunteerProfileDash = ({ eventData }) => {
                 {volunteerHistory.map((event, index) => (
                   <EventCard
                     key={index}
+                    eventId={event._id}
                     title={event.title}
                     description={event.description}
                     tags={event.tags}
@@ -69,6 +72,7 @@ const VolunteerProfileDash = ({ eventData }) => {
 
 VolunteerProfileDash.propTypes = {
   eventData: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
