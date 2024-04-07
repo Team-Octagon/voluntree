@@ -40,6 +40,7 @@ const OrganizationProfileDash = ({ eventData }) => {
                 {upcomingEvents.map((event, index) => (
                   <EventCard
                     key={index}
+                    eventId={event._id}
                     title={event.title}
                     description={event.description}
                     tags={event.tags}
@@ -52,6 +53,7 @@ const OrganizationProfileDash = ({ eventData }) => {
                 {pastEvents.map((event, index) => (
                   <EventCard
                     key={index}
+                    eventId={event._id}
                     title={event.title}
                     description={event.description}
                     tags={event.tags}
@@ -69,6 +71,7 @@ const OrganizationProfileDash = ({ eventData }) => {
 
 OrganizationProfileDash.propTypes = {
   eventData: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -122,7 +122,7 @@ const Landing = () => {
         <Row className="justify-content-center text-center mt-5">
           <Col md={8}>
             <h1 style={{ color: 'white' }}>Explore What is New</h1> {/* Add this style to make header text white */}
-            <Carousel className="mt-4">
+            <Carousel className="my-4">
               {['1', '2', '3'].map((num) => (
                 <Carousel.Item key={num}>
                   <Image src={`images/stock-image${num}.png`} className="d-block w-100" style={{ maxWidth: '1000px', margin: '0 auto' }} /> {/* Adjust maxWidth as needed */}
