@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Button, Form, ListGroup } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
 import { ChatContext } from '../contexts/ChatContext';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { ChatMessages } from '../../api/chat/ChatMessages';
@@ -8,7 +9,9 @@ const ChatWindow = () => {
   const { messages, recipients, sendMessage, closeChat } = useContext(ChatContext);
   const [selectedRecipient, setSelectedRecipient] = useState('');
   const [currentScreen, setCurrentScreen] = useState('chatList');
+  const [currentMessages, setCurrentMessages] = useState('');
   const [newMessage, setNewMessage] = useState('');
+  const currentUser = Meteor.user().username;
 
   const handleChatSelect = (recipient) => {
     setSelectedRecipient(recipient);
@@ -23,12 +26,9 @@ const ChatWindow = () => {
     const collectionName = ChatMessages.getCollectionName();
     console.log('Adding test message...');
     const testData = {
-      users: ['userId1', 'userId2'], // Example user IDs
-      messages: [{
-        sender: 'userId1',
-        recipient: 'userId2',
-        text: 'Test message',
-      }],
+      sender: currentUser,
+      recipient: 'user2',
+      text: 'hello this is a test!',
     };
 
     defineMethod.callPromise({ collectionName, definitionData: testData })
@@ -41,7 +41,7 @@ const ChatWindow = () => {
 
   const handleSendMessage = () => {
     if (newMessage.trim() !== '') {
-      sendMessage('User', newMessage, selectedRecipient);
+      sendMessage(currentUser, newMessage, selectedRecipient);
       setNewMessage('');
     }
   };
@@ -51,6 +51,14 @@ const ChatWindow = () => {
     setCurrentScreen('chatList');
     closeChat();
   };
+
+  useEffect(() => {
+    if (selectedRecipient !== '') {
+      console.log('Selected recipient changed: ', selectedRecipient);
+      console.log('Messages: ', messages[selectedRecipient]);
+      setCurrentMessages(messages[selectedRecipient]);
+    }
+  }, [selectedRecipient]);
 
   return (
     <div
@@ -95,15 +103,6 @@ const ChatWindow = () => {
           <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
             Back
           </Button>
-          <div className="chat-messages" style={{ maxHeight: 'calc(100% - 100px)', overflowY: 'auto' }}>
-            {messages
-              .filter((message) => message.recipient === selectedRecipient)
-              .map((message, index) => (
-                <div key={index}>
-                  <strong>{message.sender} to {message.recipient}:</strong> {message.text}
-                </div>
-              ))}
-          </div>
           <Form.Group controlId="newMessage">
             <Form.Control
               type="text"
@@ -115,6 +114,19 @@ const ChatWindow = () => {
           <Button variant="primary" onClick={handleSendMessage}>
             Send
           </Button>
+          <p>Loading...</p>
+          {/* Display all messages if messages are available */}
+          {currentMessages.length > 0 ? (
+            <div>
+              {currentMessages.map((message, index) => (
+                <div key={index} style={{ textAlign: message.sender === currentUser ? 'right' : 'left' }}>
+                  <p>{message.text}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No messages available.</p>
+          )}
         </div>
       )}
     </div>

@@ -1,4 +1,6 @@
-import React, { createContext, useState, useMemo } from 'react';
+import React, { createContext, useState, useMemo, useEffect } from 'react';
+import { useTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import { ChatMessages } from '../../api/chat/ChatMessages';
 
 export const ChatContext = createContext();
@@ -8,8 +10,38 @@ export const ChatContext = createContext();
 export const ChatProvider = ({ children }) => {
   const [isChatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
-  const [recipients, setRecipients] = useState(['john@foo.com', 'admin@foo.com', 'User3']);
+  const [recipients, setRecipients] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState('');
+  let currentUser = Meteor.user();
+  if (currentUser) {
+    currentUser = currentUser.username;
+    console.log();
+  }
+
+  const { ready, chatMessages } = useTracker(() => {
+    const sub = ChatMessages.subscribeChatMessages();
+    const isReady = sub.ready();
+    const messageItems = ChatMessages.find({
+      $or: [{ sender: currentUser }, { recipient: currentUser }],
+    }).fetch();
+    const conversations = {};
+    messageItems.forEach(message => {
+      const otherUser = message.sender === currentUser ? message.recipient : message.sender;
+      if (!conversations[otherUser]) {
+        conversations[otherUser] = [];
+      }
+      conversations[otherUser].push(message);
+    });
+    return { ready: isReady, chatMessages: conversations };
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (ready) {
+      const conversationRecipients = Object.keys(chatMessages);
+      setRecipients(conversationRecipients);
+      setMessages(chatMessages);
+    }
+  }, [ready, chatMessages]);
 
   const sendMessage = (sender, text, recipient) => {
     const messageID = ChatMessages.define({ sender, recipient, text });
