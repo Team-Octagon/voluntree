@@ -30,8 +30,12 @@ const VolunteerEventDash = () => {
 
   const filteredEvents = ready ? events.filter(event => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    return event.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-        (event.tags && event.tags.some(tag => tag.toLowerCase().includes(lowerCaseSearchTerm)));
+    const isEventDateValid = new Date(event.eventDate) >= new Date();
+    return (
+      isEventDateValid &&
+      (event.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+        (event.tags && event.tags.some(tag => tag.toLowerCase().includes(lowerCaseSearchTerm))))
+    );
   }) : [];
 
   return (
