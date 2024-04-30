@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Button, Form, ListGroup } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
 import { ChatContext } from '../contexts/ChatContext';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { ChatMessages } from '../../api/chat/ChatMessages';
@@ -8,7 +9,11 @@ const ChatWindow = () => {
   const { messages, recipients, sendMessage, closeChat } = useContext(ChatContext);
   const [selectedRecipient, setSelectedRecipient] = useState('');
   const [currentScreen, setCurrentScreen] = useState('chatList');
+  const [currentMessages, setCurrentMessages] = useState('');
+  const [newUserEmail, setNewUserEmail] = useState('');
   const [newMessage, setNewMessage] = useState('');
+  const currentUser = Meteor.user().username;
+  const messagesEndRef = useRef(null);
 
   const handleChatSelect = (recipient) => {
     setSelectedRecipient(recipient);
@@ -16,32 +21,18 @@ const ChatWindow = () => {
   };
 
   const handleNewChat = () => {
-    // Logic for adding new chat
+    setCurrentScreen('startNewMessage');
   };
-
-  const handleTest = () => {
-    const collectionName = ChatMessages.getCollectionName();
-    console.log('Adding test message...');
-    const testData = {
-      users: ['userId1', 'userId2'], // Example user IDs
-      messages: [{
-        sender: 'userId1',
-        recipient: 'userId2',
-        text: 'Test message',
-      }],
-    };
-
-    defineMethod.callPromise({ collectionName, definitionData: testData })
-      .then((result) => {
-        console.log('Test message added with ID:', result);
-        // Optionally, update the UI or perform any other actions upon success
-      })
-      .catch(error => console.error('Error adding test message:', error));
+  const handleNewChatAdd = () => {
+    sendMessage(currentUser, newMessage, newUserEmail);
+    setCurrentScreen('chatList');
   };
 
   const handleSendMessage = () => {
     if (newMessage.trim() !== '') {
-      sendMessage('User', newMessage, selectedRecipient);
+      sendMessage(currentUser, newMessage, selectedRecipient);
+      setCurrentMessages([...currentMessages, { sender: currentUser, text: newMessage }]);
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       setNewMessage('');
     }
   };
@@ -51,6 +42,21 @@ const ChatWindow = () => {
     setCurrentScreen('chatList');
     closeChat();
   };
+
+  useEffect(() => {
+    if (selectedRecipient !== '') {
+      console.log('Selected recipient changed: ', selectedRecipient);
+      console.log('Messages: ', messages[selectedRecipient]);
+      setCurrentMessages(messages[selectedRecipient]);
+    }
+  }, [selectedRecipient]);
+
+  useEffect(() => {
+    // Scroll to the bottom of the chat window after updating messages
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  }, [currentMessages]);
 
   return (
     <div
@@ -62,7 +68,6 @@ const ChatWindow = () => {
         height: '50%',
         backgroundColor: 'white',
         borderTop: '1px solid #ccc',
-        padding: '20px',
         overflowY: 'auto',
         transform: 'translate(0%)',
         zIndex: 1001,
@@ -71,51 +76,108 @@ const ChatWindow = () => {
       }}
     >
       {currentScreen === 'chatList' && (
-        <div>
-          <ListGroup style={{ marginBottom: '10px' }}>
-            {recipients.map((recipient, index) => (
-              <ListGroup.Item key={index} action onClick={() => handleChatSelect(recipient)}>
-                {recipient}
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+        <>
+          <div style={{ textAlign: 'center' }}>
+            <ListGroup style={{ marginBottom: '10px' }}>
+              {recipients.map((recipient, index) => (
+                <ListGroup.Item key={index} action onClick={() => handleChatSelect(recipient)}>
+                  {recipient}
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </div>
           <Button variant="primary" onClick={handleNewChat}>
             Add New Chat
           </Button>
-          <Button variant="primary" onClick={handleTest}>
-            Test Add!
-          </Button>
-        </div>
-      )}
-      {currentScreen === 'chatMessages' && (
-        <div>
-          <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px' }}>
+          <Button variant="danger" onClick={handleCloseChat}>
             Close Chat
           </Button>
-          <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
-            Back
-          </Button>
-          <div className="chat-messages" style={{ maxHeight: 'calc(100% - 100px)', overflowY: 'auto' }}>
-            {messages
-              .filter((message) => message.recipient === selectedRecipient)
-              .map((message, index) => (
-                <div key={index}>
-                  <strong>{message.sender} to {message.recipient}:</strong> {message.text}
-                </div>
-              ))}
+        </>
+      )}
+      {currentScreen === 'startNewMessage' && (
+        <>
+          <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black' }}>
+            <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
+            ←
+            </Button>
+            <h6 style={{ margin: 'auto' }}>Start New Message</h6>
+            <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px', marginRight: '4px' }}>
+              X
+            </Button>
           </div>
-          <Form.Group controlId="newMessage">
+          <h4>User Email</h4>
+          <Form.Group controlId="startNewMessage">
+            <Form.Control
+              type="text"
+              placeholder="Enter User Email"
+              value={newUserEmail}
+              onChange={(e) => setNewUserEmail(e.target.value)}
+              style={{ marginTop: '3px' }}
+            />
+            <h4>Message</h4>
             <Form.Control
               type="text"
               placeholder="Type your message..."
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
+              style={{ marginTop: '3px' }}
             />
           </Form.Group>
-          <Button variant="primary" onClick={handleSendMessage}>
+          <Button
+            variant="primary"
+            onClick={handleNewChatAdd}
+          >
             Send
           </Button>
-        </div>
+        </>
+      )}
+      {currentScreen === 'chatMessages' && (
+        <>
+          {/* Fixed position buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black', margin: '6px 6px' }}>
+            {/* Fixed position buttons */}
+            <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
+              ←
+            </Button>
+            <h6 style={{ margin: 'auto' }}>{selectedRecipient}</h6>
+            <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px', marginRight: '4px' }}>
+              X
+            </Button>
+          </div>
+          <div style={{ flex: '1', overflowY: 'auto' }} ref={messagesEndRef}>
+            {/* Chat messages container */}
+            {currentMessages.length > 0 ? (
+              <div>
+                {currentMessages.map((message, index) => (
+                  <div key={index} style={{ textAlign: message.sender === currentUser ? 'right' : 'left', backgroundColor: message.sender === currentUser ? '#6685ff' : '#8c8c8c', padding: '0px', marginBottom: '4px', borderRadius: '10px', margin: '3px 3px' }}>
+                    <p style={{ marginLeft: message.sender === !currentUser ? '0px' : '10px', marginRight: message.sender === !currentUser ? '0px' : '10px' }}>{message.text}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No messages available.</p>
+            )}
+          </div>
+          <div style={{ position: 'relative', marginBottom: '0px', paddingBottom: '0px', borderTop: 'black 2px solid', margin: '6px 6px' }}>
+            {/* Text box and send button */}
+            <Form.Group controlId="newMessage">
+              <Form.Control
+                type="text"
+                placeholder="Type your message..."
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                style={{ marginTop: '3px' }}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              style={{ position: 'absolute', right: '0', bottom: '0' }}
+              onClick={handleSendMessage}
+            >
+              Send
+            </Button>
+          </div>
+        </>
       )}
     </div>
   );

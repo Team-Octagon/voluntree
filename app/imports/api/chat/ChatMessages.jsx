@@ -9,25 +9,20 @@ export const chatMessagesPublications = {
 class ChatMessagesCollection extends BaseCollection {
   constructor() {
     super('ChatMessages', new SimpleSchema({
-      users: Array,
-      'users.$': String,
-      messages: Array,
-      'messages.$': Object,
-      'messages.$.sender': String,
-      'messages.$.recipient': String,
-      'messages.$.createdAt': Date,
-      'messages.$.text': String,
+      sender: String,
+      recipient: String,
+      text: String,
+      createdAt: Date,
     }));
   }
 
-  define({ users, messages }) {
+  define({ sender, recipient, text }) {
     const createdAt = new Date();
     return this._collection.insert({
-      users,
-      messages: messages.map(message => ({
-        ...message,
-        createdAt,
-      })),
+      sender,
+      recipient,
+      text,
+      createdAt,
     });
   }
 
@@ -36,9 +31,7 @@ class ChatMessagesCollection extends BaseCollection {
       const instance = this;
       Meteor.publish(chatMessagesPublications.chatMessages, function publish() {
         if (this.userId) {
-          return instance._collection.find({
-            users: this.userId,
-          });
+          return instance._collection.find({});
         }
         return this.ready();
       });
