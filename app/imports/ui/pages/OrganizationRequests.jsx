@@ -18,30 +18,34 @@ const OrganizationRequestsPage = () => {
   return ready ? (
     <Container>
       <h1>Organization Requests</h1>
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="text-left">Date Made</th>
-              <th className="text-left">Email</th>
-              <th className="text-right">Organization Name</th>
-              <th className="test-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((request) => (
-              <ListRequests
-                key={request._id}
-                createdAt={request.createdAt.toString()}
-                email={request.email}
-                organizationName={request.organizationName}
-                password={request.password}
-                _id={request._id}
-              />
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {requests.length > 0 ? (
+        <div>
+          <table className="table">
+            <thead>
+              <tr>
+                <th className="text-left">Date Made</th>
+                <th className="text-left">Email</th>
+                <th className="text-right">Organization Name</th>
+                <th className="test-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {requests.map((request) => (
+                <ListRequests
+                  key={request._id}
+                  createdAt={request.createdAt.toString()}
+                  email={request.email}
+                  organizationName={request.organizationName}
+                  password={request.password}
+                  _id={request._id}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <h2>No New Requests Currently</h2>
+      )}
     </Container>
   ) : <LoadingSpinner />;
 };
