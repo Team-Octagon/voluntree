@@ -83,3 +83,12 @@ button:hover, .btn:hover {
   background-color: #008080; /* Darker shade of teal for hover state */
   border-color: #008080; /* Darker shade for border on hover */
 }
+
+.teal-link {
+  color: teal;
+}
+
+.teal-badge {
+  background-color: teal;
+  color: white; /* Ensures text is readable on teal background */
+}

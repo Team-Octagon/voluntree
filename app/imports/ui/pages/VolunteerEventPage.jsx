@@ -58,7 +58,7 @@ const VolunteerEventPage = () => {
   };
 
   return ready ? (
-    <Container id={PAGE_IDS.VOLUNTEER_EVENT_PAGE} className="py-5">
+    <Container id={PAGE_IDS.VOLUNTEER_EVENT_PAGE} fluid className="py-5" style={{ backgroundImage: 'url("/images/landing-background.jpg")', backgroundSize: 'cover' }}>
       <Row className="justify-content-center mb-4">
         <Col md={8} lg={6}>
           {doc ? (
@@ -67,7 +67,7 @@ const VolunteerEventPage = () => {
                 <Card.Title className="mb-3">{doc.title}</Card.Title>
                 <img src={doc.eventLogo || '/images/default-event-image.jpg'} alt="Event Logo" className="img-fluid mb-3" />
                 <Row className="justify-content-center">
-                  <Link to={`/organization-page/${organizer._id}`}>
+                  <Link to={`/organization-page/${organizer._id}`} className="teal-link">
                     <h5 className="mb-3">{doc.organizer}</h5>
                   </Link>
                   <Col sm={6}><strong>Date:</strong> {doc.eventDate.toLocaleDateString()}</Col>
@@ -83,7 +83,7 @@ const VolunteerEventPage = () => {
                 <Row className="justify-content-center mt-3">
                   <Col sm={12}>
                     {doc.tags.map((tag, index) => (
-                      <Badge key={index} bg="primary" className="me-1">{tag}</Badge>
+                      <Badge key={index} className="me-1" style={{ backgroundColor: 'teal', color: 'white' }}>{tag}</Badge>
                     ))}
                   </Col>
                 </Row>
@@ -93,13 +93,14 @@ const VolunteerEventPage = () => {
                   <Col xs={6}>
                     <Button
                       className="w-100"
+                      style={{ backgroundColor: 'teal', borderColor: 'teal', color: 'white' }}
                       onClick={submit}
                     >
                       {isVolunteering ? 'Unsubscribe' : 'Subscribe'}
                     </Button>
                   </Col>
                   <Col xs={6}>
-                    <Button className="w-100" onClick={() => navigate('/volunteer-list-events')}>
+                    <Button className="w-100" style={{ backgroundColor: 'teal', borderColor: 'teal', color: 'white' }} onClick={() => navigate('/volunteer-list-events')}>
                       Back
                     </Button>
                   </Col>
