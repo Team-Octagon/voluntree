@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Button, Form, ListGroup } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { ChatContext } from '../contexts/ChatContext';
@@ -12,6 +12,7 @@ const ChatWindow = () => {
   const [currentMessages, setCurrentMessages] = useState('');
   const [newMessage, setNewMessage] = useState('');
   const currentUser = Meteor.user().username;
+  const messagesEndRef = useRef(null);
 
   const handleChatSelect = (recipient) => {
     setSelectedRecipient(recipient);
@@ -43,6 +44,7 @@ const ChatWindow = () => {
     if (newMessage.trim() !== '') {
       sendMessage(currentUser, newMessage, selectedRecipient);
       setCurrentMessages([...currentMessages, { sender: currentUser, text: newMessage }]);
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       setNewMessage('');
     }
   };
@@ -61,6 +63,13 @@ const ChatWindow = () => {
     }
   }, [selectedRecipient]);
 
+  useEffect(() => {
+    // Scroll to the bottom of the chat window after updating messages
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  }, [currentMessages]);
+
   return (
     <div
       style={{
@@ -71,7 +80,6 @@ const ChatWindow = () => {
         height: '50%',
         backgroundColor: 'white',
         borderTop: '1px solid #ccc',
-        padding: '20px',
         overflowY: 'auto',
         transform: 'translate(0%)',
         zIndex: 1001,
@@ -88,7 +96,7 @@ const ChatWindow = () => {
               </ListGroup.Item>
             ))}
           </ListGroup>
-          <Button variant="primary" onClick={handleNewChat}>
+          <Button variant="primary" onClick={handleNewChat} style={{ margin: '0 auto' }}>
             Add New Chat
           </Button>
           <Button variant="primary" onClick={handleTest}>
@@ -98,7 +106,18 @@ const ChatWindow = () => {
       )}
       {currentScreen === 'chatMessages' && (
         <>
-          <div style={{ flex: '1', overflowY: 'auto' }}>
+          {/* Fixed position buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black' }}>
+            {/* Fixed position buttons */}
+            <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
+              ←
+            </Button>
+            <h6 style={{ margin: 'auto' }}>john@gmail.com</h6>
+            <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px', marginRight: '4px' }}>
+              X
+            </Button>
+          </div>
+          <div style={{ flex: '1', overflowY: 'auto' }} ref={messagesEndRef}>
             {/* Chat messages container */}
             {currentMessages.length > 0 ? (
               <div>
@@ -112,7 +131,7 @@ const ChatWindow = () => {
               <p>No messages available.</p>
             )}
           </div>
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', marginBottom: '0px', paddingBottom: '0px', borderTop: 'black 2px solid', backgroundColor: 'red' }}>
             {/* Text box and send button */}
             <Form.Group controlId="newMessage">
               <Form.Control
@@ -120,23 +139,15 @@ const ChatWindow = () => {
                 placeholder="Type your message..."
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
+                style={{ marginTop: '3px' }}
               />
             </Form.Group>
             <Button
               variant="primary"
-              style={{ position: 'absolute', right: '0', bottom: '10px' }}
+              style={{ position: 'absolute', right: '0', bottom: '0' }}
               onClick={handleSendMessage}
             >
               Send
-            </Button>
-          </div>
-          {/* Fixed position buttons */}
-          <div style={{ position: 'absolute', bottom: '60px', right: '20px' }}>
-            <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px' }}>
-              Close Chat
-            </Button>
-            <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
-              Back
             </Button>
           </div>
         </>
