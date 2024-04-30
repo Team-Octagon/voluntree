@@ -3,8 +3,7 @@ import { Col, Container, Nav, Tab, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import EventCard from './EventCard';
 
-const VolunteerProfileDash = ({ eventData }) => {
-  console.log(eventData);
+const VolunteerProfileDash = ({ eventData, subData }) => {
   const [activeTab, setActiveTab] = useState('upcoming');
 
   const handleTabChange = (tab) => {
@@ -21,6 +20,10 @@ const VolunteerProfileDash = ({ eventData }) => {
     .filter(event => new Date(event.startTime) <= currentDate)
     .sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
 
+  const interestedEvents = subData
+    .filter(event => new Date(event.startTime) > currentDate)
+    .sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+
   return (
     <Container fluid className="mt-4">
       <Tab.Container id="dashboard-tabs" activeKey={activeTab} onSelect={handleTabChange}>
@@ -32,6 +35,9 @@ const VolunteerProfileDash = ({ eventData }) => {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="history">Volunteer History</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="interested">Events Interested In</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
@@ -63,6 +69,19 @@ const VolunteerProfileDash = ({ eventData }) => {
                   />
                 ))}
               </Tab.Pane>
+              <Tab.Pane eventKey="interested">
+                <h2>Events Interested In</h2>
+                {interestedEvents.map((event, index) => (
+                  <EventCard
+                    key={index}
+                    eventId={event._id}
+                    title={event.title}
+                    description={event.description}
+                    tags={event.tags}
+                    startTime={event.startTime}
+                  />
+                ))}
+              </Tab.Pane>
             </Tab.Content>
           </Col>
         </Row>
@@ -73,6 +92,13 @@ const VolunteerProfileDash = ({ eventData }) => {
 
 VolunteerProfileDash.propTypes = {
   eventData: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    status: PropTypes.string.isRequired,
+  })).isRequired,
+  subData: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
