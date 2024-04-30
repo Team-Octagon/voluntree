@@ -20,12 +20,21 @@ const UpcomingEventsContainerVolunteer = () => {
       email: Meteor.user()?.username,
     };
   }, []);
-  const profileEvents = VolunteerProfileEvents.find({ volunteer: email }).fetch();
-  const eventData = Events.find({ _id: { $in: profileEvents.map((pe) => pe.event) } }).fetch();
 
+  const profileEvents = VolunteerProfileEvents.find({ volunteer: email }).fetch();
+  const eventData = Events.find({
+    _id: { $in: profileEvents.map((pe) => pe.event) },
+  }).fetch();
+
+  const now = new Date(); // Use a Date object for current time
+
+  const upcomingEvents = eventData.filter(event => {
+    const eventDate = new Date(event.startTime); // Parse event start time as Date object
+    return eventDate >= now; // Compare as Date objects
+  });
   return ready ? (
     <Container id={COMPONENT_IDS.DASHBOARD_UPCOMING_EVENTS_VOLUNTEER} className="mt-4">
-      {eventData.map(event => (
+      {upcomingEvents.map(event => (
         <UpcomingEventsCardVolunteer key={event._id} eventId={event._id} />
       ))}
       <Container className="text-center mt-4">
