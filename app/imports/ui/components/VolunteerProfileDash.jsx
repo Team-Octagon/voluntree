@@ -11,14 +11,15 @@ const VolunteerProfileDash = ({ eventData }) => {
     setActiveTab(tab);
   };
 
-  const upcomingEvents = eventData.filter(event => event.status === 'not started').sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+  const currentDate = new Date();
+
+  const upcomingEvents = eventData
+    .filter(event => new Date(event.startTime) > currentDate)
+    .sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+
   const volunteerHistory = eventData
-    .filter(event => event.status === 'completed')
-    .sort((a, b) => {
-      const dateA = new Date(a.eventDate);
-      const dateB = new Date(b.eventDate);
-      return dateA - dateB;
-    });
+    .filter(event => new Date(event.startTime) <= currentDate)
+    .sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
 
   return (
     <Container fluid className="mt-4">
