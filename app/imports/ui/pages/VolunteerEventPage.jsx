@@ -74,8 +74,8 @@ const VolunteerEventPage = () => {
                   <Col sm={6}><strong>Location:</strong> {doc.location}</Col>
                 </Row>
                 <Row className="justify-content-center mb-3">
-                  <Col sm={6}><strong>Start Time:</strong> {doc.startTime.toLocaleDateString()}</Col>
-                  <Col sm={6}><strong>End Time:</strong> {doc.endTime.toLocaleDateString() || 'Not specified'}</Col>
+                  <Col sm={6}><strong>Start Time:</strong> {doc.startTime.toLocaleString()}</Col>
+                  <Col sm={6}><strong>End Time:</strong> {doc.endTime.toLocaleString() || 'Not specified'}</Col>
                 </Row>
                 <div className="description-box p-3" style={{ backgroundColor: '#f8f9fa', borderRadius: '5px', margin: 'auto' }}>
                   <strong>Description:</strong> {doc.description}
