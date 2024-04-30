@@ -4,10 +4,8 @@ import { Card, Badge } from 'react-bootstrap';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const EventCardTest = ({ title, description, eventLogo, tags }) => (
-  <Card id={COMPONENT_IDS.EVENT_TEST_CARD} style={{ width: '18rem' }}>
-    <a href={eventLogo}>
-      <Card.Img variant="top" src={eventLogo} />
-    </a>
+  <Card id={COMPONENT_IDS.EVENT_TEST_CARD} style={{ width: '18rem', minHeight: '420px', overflow: 'auto' }}>
+    <Card.Img variant="top" src={eventLogo} />
     <Card.Header>{title}</Card.Header>
     <Card.Body>
       <Card.Text>{description}</Card.Text>
