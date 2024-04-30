@@ -2,6 +2,7 @@ import React, { createContext, useState, useMemo, useEffect } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { ChatMessages } from '../../api/chat/ChatMessages';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
 
 export const ChatContext = createContext();
 
@@ -12,6 +13,7 @@ export const ChatProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
   const [recipients, setRecipients] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState('');
+  const [fetchTrigger, setFetchTrigger] = useState(false);
   let currentUser = Meteor.user();
   if (currentUser) {
     currentUser = currentUser.username;
@@ -33,7 +35,7 @@ export const ChatProvider = ({ children }) => {
       conversations[otherUser].push(message);
     });
     return { ready: isReady, chatMessages: conversations };
-  }, [currentUser]);
+  }, [currentUser, fetchTrigger]);
 
   useEffect(() => {
     if (ready) {
@@ -44,11 +46,19 @@ export const ChatProvider = ({ children }) => {
   }, [ready, chatMessages]);
 
   const sendMessage = (sender, text, recipient) => {
-    const messageID = ChatMessages.define({ sender, recipient, text });
-    setMessages([...messages, ChatMessages.findDoc(messageID)]);
-    if (!recipients.includes(recipient)) {
-      setRecipients([...recipients, recipient]);
-    }
+    const collectionName = ChatMessages.getCollectionName();
+    console.log('Adding test message...');
+    const testData = {
+      sender: sender,
+      recipient: recipient,
+      text: text,
+    };
+
+    defineMethod.callPromise({ collectionName, definitionData: testData })
+      .then((result) => {
+        console.log('Test message added with ID:', result);
+      })
+      .catch(error => console.error('Error adding test message:', error));
   };
 
   const contextValue = useMemo(() => ({

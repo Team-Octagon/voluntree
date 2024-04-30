@@ -42,6 +42,7 @@ const ChatWindow = () => {
   const handleSendMessage = () => {
     if (newMessage.trim() !== '') {
       sendMessage(currentUser, newMessage, selectedRecipient);
+      setCurrentMessages([...currentMessages, { sender: currentUser, text: newMessage }]);
       setNewMessage('');
     }
   };
@@ -96,38 +97,49 @@ const ChatWindow = () => {
         </div>
       )}
       {currentScreen === 'chatMessages' && (
-        <div>
-          <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px' }}>
-            Close Chat
-          </Button>
-          <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
-            Back
-          </Button>
-          <Form.Group controlId="newMessage">
-            <Form.Control
-              type="text"
-              placeholder="Type your message..."
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-            />
-          </Form.Group>
-          <Button variant="primary" onClick={handleSendMessage}>
-            Send
-          </Button>
-          <p>Loading...</p>
-          {/* Display all messages if messages are available */}
-          {currentMessages.length > 0 ? (
-            <div>
-              {currentMessages.map((message, index) => (
-                <div key={index} style={{ textAlign: message.sender === currentUser ? 'right' : 'left' }}>
-                  <p>{message.text}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p>No messages available.</p>
-          )}
-        </div>
+        <>
+          <div style={{ flex: '1', overflowY: 'auto' }}>
+            {/* Chat messages container */}
+            {currentMessages.length > 0 ? (
+              <div>
+                {currentMessages.map((message, index) => (
+                  <div key={index} style={{ textAlign: message.sender === currentUser ? 'right' : 'left' }}>
+                    <p>{message.text}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No messages available.</p>
+            )}
+          </div>
+          <div style={{ position: 'relative' }}>
+            {/* Text box and send button */}
+            <Form.Group controlId="newMessage">
+              <Form.Control
+                type="text"
+                placeholder="Type your message..."
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              style={{ position: 'absolute', right: '0', bottom: '10px' }}
+              onClick={handleSendMessage}
+            >
+              Send
+            </Button>
+          </div>
+          {/* Fixed position buttons */}
+          <div style={{ position: 'absolute', bottom: '60px', right: '20px' }}>
+            <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px' }}>
+              Close Chat
+            </Button>
+            <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
+              Back
+            </Button>
+          </div>
+        </>
       )}
     </div>
   );
