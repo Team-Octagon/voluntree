@@ -1,7 +1,6 @@
 // import { Selector, t } from 'testcafe';
 import {
-  aboutUsPage, adminPage, /* addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, manageDatabasePage, */
-  signOutPage, startOrganizationPage,
+  aboutUsPage, adminPage, signOutPage, startOrganizationPage,
   volunteerProfilePage,
 } from './simple.page';
 import { landingPage } from './landing.page';
@@ -49,15 +48,6 @@ test('Test that user pages show up', async () => {
   await aboutUsPage.isDisplayed();
   await navBar.gotoEventsPage();
   await navBar.gotoDashboardVolunteer();
-  // await aboutUsPage.isDisplayed();
-  // await navBar.gotoAddStuffPage();
-  // await addStuffPage.isDisplayed();
-  // await navBar.gotoListStuffPage();
-  // await listStuffPage.isDisplayed();
-  // want to see if we can get to the editStuffPage
-  // const editLinks = await Selector(`.${COMPONENT_IDS.LIST_STUFF_EDIT}`);
-  // await t.click(editLinks.nth(0));
-  // await editStuffPage.isDisplayed();
   await navBar.logout();
   await signOutPage.isDisplayed();
 });
@@ -79,18 +69,6 @@ test('Test that admin pages show up', async () => {
   await navBar.isLoggedIn(adminCredentials.username);
   await navBar.gotoAdminPage();
   await adminPage.isDisplayed();
-  // await navBar.gotoAddStuffPage();
-  // await addStuffPage.isDisplayed();
-  // await navBar.gotoListStuffPage();
-  // await listStuffPage.isDisplayed();
-  // want to see if we can get to the editStuffPage
-  // const editLinks = await Selector(`.${COMPONENT_IDS.LIST_STUFF_EDIT}`);
-  // await t.click(editLinks.nth(0));
-  // await editStuffPage.isDisplayed();
-  // await navBar.gotoListStuffAdminPage();
-  // await listStuffAdminPage.isDisplayed();
-  // await navBar.gotoManageDatabasePage();
-  // await manageDatabasePage.isDisplayed();
 });
 
 test('Test that start organization shows up', async () => {

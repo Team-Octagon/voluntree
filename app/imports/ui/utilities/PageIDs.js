@@ -1,15 +1,10 @@
 /** Define ids for each page. */
 export const PAGE_IDS = {
   ABOUT_US: 'about-us',
-  ADD_STUFF: 'add-stuff',
   ADMIN_PAGE: 'admin-page',
   CREATE_ORGANIZATION: 'create-organization',
-  EDIT_STUFF: 'edit-stuff',
   VOLUNTEER_PROFILE: 'volunteer-profile',
   LANDING: 'landing',
-  LIST_STUFF: 'list-stuff',
-  LIST_STUFF_ADMIN: 'list-stuff-admin',
-  LIST_STUFF_VOLUNTEER: 'list-stuff-volunteer',
   MANAGE_DATABASE: 'manage-database',
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',

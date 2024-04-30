@@ -45,7 +45,6 @@ const NavBar = () => {
             )}
             {isAdmin && (
               <>
-                <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/admin">Admin</Nav.Link>
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_ADD_EVENT_ADMIN} as={NavLink} to="/add-event">Add Event</Nav.Link>
                 <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage">
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} as={NavLink} to="/manage-database">

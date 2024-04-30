@@ -6,9 +6,6 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListStuff from '../pages/ListStuff';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -19,7 +16,6 @@ import { ROLE } from '../../api/role/Role';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ManageDatabase from '../pages/ManageDatabase';
 import Feedback from '../pages/Feedback';
-import ListStuffVolunteer from '../pages/ListStuffVolunteer';
 import VolunteerProfile from '../pages/VolunteerProfile';
 import AboutUs from '../pages/AboutUs';
 import VolunteerListEvents from '../pages/VolunteerListEvents';
@@ -70,17 +66,13 @@ const App = () => {
             <Route path="/volunteer-settings" element={<ProtectedRoute><VolunteerSettings /></ProtectedRoute>} />
             <Route path="/volunteer-list-events" element={<VolunteerListEvents />} />
             <Route path="/volunteer-list-events/:_id" element={<ProtectedRoute><VolunteerEventDetail /></ProtectedRoute>} />
-            <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
             <Route path="/listEvents" element={<ProtectedRoute><ListEvents /></ProtectedRoute>} />
             <Route path="/listEvents-mapview" element={<ProtectedRoute><ListEventsMapView /></ProtectedRoute>} />
-            <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
             <Route path="/add-event" element={<ProtectedRoute><AddEvent /></ProtectedRoute>} />
             <Route path="/dashboard-volunteer" element={<ProtectedRoute><DashboardVolunteer /></ProtectedRoute>} />
-            <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
             <Route path="/edit-event/:_id" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
             <Route path="/volunteer-event-page/:_id" element={<VolunteerEventPage />} />
             <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListEvents /></AdminProtectedRoute>} />
-            <Route path="/volunteer" element={<ProtectedRoute><ListStuffVolunteer /></ProtectedRoute>} />
             <Route path="/start-organization" element={<StartOrganization />} />
             <Route path="/create-organization" element={<CreateOrganization />} />
             <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />
