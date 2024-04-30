@@ -10,6 +10,7 @@ const ChatWindow = () => {
   const [selectedRecipient, setSelectedRecipient] = useState('');
   const [currentScreen, setCurrentScreen] = useState('chatList');
   const [currentMessages, setCurrentMessages] = useState('');
+  const [newUserEmail, setNewUserEmail] = useState('');
   const [newMessage, setNewMessage] = useState('');
   const currentUser = Meteor.user().username;
   const messagesEndRef = useRef(null);
@@ -20,24 +21,11 @@ const ChatWindow = () => {
   };
 
   const handleNewChat = () => {
-    // Logic for adding new chat
+    setCurrentScreen('startNewMessage');
   };
-
-  const handleTest = () => {
-    const collectionName = ChatMessages.getCollectionName();
-    console.log('Adding test message...');
-    const testData = {
-      sender: currentUser,
-      recipient: 'user2',
-      text: 'hello this is a test!',
-    };
-
-    defineMethod.callPromise({ collectionName, definitionData: testData })
-      .then((result) => {
-        console.log('Test message added with ID:', result);
-        // Optionally, update the UI or perform any other actions upon success
-      })
-      .catch(error => console.error('Error adding test message:', error));
+  const handleNewChatAdd = () => {
+    sendMessage(currentUser, newMessage, newUserEmail);
+    setCurrentScreen('chatList');
   };
 
   const handleSendMessage = () => {
@@ -88,31 +76,70 @@ const ChatWindow = () => {
       }}
     >
       {currentScreen === 'chatList' && (
-        <div>
-          <ListGroup style={{ marginBottom: '10px' }}>
-            {recipients.map((recipient, index) => (
-              <ListGroup.Item key={index} action onClick={() => handleChatSelect(recipient)}>
-                {recipient}
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-          <Button variant="primary" onClick={handleNewChat} style={{ margin: '0 auto' }}>
+        <>
+          <div style={{ textAlign: 'center' }}>
+            <ListGroup style={{ marginBottom: '10px' }}>
+              {recipients.map((recipient, index) => (
+                <ListGroup.Item key={index} action onClick={() => handleChatSelect(recipient)}>
+                  {recipient}
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </div>
+          <Button variant="primary" onClick={handleNewChat}>
             Add New Chat
           </Button>
-          <Button variant="primary" onClick={handleTest}>
-            Test Add!
+          <Button variant="danger" onClick={handleCloseChat}>
+            Close Chat
           </Button>
-        </div>
+        </>
+      )}
+      {currentScreen === 'startNewMessage' && (
+        <>
+          <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black' }}>
+            <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
+            ←
+            </Button>
+            <h6 style={{ margin: 'auto' }}>Start New Message</h6>
+            <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px', marginRight: '4px' }}>
+              X
+            </Button>
+          </div>
+          <h4>User Email</h4>
+          <Form.Group controlId="startNewMessage">
+            <Form.Control
+              type="text"
+              placeholder="Enter User Email"
+              value={newUserEmail}
+              onChange={(e) => setNewUserEmail(e.target.value)}
+              style={{ marginTop: '3px' }}
+            />
+            <h4>Message</h4>
+            <Form.Control
+              type="text"
+              placeholder="Type your message..."
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              style={{ marginTop: '3px' }}
+            />
+          </Form.Group>
+          <Button
+            variant="primary"
+            onClick={handleNewChatAdd}
+          >
+            Send
+          </Button>
+        </>
       )}
       {currentScreen === 'chatMessages' && (
         <>
           {/* Fixed position buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black' }}>
+          <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black', margin: '6px 6px' }}>
             {/* Fixed position buttons */}
             <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
               ←
             </Button>
-            <h6 style={{ margin: 'auto' }}>john@gmail.com</h6>
+            <h6 style={{ margin: 'auto' }}>{selectedRecipient}</h6>
             <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px', marginRight: '4px' }}>
               X
             </Button>
@@ -122,8 +149,8 @@ const ChatWindow = () => {
             {currentMessages.length > 0 ? (
               <div>
                 {currentMessages.map((message, index) => (
-                  <div key={index} style={{ textAlign: message.sender === currentUser ? 'right' : 'left' }}>
-                    <p>{message.text}</p>
+                  <div key={index} style={{ textAlign: message.sender === currentUser ? 'right' : 'left', backgroundColor: message.sender === currentUser ? '#6685ff' : '#8c8c8c', padding: '0px', marginBottom: '4px', borderRadius: '10px', margin: '3px 3px' }}>
+                    <p style={{ marginLeft: message.sender === !currentUser ? '0px' : '10px', marginRight: message.sender === !currentUser ? '0px' : '10px' }}>{message.text}</p>
                   </div>
                 ))}
               </div>
@@ -131,7 +158,7 @@ const ChatWindow = () => {
               <p>No messages available.</p>
             )}
           </div>
-          <div style={{ position: 'relative', marginBottom: '0px', paddingBottom: '0px', borderTop: 'black 2px solid', backgroundColor: 'red' }}>
+          <div style={{ position: 'relative', marginBottom: '0px', paddingBottom: '0px', borderTop: 'black 2px solid', margin: '6px 6px' }}>
             {/* Text box and send button */}
             <Form.Group controlId="newMessage">
               <Form.Control
