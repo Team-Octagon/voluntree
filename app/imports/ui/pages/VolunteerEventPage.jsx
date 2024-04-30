@@ -34,7 +34,7 @@ const VolunteerEventPage = () => {
     setIsVolunteering(status);
   }, [status]);
 
-  const submit = () => {
+  const subscribe = () => {
     const isSubscribed = VolunteerProfileEvents.find({ event: _id, volunteer: currentUser }).count() > 0;
     if (!isSubscribed) {
       const collectionName = VolunteerProfileEvents.getCollectionName();
@@ -90,15 +90,15 @@ const VolunteerEventPage = () => {
               </Card.Body>
               <Card.Footer>
                 <Row className="justify-content-between">
-                  <Col xs={6}>
-                    <Button
-                      className="w-100"
-                      onClick={submit}
-                    >
+                  <Col xs={4}>
+                    <Button className="w-100">Sign Up</Button>
+                  </Col>
+                  <Col xs={4}>
+                    <Button className="w-100" onClick={subscribe}>
                       {isVolunteering ? 'Unsubscribe' : 'Subscribe'}
                     </Button>
                   </Col>
-                  <Col xs={6}>
+                  <Col xs={4}>
                     <Button className="w-100" onClick={() => navigate('/volunteer-list-events')}>
                       Back
                     </Button>
