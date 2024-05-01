@@ -34,15 +34,18 @@ const NavBar = () => {
           {!isOrganization && (
             <Nav.Link id={COMPONENT_IDS.NAVBAR_START_ORGANIZATION} as={NavLink} to="/start-organization">Start Organization</Nav.Link>
           )}
+          {!isOrganization && (
+            <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD_VOLUNTEER} as={NavLink} to="/dashboard-volunteer">Dashboard</Nav.Link>
+          )}
         </Nav>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto">
-            {currentUser ? (
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD_VOLUNTEER} as={NavLink} to="/dashboard-volunteer">Dashboard</Nav.Link>
-            ) : null}
             {isOrganization && (
               <Nav.Link id={COMPONENT_IDS.NAVBAR_ADD_EVENT_ORGANIZATION} as={NavLink} to="/add-event">Add Event</Nav.Link>
+            )}
+            {isOrganization && (
+              <Nav.Link id={PAGE_IDS.DASHBOARD_ORGANIZATION} as={NavLink} to="/dashboard-organization">Dashboard</Nav.Link>
             )}
             {isAdmin && (
               <>

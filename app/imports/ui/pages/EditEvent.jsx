@@ -6,7 +6,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { useParams } from 'react-router';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { Events, eventTags } from '../../api/event/Events';
-import { updateMethod } from '../../api/base/BaseCollection.methods';
+import { removeItMethod, updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
@@ -31,6 +31,30 @@ const EditEvent = () => {
         formRef.current.reset();
       })
       .catch(error => swal('Error', error.message, 'error'));
+  };
+  const deleteEvent = () => {
+    swal({
+      title: 'Are you sure?',
+      text: 'Once deleted, you will not be able to recover this event!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          removeItMethod.callPromise({
+            collectionName: Events.getCollectionName(),
+            instance: _id, // Assuming 'instance' is the ID of the event to delete.
+          })
+            .then(() => {
+              swal('Poof! Your event has been deleted!', {
+                icon: 'success',
+              });
+              // Redirect or update UI accordingly
+            })
+            .catch(error => swal('Error', error.message, 'error'));
+        }
+      });
   };
 
   return ready ? (
@@ -76,7 +100,8 @@ const EditEvent = () => {
                   </Col>
                 </Row>
                 <ErrorsField />
-                <div className="text-center">
+                <div className="text-center mt-4">
+                  <Button variant="danger" onClick={deleteEvent}>Delete Event</Button>
                   <Button type="submit" variant="primary">Update</Button>
                 </div>
               </Card.Body>

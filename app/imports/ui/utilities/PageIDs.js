@@ -21,4 +21,6 @@ export const PAGE_IDS = {
   VOLUNTEER_EVENT_PAGE: 'volunteer-event-page',
   SEND_NOTIFCATIONS: 'send-notifications',
   START_ORGANIZATION: 'start-organization',
+  DASHBOARD_ORGANIZATION: 'dashboard-organization',
+
 };
