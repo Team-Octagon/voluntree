@@ -128,9 +128,7 @@ const ChatWindow = () => {
       )}
       {currentScreen === 'chatMessages' && (
         <>
-          {/* Fixed position buttons */}
           <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black', margin: '6px 6px' }}>
-            {/* Fixed position buttons */}
             <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
               ←
             </Button>
@@ -140,7 +138,6 @@ const ChatWindow = () => {
             </Button>
           </div>
           <div style={{ flex: '1', overflowY: 'auto' }} ref={messagesEndRef}>
-            {/* Chat messages container */}
             {currentMessages.length > 0 ? (
               <div>
                 {currentMessages.map((message, index) => (

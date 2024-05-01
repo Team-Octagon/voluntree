@@ -26,8 +26,8 @@ const EventsMap = ({ latAndLon }) => {
 
     const customIcon = L.icon({
       iconUrl: url,
-      iconSize: [50, 50], // Set the size of the icon
-      iconAnchor: [16, 32], // Set the anchor point of the icon
+      iconSize: [50, 50],
+      iconAnchor: [16, 32],
     });
 
     if (Array.isArray(latAndLon) && latAndLon.length === 2 && typeof latAndLon[0] === 'number' && typeof latAndLon[1] === 'number') {
@@ -46,9 +46,7 @@ const EventsMap = ({ latAndLon }) => {
         const marker = L.marker([location.latitude, location.longitude], { icon: customIcon }).addTo(map);
 
         marker.on('click', () => {
-          // Construct the URL for the event page using the event ID
           const eventPageUrl = `/volunteer-event-page/${location.eventId}`;
-          // Navigate to the event page
           window.location.href = eventPageUrl;
         });
       });

@@ -7,14 +7,13 @@ import ChatWindow from './ChatWindow';
 
 const ChatButton = () => {
   const { openChat, closeChat, isChatOpen } = useContext(ChatContext);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Initially set to false
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Use useTracker to reactively track changes to the user's login status
   useTracker(() => {
-    setIsLoggedIn(!!Meteor.userId()); // Check if user is logged in and update isLoggedIn state
+    setIsLoggedIn(!!Meteor.userId());
   }, []);
 
-  return isLoggedIn && ( // Only render if user is logged in
+  return isLoggedIn && (
     <>
       <Button
         variant="primary"
@@ -24,7 +23,7 @@ const ChatButton = () => {
           right: '20px',
           zIndex: 1000,
         }}
-        onClick={isChatOpen ? closeChat : openChat} // Toggle chat on button click
+        onClick={isChatOpen ? closeChat : openChat}
       >
         {isChatOpen ? 'Close Chat' : 'Open Chat'}
       </Button>
