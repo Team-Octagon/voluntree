@@ -51,7 +51,7 @@ const VolunteerEventDash = () => {
         />
         <Row>
           {filteredEvents.map((event, index) => (
-            <Col key={index} sm={4} className="p-2 d-flex justify-content-center">
+            <Col key={index} sm={4} className="p-2 d-flex justify-content-center expand-card">
               <div
                 className="event-card-container"
                 style={{
@@ -68,7 +68,7 @@ const VolunteerEventDash = () => {
                 />
                 <Button
                   variant="primary"
-                  className="" // Removed "mt-3" to eliminate the top margin
+                  className="rounded-0 rounded-bottom-3 mb-3 shadow-lg" // Removed "mt-3" to eliminate the top margin
                   style={{
                     backgroundColor: 'teal',
                     borderColor: 'darkslategray',
