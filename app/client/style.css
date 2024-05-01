@@ -84,6 +84,15 @@ button:hover, .btn:hover {
   border-color: #008080; /* Darker shade for border on hover */
 }
 
+.expand-card {
+  transition-property: transform;
+  transition-duration: 0.5s;
+}
+.expand-card:hover {
+  transform: scale(1.1);
+  animation: ease-in-out;
+}
+
 .teal-link {
   color: teal;
 }
