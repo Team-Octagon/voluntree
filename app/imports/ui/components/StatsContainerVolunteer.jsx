@@ -33,17 +33,17 @@ const StatsContainerVolunteer = () => {
   const futureHours = upcomingEvents.reduce((a, event) => a + Events.totalHoursOfEvent(event), 0);
   const impactValue = pastHours * 15;
   const award = (() => {
-    if (pastHours >= 20) {
+    if (pastEvents.length >= 10) {
       return '🥇';
-    } if (pastHours >= 10) {
+    } if (pastEvents.length >= 5) {
       return '🥈';
     }
     return '🥉';
   })();
   const awardName = (() => {
-    if (pastHours >= 20) {
+    if (pastEvents.length >= 10) {
       return 'Gold';
-    } if (pastHours >= 10) {
+    } if (pastEvents.length >= 5) {
       return 'Silver';
     }
     return 'Bronze';
@@ -85,7 +85,7 @@ const StatsContainerVolunteer = () => {
           <Card className="text-center">
             <Card.Body>
               <p className="text-center display-2">{award}</p>
-              <Card.Title>Badges</Card.Title>
+              <Card.Title title="5 events is siler and 10 events is gold">Badges</Card.Title>
               <Card.Text>{awardName} Volunteer <br />  </Card.Text>
             </Card.Body>
           </Card>
