@@ -10,6 +10,7 @@ import { OrganizationRequests } from '../requests/OrganizationRequests';
 import { OrganizationProfiles } from '../user/OrganizationProfileCollection';
 import { VolunteerProfileSkills } from '../user/VolunteerProfileSkills';
 import { VolunteerProfileEvents } from '../user/VolunteerProfileEvents';
+import { VolunteerProfileSubs } from '../user/VolunteerProfileSubscriptions';
 import { OrganizationEvents } from '../user/OrganizationEvents';
 import { ChatMessages } from '../chat/ChatMessages';
 import { MapCoordinates } from '../maps/MapCoordinates';
@@ -31,6 +32,7 @@ class MATPClass {
       VolunteerProfiles,
       VolunteerProfileEvents,
       VolunteerProfileSkills,
+      VolunteerProfileSubs,
       Notifications,
       Feedback,
       OrganizationRequests,
@@ -48,6 +50,7 @@ class MATPClass {
       VolunteerProfiles,
       VolunteerProfileEvents,
       VolunteerProfileSkills,
+      VolunteerProfileSubs,
       Stuffs,
       Events,
       Notifications,

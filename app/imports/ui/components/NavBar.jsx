@@ -8,6 +8,7 @@ import { BellFill, BoxArrowRight, CloudDownload, GearFill, PersonFill, PersonPlu
 import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import NotificationsDropdown from './NotificationsDropdown';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 // Define the NavBar component
 const NavBar = () => {
@@ -46,6 +47,7 @@ const NavBar = () => {
             {isAdmin && (
               <>
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_ADD_EVENT_ADMIN} as={NavLink} to="/add-event">Add Event</Nav.Link>
+                <Nav.Link id={PAGE_IDS.ADMIN_PAGE} as={NavLink} to="/admin">Edit Event</Nav.Link>
                 <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage">
                   <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} as={NavLink} to="/manage-database">
                     <CloudDownload /> Database

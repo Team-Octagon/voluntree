@@ -16,14 +16,14 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @param lastName The last name.
    * @param birthDate The birth date.
    */
-  define({ email, firstName, lastName, birthDate, password }) {
+  define({ email, firstName, lastName, birthDate, password, avatar }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName });
     if (!user) {
       const role = ROLE.VOLUNTEER;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, birthDate, userID, role });
+      const profileID = this._collection.insert({ email, firstName, lastName, birthDate, userID, role, avatar });
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }
