@@ -5,23 +5,23 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const volunteerProfileEventPublications = {
-  volunteerProfileEvent: 'VolunteerProfileEvent',
-  volunteerProfileEventAdmin: 'VolunteerProfileEventAdmin',
-  volunteerProfileEventVolunteer: 'VolunteerProfileEventVolunteer',
-  volunteerProfileEventOrganization: 'VolunteerProfileEventOrganization',
+export const volunteerProfileSubsPublications = {
+  volunteerProfileSubs: 'VolunteerProfileSubs',
+  volunteerProfileSubsAdmin: 'VolunteerProfileSubsAdmin',
+  volunteerProfileSubsVolunteer: 'VolunteerProfileSubsVolunteer',
+  volunteerProfileSubsOrganization: 'VolunteerProfileSubsOrganization',
 };
 
-class VolunteerProfileEventsCollection extends BaseCollection {
+class VolunteerProfileSubsCollection extends BaseCollection {
   constructor() {
-    super('VolunteerProfileEvents', new SimpleSchema({
+    super('VolunteerProfileSubs', new SimpleSchema({
       volunteer: String,
       event: String,
     }));
   }
 
   /**
-   * Defines a new VolunteerEvent item.
+   * Defines a new VolunteerSub item.
    * @param volunteer the email of the volunteer.
    * @param event the name of the event.
    * @return {String} the docID of the new document.
@@ -73,7 +73,7 @@ class VolunteerProfileEventsCollection extends BaseCollection {
       // get the VolunteerProfileEvent instance.
       const instance = this;
       /** This subscription publishes only the documents associated with the logged in user */
-      Meteor.publish(volunteerProfileEventPublications.volunteerProfileEvent, function publish() {
+      Meteor.publish(volunteerProfileSubsPublications.volunteerProfileSubs, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -82,7 +82,7 @@ class VolunteerProfileEventsCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(volunteerProfileEventPublications.volunteerProfileEventAdmin, function publish() {
+      Meteor.publish(volunteerProfileSubsPublications.volunteerProfileSubsAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -90,14 +90,14 @@ class VolunteerProfileEventsCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is a Volunteer. */
-      Meteor.publish(volunteerProfileEventPublications.volunteerProfileEventVolunteer, function publish() {
+      Meteor.publish(volunteerProfileSubsPublications.volunteerProfileSubsVolunteer, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.VOLUNTEER)) {
           return instance._collection.find();
         }
         return this.ready();
       });
       /** This subscription publishes all documents regardless of user, but only if the logged in user is an Organization. */
-      Meteor.publish(volunteerProfileEventPublications.volunteerProfileEventOrganization, function publish() {
+      Meteor.publish(volunteerProfileSubsPublications.volunteerProfileSubsOrganization, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ORGANIZATION)) {
           return instance._collection.find();
         }
@@ -109,9 +109,9 @@ class VolunteerProfileEventsCollection extends BaseCollection {
   /**
    * Subscription method for event chosen by the current user.
    */
-  subscribeVolunteerProfileEvents() {
+  subscribeVolunteerProfileSubs() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(volunteerProfileEventPublications.volunteerProfileEvent);
+      return Meteor.subscribe(volunteerProfileSubsPublications.volunteerProfileSubs);
     } return null;
   }
 
@@ -119,9 +119,9 @@ class VolunteerProfileEventsCollection extends BaseCollection {
    * Subscription method for admin users.
    * It subscribes to the entire collection.
    */
-  subscribeVolunteerProfileEventsAdmin() {
+  subscribeVolunteerProfileSubsAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(volunteerProfileEventPublications.volunteerProfileEventAdmin);
+      return Meteor.subscribe(volunteerProfileSubsPublications.volunteerProfileSubsAdmin);
     }
     return null;
   }
@@ -130,9 +130,9 @@ class VolunteerProfileEventsCollection extends BaseCollection {
    * Subscription method for volunteer users.
    * It subscribes to the entire collection.
    */
-  subscribeVolunteerProfileEventsVolunteer() {
+  subscribeVolunteerProfileSubsVolunteer() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(volunteerProfileEventPublications.volunteerProfileEventVolunteer);
+      return Meteor.subscribe(volunteerProfileSubsPublications.volunteerProfileSubsVolunteer);
     }
     return null;
   }
@@ -141,9 +141,9 @@ class VolunteerProfileEventsCollection extends BaseCollection {
    * Subscription method for organization users.
    * It subscribes to the entire collection.
    */
-  subscribeVolunteerProfileEventsOrganization() {
+  subscribeVolunteerProfileSubsOrganization() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(volunteerProfileEventPublications.volunteerProfileEventOrganization);
+      return Meteor.subscribe(volunteerProfileSubsPublications.volunteerProfileSubsOrganization);
     }
     return null;
   }
@@ -173,4 +173,4 @@ class VolunteerProfileEventsCollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const VolunteerProfileEvents = new VolunteerProfileEventsCollection();
+export const VolunteerProfileSubs = new VolunteerProfileSubsCollection();
