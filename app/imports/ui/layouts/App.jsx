@@ -36,6 +36,7 @@ import StartOrganization from '../pages/StartOrganization';
 import CreateOrganization from '../pages/CreateOrganization';
 import OrganizationRequests from '../pages/OrganizationRequests';
 import OrganizationPagePublic from '../pages/OrganizationPagePublic';
+import DashboardOrganization from '../pages/DashboardOrganization';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -70,6 +71,7 @@ const App = () => {
             <Route path="/listEvents-mapview" element={<ProtectedRoute><ListEventsMapView /></ProtectedRoute>} />
             <Route path="/add-event" element={<ProtectedRoute><AddEvent /></ProtectedRoute>} />
             <Route path="/dashboard-volunteer" element={<ProtectedRoute><DashboardVolunteer /></ProtectedRoute>} />
+            <Route path="/dashboard-organization" element={<ProtectedRoute><DashboardOrganization /></ProtectedRoute>} />
             <Route path="/edit-event/:_id" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
             <Route path="/volunteer-event-page/:_id" element={<VolunteerEventPage />} />
             <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListEvents /></AdminProtectedRoute>} />

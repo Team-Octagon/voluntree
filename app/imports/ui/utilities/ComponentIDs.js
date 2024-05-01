@@ -46,6 +46,7 @@ export const COMPONENT_IDS = {
   PREFERENCES_SETTINGS_CARD_VOLUNTEER: 'preferences-settings-card-volunteer',
   SECURITY_SETTINGS_CARD_VOLUNTEER: 'security-settings-card-volunteer',
   NAVBAR_ADD_EVENT_ORGANIZATION: 'navbar-add-event-organization',
-  NAVBAR_ADD_EVENT_ADMIN: 'navbar-add-event-admin',
+  NAVBAR_ADD_EVENT_ADMIN: 'navbar-add-event-admin', DASHBOARD_UPCOMING_EVENTS_ORGANIZATION: 'dashboard-upcoming-events-organization',
+  DASHBOARD_PAST_EVENTS_ORGANIZATION: 'dashboard-past-events-organization',
 
 };
