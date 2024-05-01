@@ -7,7 +7,7 @@
     "lastName": "Person",
     "age": 25,
     "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "avatar": "https://example.com/avatar.jpg",
+    "avatar": "/images/Music_Foundation_avatar.png",
     "events": [
       {
         "title": "Virtual Music Education for Underprivileged Children",
