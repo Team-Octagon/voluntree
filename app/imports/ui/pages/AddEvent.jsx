@@ -17,19 +17,44 @@ import { MapCoordinates } from '../../api/maps/MapCoordinates';
 const formSchema = new SimpleSchema({
   title: String,
   organizer: String,
-  eventDate: Date,
+  eventDate: {
+    type: Date,
+    custom() {
+      const eventDate = this.value;
+      if (eventDate <= new Date()) {
+        return 'eventDateMustBeFuture';
+      }
+    },
+  },
   location: String,
   description: String,
   eventLogo: String,
-  startTime: String,
+  startTime: {
+    type: String,
+    custom() {
+      const startTime = this.value;
+      if (startTime && new Date(startTime) <= new Date()) {
+        return 'startTimeMustBeFuture';
+      }
+    },
+  },
   endTime: {
     type: String,
     optional: true,
+    custom() {
+      const endTime = this.value;
+      if (endTime && new Date(endTime) <= new Date()) {
+        return 'endTimeMustBeFuture';
+      }
+    },
   },
-  volunteersNeeded: Number,
+  volunteersNeeded: {
+    type: SimpleSchema.Integer,
+    min: 0,
+  },
   tags: {
-    type: Array, // Specify that tags is an array
-    defaultValue: [], // Ensuring default is an empty array
+    type: Array,
+    defaultValue: [],
   },
   'tags.$': {
     type: String,
