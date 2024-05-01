@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';

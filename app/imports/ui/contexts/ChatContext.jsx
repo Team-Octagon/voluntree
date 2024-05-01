@@ -13,7 +13,7 @@ export const ChatProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
   const [recipients, setRecipients] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState('');
-  const [fetchTrigger, setFetchTrigger] = useState(false);
+  const [fetchTrigger] = useState(false);
   let currentUser = Meteor.user();
   if (currentUser) {
     currentUser = currentUser.username;

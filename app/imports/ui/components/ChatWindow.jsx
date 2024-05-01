@@ -2,8 +2,6 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Button, Form, ListGroup } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { ChatContext } from '../contexts/ChatContext';
-import { defineMethod } from '../../api/base/BaseCollection.methods';
-import { ChatMessages } from '../../api/chat/ChatMessages';
 
 const ChatWindow = () => {
   const { messages, recipients, sendMessage, closeChat } = useContext(ChatContext);
@@ -98,7 +96,7 @@ const ChatWindow = () => {
         <>
           <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black' }}>
             <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
-            ←
+              ←
             </Button>
             <h6 style={{ margin: 'auto' }}>Start New Message</h6>
             <Button variant="danger" onClick={handleCloseChat} style={{ marginBottom: '10px', marginRight: '4px' }}>
@@ -149,7 +147,11 @@ const ChatWindow = () => {
             {currentMessages.length > 0 ? (
               <div>
                 {currentMessages.map((message, index) => (
-                  <div key={index} style={{ textAlign: message.sender === currentUser ? 'right' : 'left', backgroundColor: message.sender === currentUser ? '#6685ff' : '#8c8c8c', padding: '0px', marginBottom: '4px', borderRadius: '10px', margin: '3px 3px' }}>
+                  <div
+                    key={index}
+                    style={{ textAlign: message.sender === currentUser ? 'right' : 'left', backgroundColor: message.sender === currentUser ? '#6685ff' : '#8c8c8c', padding: '0px', marginBottom: '4px',
+                      borderRadius: '10px', margin: '3px 3px' }}
+                  >
                     <p style={{ marginLeft: message.sender === !currentUser ? '0px' : '10px', marginRight: message.sender === !currentUser ? '0px' : '10px' }}>{message.text}</p>
                   </div>
                 ))}

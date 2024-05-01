@@ -5,6 +5,7 @@ import EditProfileCard from './EditProfileCard';
 
 const VolunteerProfileCard = ({ profile }) => {
   const { firstName, lastName, bio, avatar } = profile;
+  console.log(profile);
   return (
     <Container fluid id="profile-card" className="my-5">
       <Row>
