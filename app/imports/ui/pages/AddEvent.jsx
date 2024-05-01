@@ -12,6 +12,7 @@ import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { OrganizationProfiles } from '../../api/user/OrganizationProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { MapCoordinates } from '../../api/maps/MapCoordinates';
 
 const formSchema = new SimpleSchema({
   title: String,
@@ -71,10 +72,30 @@ const AddEvent = () => {
     const definitionData = { ...data };
 
     try {
-      await defineMethod.callPromise({ collectionName, definitionData });
+      const eventId = await defineMethod.callPromise({ collectionName, definitionData });
+      console.log(`Event ID: ${eventId}`);
       return definitionData;
     } catch (error) {
       throw new Error('Failed to define event');
+    }
+  };
+
+  const handleCoordinateAdd = async (address, eventId) => {
+    try {
+      const collectionName = MapCoordinates.getCollectionName();
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&addressdetails=1&limit=1`);
+      const data = await response.json();
+      console.log(data);
+
+      if (data && data.length > 0) {
+        const { lat, lon } = data[0];
+        const result = await defineMethod.callPromise({ collectionName, definitionData: { lat, lon, eventId: eventId } });
+        console.log('Test message added with ID:', result);
+      } else {
+        throw new Error('Coordinates not found for the provided address.');
+      }
+    } catch (error) {
+      console.error('Error adding test message:', error);
     }
   };
 
@@ -87,6 +108,7 @@ const AddEvent = () => {
       .then(() => {
         swal('Success', 'Event added successfully', 'success');
         formRef.current.reset();
+        handleCoordinateAdd(data.location, eventID);
       })
       .catch((error) => {
         swal('Error', error.message, 'error ?');
