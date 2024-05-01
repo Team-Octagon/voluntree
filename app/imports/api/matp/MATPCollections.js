@@ -13,6 +13,7 @@ import { VolunteerProfileEvents } from '../user/VolunteerProfileEvents';
 import { VolunteerProfileSubs } from '../user/VolunteerProfileSubscriptions';
 import { OrganizationEvents } from '../user/OrganizationEvents';
 import { ChatMessages } from '../chat/ChatMessages';
+import { MapCoordinates } from '../maps/MapCoordinates';
 
 class MATPClass {
   collections;
@@ -38,6 +39,7 @@ class MATPClass {
       OrganizationProfiles,
       OrganizationEvents,
       ChatMessages,
+      MapCoordinates,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -57,6 +59,7 @@ class MATPClass {
       OrganizationProfiles,
       OrganizationEvents,
       ChatMessages,
+      MapCoordinates,
     ];
 
     /*

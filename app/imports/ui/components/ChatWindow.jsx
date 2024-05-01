@@ -43,14 +43,11 @@ const ChatWindow = () => {
 
   useEffect(() => {
     if (selectedRecipient !== '') {
-      console.log('Selected recipient changed: ', selectedRecipient);
-      console.log('Messages: ', messages[selectedRecipient]);
       setCurrentMessages(messages[selectedRecipient]);
     }
   }, [selectedRecipient]);
 
   useEffect(() => {
-    // Scroll to the bottom of the chat window after updating messages
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
     }
@@ -131,9 +128,7 @@ const ChatWindow = () => {
       )}
       {currentScreen === 'chatMessages' && (
         <>
-          {/* Fixed position buttons */}
           <div style={{ display: 'flex', alignItems: 'center', borderBottom: '2px solid black', margin: '6px 6px' }}>
-            {/* Fixed position buttons */}
             <Button variant="secondary" onClick={() => setCurrentScreen('chatList')} style={{ marginBottom: '10px', marginRight: '10px' }}>
               ←
             </Button>
@@ -143,14 +138,12 @@ const ChatWindow = () => {
             </Button>
           </div>
           <div style={{ flex: '1', overflowY: 'auto' }} ref={messagesEndRef}>
-            {/* Chat messages container */}
             {currentMessages.length > 0 ? (
               <div>
                 {currentMessages.map((message, index) => (
                   <div
                     key={index}
-                    style={{ textAlign: message.sender === currentUser ? 'right' : 'left', backgroundColor: message.sender === currentUser ? '#6685ff' : '#8c8c8c', padding: '0px', marginBottom: '4px',
-                      borderRadius: '10px', margin: '3px 3px' }}
+                    style={{ textAlign: message.sender === currentUser ? 'right' : 'left', backgroundColor: message.sender === currentUser ? '#6685ff' : '#8c8c8c', padding: '0px', marginBottom: '4px', borderRadius: '10px', margin: '3px 3px' }}
                   >
                     <p style={{ marginLeft: message.sender === !currentUser ? '0px' : '10px', marginRight: message.sender === !currentUser ? '0px' : '10px' }}>{message.text}</p>
                   </div>

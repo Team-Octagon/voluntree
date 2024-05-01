@@ -8,7 +8,6 @@ const ListEventsMapView = () => {
   const [zipcode, setZipcode] = useState('');
 
   useEffect(() => {
-    console.log('Updated latAndLon:', latAndLon);
   }, [latAndLon]);
 
   const handleSearch = async () => {

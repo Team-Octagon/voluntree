@@ -4,7 +4,7 @@
     },
     { "email": "john@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "John", "lastName": "Doe"
     },
-    { "email": "organization@foo.com", "password": "changeme", "role": "ORGANIZATION" , "name": "Organization"
+      { "email": "organization@foo.com", "password": "changeme", "role": "ORGANIZATION" , "name": "Organization"
     }
   ],
 
